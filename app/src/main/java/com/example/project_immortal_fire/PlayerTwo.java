@@ -1,6 +1,7 @@
 package com.example.project_immortal_fire;
 
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -33,6 +35,7 @@ public class PlayerTwo extends AppCompatActivity {
     private static final String IMAGEVIEW_TAG_CARD4 = "Card4";
     private static final String IMAGEVIEW_TAG_CARD5 = "Card5";
     public static String[] CardsArr2 = new String[]{"none", "none", "none", "none", "none"};
+    @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class PlayerTwo extends AppCompatActivity {
         EnemyCards2 = Arrays.copyOf(getIntent().getExtras().getStringArray("BoardCards"), 6);
         BoardCards2 = Arrays.copyOf(getIntent().getExtras().getStringArray("EnemyCards"), 6);
         Log.i("Intent Data", "onCreate: " + Arrays.toString(BoardCards2));
+        ConstraintLayout TurnScreen = findViewById(R.id.TurnScreen);
         ImageView EnemyCard1 = findViewById(R.id.EnemyCard1);
         ImageView EnemyCard2 = findViewById(R.id.EnemyCard2);
         ImageView EnemyCard3 = findViewById(R.id.EnemyCard3);
@@ -76,6 +80,7 @@ public class PlayerTwo extends AppCompatActivity {
 
         Log.i("EnemyCards", "onCreate: " + Arrays.toString(EnemyCards2));
 
+        TurnScreen.setVisibility(View.VISIBLE);
 
         card1.setTag(IMAGEVIEW_TAG_CARD1);
         card2.setTag(IMAGEVIEW_TAG_CARD2);
@@ -92,6 +97,12 @@ public class PlayerTwo extends AppCompatActivity {
 
             startActivity(i1);
         });
+
+        TurnScreen.setOnTouchListener((view, motionEvent) -> {
+            TurnScreen.setVisibility(View.GONE);
+            return true;
+        });
+
         card1.setOnLongClickListener(v -> {
 
             if (card1Poped[0]&& CardsPlacedCount2.get()<2) {
@@ -205,7 +216,7 @@ public class PlayerTwo extends AppCompatActivity {
             if (!card1Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-                animation.setDuration(500);
+                animation.setDuration(300);
                 animation.setInterpolator(new OvershootInterpolator());
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {
@@ -241,7 +252,7 @@ public class PlayerTwo extends AppCompatActivity {
             if (!card2Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-                animation.setDuration(500);
+                animation.setDuration(300);
                 animation.setInterpolator(new OvershootInterpolator());
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {
@@ -277,7 +288,7 @@ public class PlayerTwo extends AppCompatActivity {
             if (!card3Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-                animation.setDuration(500);
+                animation.setDuration(300);
                 animation.setInterpolator(new OvershootInterpolator());
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {
@@ -313,7 +324,7 @@ public class PlayerTwo extends AppCompatActivity {
             if (!card4Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-                animation.setDuration(500);
+                animation.setDuration(300);
                 animation.setInterpolator(new OvershootInterpolator());
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {
@@ -349,7 +360,7 @@ public class PlayerTwo extends AppCompatActivity {
             if (!card5Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-                animation.setDuration(500);
+                animation.setDuration(300);
                 animation.setInterpolator(new OvershootInterpolator());
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {

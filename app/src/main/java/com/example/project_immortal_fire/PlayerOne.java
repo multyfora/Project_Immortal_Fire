@@ -264,7 +264,7 @@ public class PlayerOne extends AppCompatActivity {
             if (!card1Poped[0]){
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-            animation.setDuration(500);
+            animation.setDuration(300);
             animation.setInterpolator(new OvershootInterpolator());
             animation.start();
             animation.addUpdateListener(updatedAnimation -> {
@@ -300,7 +300,7 @@ public class PlayerOne extends AppCompatActivity {
             if (!card2Poped[0]){
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-                animation.setDuration(500);
+                animation.setDuration(300);
                 animation.setInterpolator(new OvershootInterpolator());
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {
@@ -336,7 +336,7 @@ public class PlayerOne extends AppCompatActivity {
             if (!card3Poped[0]){
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-                animation.setDuration(500);
+                animation.setDuration(300);
                 animation.setInterpolator(new OvershootInterpolator());
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {
@@ -372,7 +372,7 @@ public class PlayerOne extends AppCompatActivity {
             if (!card4Poped[0]){
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-                animation.setDuration(500);
+                animation.setDuration(300);
                 animation.setInterpolator(new OvershootInterpolator());
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {
@@ -408,7 +408,7 @@ public class PlayerOne extends AppCompatActivity {
             if (!card5Poped[0]){
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-                animation.setDuration(500);
+                animation.setDuration(300);
                 animation.setInterpolator(new OvershootInterpolator());
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {
