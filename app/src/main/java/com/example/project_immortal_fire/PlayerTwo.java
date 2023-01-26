@@ -198,7 +198,7 @@ public class PlayerTwo extends AppCompatActivity {
             if (CardViewerPoped[0]) {
                 Log.i("Board cards", "All board cards:" + Arrays.toString(BoardCards2));
                 ValueAnimator goingAnim = ValueAnimator.ofFloat(1f, 0f);
-                goingAnim.setDuration(350);
+                goingAnim.setDuration(250);
                 goingAnim.setInterpolator(new LinearInterpolator());
                 goingAnim.start();
                 goingAnim.addUpdateListener(valueAnimator -> {
@@ -216,7 +216,7 @@ public class PlayerTwo extends AppCompatActivity {
             if (!card1Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-                animation.setDuration(300);
+                animation.setDuration(500);
                 animation.setInterpolator(new OvershootInterpolator());
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {
@@ -238,7 +238,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardViewer.setAlpha(0F);
                 CardViewer.setImageDrawable(card1.getDrawable());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
-                alphaAnim.setDuration(350);
+                alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
                 alphaAnim.start();
                 alphaAnim.addUpdateListener(valueAnimator -> {
@@ -252,7 +252,7 @@ public class PlayerTwo extends AppCompatActivity {
             if (!card2Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-                animation.setDuration(300);
+                animation.setDuration(500);
                 animation.setInterpolator(new OvershootInterpolator());
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {
@@ -274,7 +274,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardViewer.setAlpha(0F);
                 CardViewer.setImageDrawable(card2.getDrawable());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
-                alphaAnim.setDuration(350);
+                alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
                 alphaAnim.start();
                 alphaAnim.addUpdateListener(valueAnimator -> {
@@ -288,7 +288,7 @@ public class PlayerTwo extends AppCompatActivity {
             if (!card3Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-                animation.setDuration(300);
+                animation.setDuration(500);
                 animation.setInterpolator(new OvershootInterpolator());
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {
@@ -310,7 +310,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardViewer.setAlpha(0F);
                 CardViewer.setImageDrawable(card3.getDrawable());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
-                alphaAnim.setDuration(350);
+                alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
                 alphaAnim.start();
                 alphaAnim.addUpdateListener(valueAnimator -> {
@@ -324,7 +324,7 @@ public class PlayerTwo extends AppCompatActivity {
             if (!card4Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-                animation.setDuration(300);
+                animation.setDuration(500);
                 animation.setInterpolator(new OvershootInterpolator());
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {
@@ -346,7 +346,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardViewer.setAlpha(0F);
                 CardViewer.setImageDrawable(card4.getDrawable());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
-                alphaAnim.setDuration(350);
+                alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
                 alphaAnim.start();
                 alphaAnim.addUpdateListener(valueAnimator -> {
@@ -360,7 +360,7 @@ public class PlayerTwo extends AppCompatActivity {
             if (!card5Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-                animation.setDuration(300);
+                animation.setDuration(500);
                 animation.setInterpolator(new OvershootInterpolator());
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {
@@ -382,7 +382,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardViewer.setAlpha(0F);
                 CardViewer.setImageDrawable(card5.getDrawable());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
-                alphaAnim.setDuration(350);
+                alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
                 alphaAnim.start();
                 alphaAnim.addUpdateListener(valueAnimator -> {
