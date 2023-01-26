@@ -2,8 +2,10 @@ package com.example.project_immortal_fire;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
@@ -12,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
@@ -19,13 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -34,6 +31,8 @@ public class PlayerOne extends AppCompatActivity {
 
     public static final int CardsCount = 13;
     int AvailableBoardSlots = 6;
+
+    static boolean IsFirst = true;
     private static final String IMAGEVIEW_TAG_CARD1 = "Card1";
     private static final String IMAGEVIEW_TAG_CARD2 = "Card2";
     private static final String IMAGEVIEW_TAG_CARD3 = "Card3";
@@ -45,12 +44,14 @@ public class PlayerOne extends AppCompatActivity {
 
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_1);
+
 
 
         //Mat image = Imgcodecs.imread("path/to/your/image.jpg"); // Load image
@@ -68,7 +69,7 @@ public class PlayerOne extends AppCompatActivity {
         final boolean[] card4Poped = {false};
         final boolean[] card5Poped = {false};
 
-
+        ConstraintLayout TurnScreen = findViewById(R.id.TurnScreen);
         ImageView CardViewer = findViewById(R.id.CardViewer);
         ImageView card1 = findViewById(R.id.Card1);
         ImageView card2 = findViewById(R.id.Card2);
@@ -89,6 +90,17 @@ public class PlayerOne extends AppCompatActivity {
         ImageView EnemyCard6 = findViewById(R.id.EnemyCard6);
         ImageView EndTurn1 = findViewById(R.id.EndTurn);
 
+
+        if(IsFirst){
+            TurnScreen.setVisibility(View.GONE);
+            Log.i("player1", "IsFirst made gone " + IsFirst);
+        }
+        else {
+            TurnScreen.setVisibility(View.VISIBLE);
+            Log.i("player1", "IsFirst made visible " + IsFirst);
+        }
+        IsFirst = false;
+
         if (getIntent().getStringArrayExtra("BoardCards2") != null) {
             BoardCards = Arrays.copyOf(getIntent().getExtras().getStringArray("EnemyCards2"), 6);
             EnemyCards = Arrays.copyOf(getIntent().getExtras().getStringArray("BoardCards2"), 6);
@@ -103,6 +115,8 @@ public class PlayerOne extends AppCompatActivity {
         card3.setTag(IMAGEVIEW_TAG_CARD3);
         card4.setTag(IMAGEVIEW_TAG_CARD4);
         card5.setTag(IMAGEVIEW_TAG_CARD5);
+
+
         EndTurn1.setOnClickListener(view -> {
             Log.i("player1", "atomic count: " + CardsPlacedCount.get());
             Intent i = new Intent(PlayerOne.this, PlayerTwo.class);
@@ -113,6 +127,11 @@ public class PlayerOne extends AppCompatActivity {
             startActivity(i);
         });
 
+
+        TurnScreen.setOnTouchListener((view, motionEvent) -> {
+            TurnScreen.setVisibility(View.GONE);
+            return true;
+        });
 
 
 
