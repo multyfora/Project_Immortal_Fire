@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.project_immortal_fire" >
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <application
         android:largeHeap="true"
         android:hardwareAccelerated="false"
@@ -32,6 +33,9 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+
+
     </application>
 
 </manifest>

@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.project_immortal_fire"
         minSdk 22
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -52,8 +52,11 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.9.0-alpha01'
 
+
+
     def core_version = "1.9.0"
     dependencies {
         implementation "androidx.core:core:$core_version"
     }
+
 }

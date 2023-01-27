@@ -7,15 +7,19 @@ import androidx.core.app.NotificationCompat;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.DragEvent;
-import android.view.MotionEvent;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
@@ -26,6 +30,7 @@ import android.widget.Toast;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.Arrays;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class PlayerOne extends AppCompatActivity {
@@ -44,7 +49,6 @@ public class PlayerOne extends AppCompatActivity {
     public static String[] EnemyCards = new String[]{null, null, null, null, null, null};
 
 
-
     @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -53,15 +57,11 @@ public class PlayerOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_1);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.notification_icon)
-                .setContentTitle(textTitle)
-                .setContentText(textContent)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-        //Mat image = Imgcodecs.imread("path/to/your/image.jpg"); // Load image
-        //Imgproc.putText(image, "your text", new Point(3, 4), Imgproc.FONT_HERSHEY_SIMPLEX, 0.5, new Scalar(0, 0, 255), 2); // Add text
-        //Imgcodecs.imwrite("path/to/save/image.jpg", image); // Save image with text
+
+
+
+
 
 
         AtomicInteger CardsPlacedCount = new AtomicInteger();
@@ -1179,6 +1179,49 @@ public class PlayerOne extends AppCompatActivity {
         CardsSet.set(card1,card2,card3,card4,card5,CardsArr);
 
     }
+
+
+
+    // TODO: 27.01.2023 forgotten achievement system
+/*
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        Log.i("player1", "onKeyDown: " + keyCode + "  key event  " + event);
+
+        String channelId = "my_channel_id";
+        CharSequence channelName = "My Channel";
+        int importance = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            importance = NotificationManager.IMPORTANCE_HIGH;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
+
+            channel.setDescription("Achievement notify channel");
+
+
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(channel);
+
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.drawable.background)
+                .setContentTitle("you've got an achievement!")
+                .setContentText("take a screenshot")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+            Log.d("player1", "Screenshot Taken " + keyCode);
+            notificationManager.notify(1, builder.build());
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+*/
 
     @Override
     protected void onStop() {
