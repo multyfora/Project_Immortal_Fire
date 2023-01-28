@@ -26,57 +26,89 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.4" />
 
-        <ImageView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/Card1"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:cardBackgroundColor="@color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/Card2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline3"
-            app:srcCompat="@drawable/fire_card" />
+            app:layout_constraintTop_toTopOf="@+id/guideline3">
 
-        <ImageView
+            <ImageView
+                android:id="@+id/Card1Image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/placeholder" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/Card2"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:cardBackgroundColor="@color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/Card3"
             app:layout_constraintStart_toEndOf="@id/Card1"
-            app:layout_constraintTop_toTopOf="@+id/guideline3"
-            app:srcCompat="@drawable/wind_card" />
+            app:layout_constraintTop_toTopOf="@+id/guideline3">
+            <ImageView
+                android:id="@+id/Card2Image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/placeholder" />
+        </com.google.android.material.card.MaterialCardView>
 
-        <ImageView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/Card3"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:cardBackgroundColor="@color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/Card4"
             app:layout_constraintStart_toEndOf="@id/Card2"
-            app:layout_constraintTop_toTopOf="@+id/guideline3"
-            app:srcCompat="@drawable/water_card" />
+            app:layout_constraintTop_toTopOf="@+id/guideline3">
 
-        <ImageView
+            <ImageView
+                android:id="@+id/Card3Image"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                app:srcCompat="@drawable/placeholder" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/Card4"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:cardBackgroundColor="@color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/Card5"
             app:layout_constraintStart_toEndOf="@id/Card3"
-            app:layout_constraintTop_toTopOf="@+id/guideline3"
-            app:srcCompat="@drawable/darkness_card" />
+            app:layout_constraintTop_toTopOf="@+id/guideline3">
+            <ImageView
+                android:id="@+id/Card4Image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/placeholder" />
+        </com.google.android.material.card.MaterialCardView>
 
-        <ImageView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/Card5"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:cardBackgroundColor="@color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@id/Card4"
-            app:layout_constraintTop_toTopOf="@+id/guideline3"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/lightning_card" />
+            app:layout_constraintTop_toTopOf="@+id/guideline3">
+            <ImageView
+                android:id="@+id/Card5Image"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                app:srcCompat="@drawable/placeholder" />
+        </com.google.android.material.card.MaterialCardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline

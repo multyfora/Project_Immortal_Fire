@@ -60,10 +60,6 @@ public class PlayerOne extends AppCompatActivity {
 
 
 
-
-
-
-
         AtomicInteger CardsPlacedCount = new AtomicInteger();
         CardsPlacedCount.set(0);
         final String[] buffer = {null,null};
@@ -76,11 +72,16 @@ public class PlayerOne extends AppCompatActivity {
 
         ConstraintLayout TurnScreen = findViewById(R.id.TurnScreen);
         ImageView CardViewer = findViewById(R.id.CardViewer);
-        ImageView card1 = findViewById(R.id.Card1);
-        ImageView card2 = findViewById(R.id.Card2);
-        ImageView card3 = findViewById(R.id.Card3);
-        ImageView card4 = findViewById(R.id.Card4);
-        ImageView card5 = findViewById(R.id.Card5);
+        ImageView card1Image = findViewById(R.id.Card1Image);
+        ImageView card2Image = findViewById(R.id.Card2Image);
+        ImageView card3Image = findViewById(R.id.Card3Image);
+        ImageView card4Image = findViewById(R.id.Card4Image);
+        ImageView card5Image = findViewById(R.id.Card5Image);
+        MaterialCardView card1 = findViewById(R.id.Card1);
+        MaterialCardView card2 = findViewById(R.id.Card2);
+        MaterialCardView card3 = findViewById(R.id.Card3);
+        MaterialCardView card4 = findViewById(R.id.Card4);
+        MaterialCardView card5 = findViewById(R.id.Card5);
         ImageView BoardCard1 = findViewById(R.id.BoardCard1);
         ImageView BoardCard2 = findViewById(R.id.BoardCard2);
         ImageView BoardCard3 = findViewById(R.id.BoardCard3);
@@ -289,7 +290,7 @@ public class PlayerOne extends AppCompatActivity {
         }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card1.getDrawable());
+                CardViewer.setImageDrawable(card5Image.getDrawable());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -325,7 +326,7 @@ public class PlayerOne extends AppCompatActivity {
             }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card2.getDrawable());
+                CardViewer.setImageDrawable(card5Image.getDrawable());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -361,7 +362,7 @@ public class PlayerOne extends AppCompatActivity {
             }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card3.getDrawable());
+                CardViewer.setImageDrawable(card5Image.getDrawable());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -397,7 +398,7 @@ public class PlayerOne extends AppCompatActivity {
             }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card4.getDrawable());
+                CardViewer.setImageDrawable(card5Image.getDrawable());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -433,7 +434,7 @@ public class PlayerOne extends AppCompatActivity {
             }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card5.getDrawable());
+                CardViewer.setImageDrawable(card5Image.getDrawable());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -510,19 +511,19 @@ public class PlayerOne extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
                     if ("Card1".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card1.getDrawable());
+                        BoardCard1.setImageDrawable(card1Image.getDrawable());
                         BoardCards[0] = buffer[0];
                     } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card2.getDrawable());
+                        BoardCard1.setImageDrawable(card2Image.getDrawable());
                         BoardCards[0] = buffer[0];
                     } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card3.getDrawable());
+                        BoardCard1.setImageDrawable(card3Image.getDrawable());
                         BoardCards[0] = buffer[0];
                     } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card4.getDrawable());
+                        BoardCard1.setImageDrawable(card4Image.getDrawable());
                         BoardCards[0] = buffer[0];
                     } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card5.getDrawable());
+                        BoardCard1.setImageDrawable(card5Image.getDrawable());
                         BoardCards[0] = buffer[0];
                     } else {
                         throw new IllegalStateException("Unexpected value: " + dragData);
@@ -543,7 +544,7 @@ public class PlayerOne extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENDED:
                     if(!e.getResult()) {
 
-                        CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
+                        CardReturner.Return(card1, card2, card3, card4, card5,card1Image,card2Image,card3Image,card4Image,card5Image, CardsArr, buffer, AvailableBoardSlots);
                         CardsPlacedCount.getAndDecrement();
                     }
 
@@ -632,19 +633,19 @@ public class PlayerOne extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
                     if ("Card1".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card1.getDrawable());
+                        BoardCard2.setImageDrawable(card1Image.getDrawable());
                         BoardCards[1] = buffer[0];
                     } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card2.getDrawable());
+                        BoardCard2.setImageDrawable(card2Image.getDrawable());
                         BoardCards[1] = buffer[0];
                     } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card3.getDrawable());
+                        BoardCard2.setImageDrawable(card3Image.getDrawable());
                         BoardCards[1] = buffer[0];
                     } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card4.getDrawable());
+                        BoardCard2.setImageDrawable(card4Image.getDrawable());
                         BoardCards[1] = buffer[0];
                     } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card5.getDrawable());
+                        BoardCard2.setImageDrawable(card5Image.getDrawable());
                         BoardCards[1] = buffer[0];
                     } else {
                         throw new IllegalStateException("Unexpected value: " + dragData);
@@ -664,7 +665,7 @@ public class PlayerOne extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENDED:
                     if(!e.getResult()) {
 
-                        CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
+                        CardReturner.Return(card1, card2, card3, card4, card5,card1Image,card2Image,card3Image,card4Image,card5Image, CardsArr, buffer, AvailableBoardSlots);
                         CardsPlacedCount.getAndDecrement();
                     }else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
                     // Turns off any color tinting.
@@ -752,19 +753,19 @@ public class PlayerOne extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
                     if ("Card1".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card1.getDrawable());
+                        BoardCard3.setImageDrawable(card1Image.getDrawable());
                         BoardCards[2] = buffer[0];
                     } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card2.getDrawable());
+                        BoardCard3.setImageDrawable(card2Image.getDrawable());
                         BoardCards[2] = buffer[0];
                     } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card3.getDrawable());
+                        BoardCard3.setImageDrawable(card3Image.getDrawable());
                         BoardCards[2] = buffer[0];
                     } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card4.getDrawable());
+                        BoardCard3.setImageDrawable(card4Image.getDrawable());
                         BoardCards[2] = buffer[0];
                     } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card5.getDrawable());
+                        BoardCard3.setImageDrawable(card5Image.getDrawable());
                         BoardCards[2] = buffer[0];
                     } else {
                         throw new IllegalStateException("Unexpected value: " + dragData);
@@ -784,7 +785,7 @@ public class PlayerOne extends AppCompatActivity {
 
                 case DragEvent.ACTION_DRAG_ENDED:
                     if(!e.getResult()) {
-                        CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
+                        CardReturner.Return(card1, card2, card3, card4, card5,card1Image,card2Image,card3Image,card4Image,card5Image, CardsArr, buffer, AvailableBoardSlots);
                         CardsPlacedCount.getAndDecrement();
                     }
                     else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
@@ -873,19 +874,19 @@ public class PlayerOne extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
                     if ("Card1".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card1.getDrawable());
+                        BoardCard4.setImageDrawable(card1Image.getDrawable());
                         BoardCards[3] = buffer[0];
                     } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card2.getDrawable());
+                        BoardCard4.setImageDrawable(card2Image.getDrawable());
                         BoardCards[3] = buffer[0];
                     } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card3.getDrawable());
+                        BoardCard4.setImageDrawable(card3Image.getDrawable());
                         BoardCards[3] = buffer[0];
                     } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card4.getDrawable());
+                        BoardCard4.setImageDrawable(card4Image.getDrawable());
                         BoardCards[3] = buffer[0];
                     } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card5.getDrawable());
+                        BoardCard4.setImageDrawable(card5Image.getDrawable());
                         BoardCards[3] = buffer[0];
                     } else {
                         throw new IllegalStateException("Unexpected value: " + dragData);
@@ -906,7 +907,7 @@ public class PlayerOne extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENDED:
                     if(!e.getResult()) {
 
-                        CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
+                        CardReturner.Return(card1, card2, card3, card4, card5,card1Image,card2Image,card3Image,card4Image,card5Image, CardsArr, buffer, AvailableBoardSlots);
                         CardsPlacedCount.getAndDecrement();
                     }else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
                     // Turns off any color tinting.
@@ -994,19 +995,19 @@ public class PlayerOne extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
                     if ("Card1".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card1.getDrawable());
+                        BoardCard5.setImageDrawable(card1Image.getDrawable());
                         BoardCards[4] = buffer[0];
                     } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card2.getDrawable());
+                        BoardCard5.setImageDrawable(card2Image.getDrawable());
                         BoardCards[4] = buffer[0];
                     } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card3.getDrawable());
+                        BoardCard5.setImageDrawable(card3Image.getDrawable());
                         BoardCards[4] = buffer[0];
                     } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card4.getDrawable());
+                        BoardCard5.setImageDrawable(card4Image.getDrawable());
                         BoardCards[4] = buffer[0];
                     } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card5.getDrawable());
+                        BoardCard5.setImageDrawable(card5Image.getDrawable());
                         BoardCards[4] = buffer[0];
                     } else {
                         throw new IllegalStateException("Unexpected value: " + dragData);
@@ -1027,7 +1028,7 @@ public class PlayerOne extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENDED:
                     if(!e.getResult()) {
 
-                        CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
+                        CardReturner.Return(card1, card2, card3, card4, card5,card1Image,card2Image,card3Image,card4Image,card5Image, CardsArr, buffer, AvailableBoardSlots);
                         CardsPlacedCount.getAndDecrement();
                     }else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
                     // Turns off any color tinting.
@@ -1115,19 +1116,19 @@ public class PlayerOne extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
                     if ("Card1".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card1.getDrawable());
+                        BoardCard6.setImageDrawable(card1Image.getDrawable());
                         BoardCards[5] = buffer[0];
                     } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card2.getDrawable());
+                        BoardCard6.setImageDrawable(card2Image.getDrawable());
                         BoardCards[5] = buffer[0];
                     } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card3.getDrawable());
+                        BoardCard6.setImageDrawable(card3Image.getDrawable());
                         BoardCards[5] = buffer[0];
                     } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card4.getDrawable());
+                        BoardCard6.setImageDrawable(card4Image.getDrawable());
                         BoardCards[5] = buffer[0];
                     } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card5.getDrawable());
+                        BoardCard6.setImageDrawable(card5Image.getDrawable());
                         BoardCards[5] = buffer[0];
                     } else {
                         throw new IllegalStateException("Unexpected value: " + dragData);
@@ -1148,7 +1149,7 @@ public class PlayerOne extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENDED:
                     if(!e.getResult()) {
 
-                        CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
+                        CardReturner.Return(card1, card2, card3, card4, card5,card1Image,card2Image,card3Image,card4Image,card5Image, CardsArr, buffer, AvailableBoardSlots);
                         CardsPlacedCount.getAndDecrement();
                     }else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
                     // Turns off any color tinting.
@@ -1176,7 +1177,7 @@ public class PlayerOne extends AppCompatActivity {
         Log.i("Player1", "Cardsarr: " + Arrays.toString(CardsArr));
         shuffler.shuffle(false);
         Log.i("Player1", "Cardsarr: " + Arrays.toString(CardsArr));
-        CardsSet.set(card1,card2,card3,card4,card5,CardsArr);
+        CardsSet.set(card1Image,card2Image,card3Image,card4Image,card5Image,CardsArr);
 
     }
 
