@@ -22,31 +22,110 @@
 
 
 
-    <string name="placeholder">     00\n\n\n\n\n\n\n                 00</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="salamander">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="phoenix">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="dragon">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="lion">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="koi_fish">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="leviathan">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="shark">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="raiden">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="mjolnir">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
-    <string name="kirin">     50\n\n\n\n\n\n\n                 12</string>
+    <string name="placeholder">\u0020\u0020\u0020\u0020
+        00
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        00</string>
+    <string name="kirin">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12
+    </string>
+    <string name="salamander">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="phoenix">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="dragon">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="lion">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="koi_fish">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="leviathan">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="shark">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="raiden">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="mjolnir">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="a">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="b">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="c">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="d">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="e">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="f">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="g">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="h">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="a1">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="a2">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="a3">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="a5">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="a6">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="aa">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
+    <string name="a9">\u0020\u0020\u0020\u0020
+        50
+        \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        12</string>
 
 </resources>

@@ -4,8 +4,7 @@ package com.example.project_immortal_fire;
 
 import android.view.View;
 import android.widget.ImageView;
-
-import com.google.android.material.card.MaterialCardView;
+import android.widget.TextView;
 
 public class CardsSet {
 
@@ -21,7 +20,7 @@ public class CardsSet {
 
     public static int[] draw ={-1,R.drawable.salamander_fire_card01,R.drawable.phoenix_fire_card02,R.drawable.dragon_fire_card03,R.drawable.kirin_fire_card04,R.drawable.lion_fire_card05,R.drawable.koi_fish_water_card06,R.drawable.leviathan_water_card07,R.drawable.shark_water_card08,R.drawable.a09,R.drawable.a10,R.drawable.raiden_electro_card11,R.drawable.mjolnir_electro_card12,R.drawable.a13,R.drawable.a14,R.drawable.a15,R.drawable.a16,R.drawable.a17,R.drawable.a18,R.drawable.a19,R.drawable.a20,R.drawable.a21,R.drawable.a22,R.drawable.a23,R.drawable.a24,R.drawable.a25};
 
-    public static void renew(MaterialCardView card1, MaterialCardView card2, MaterialCardView card3, MaterialCardView card4, MaterialCardView card5, String[] arr ){
+    public static void renew(TextView card1, TextView card2, TextView card3, TextView card4, TextView card5, String[] arr ){
         for (int i = 0; i < 5; i++) {
             if(arr[i] != null){
             if(arr[i].equals("none")){
@@ -117,7 +116,7 @@ public class CardsSet {
     }
 
 
-    public static void set(ImageView card1, ImageView card2, ImageView card3, ImageView card4, ImageView card5, String[] arr) {
+    public static void set(TextView card1, TextView card2, TextView card3, TextView card4, TextView card5, String[] arr) {
 
         int[] newarr = new int[5];
         for (int i = 0; i < 5; i++) {
@@ -128,19 +127,19 @@ public class CardsSet {
         }
 
         if(newarr[0]!=-1) {
-            card1.setImageResource(draw[newarr[0]]);
+            card1.setBackgroundResource(draw[newarr[0]]);
         }
         if(newarr[1]!=-1) {
-            card2.setImageResource(draw[newarr[1]]);
+            card2.setBackgroundResource(draw[newarr[1]]);
         }
         if(newarr[2]!=-1) {
-            card3.setImageResource(draw[newarr[2]]);
+            card3.setBackgroundResource(draw[newarr[2]]);
         }
         if(newarr[3]!=-1) {
-            card4.setImageResource(draw[newarr[3]]);
+            card4.setBackgroundResource(draw[newarr[3]]);
         }
         if(newarr[4]!=-1) {
-            card5.setImageResource(draw[newarr[4]]);
+            card5.setBackgroundResource(draw[newarr[4]]);
         }
     }
 }

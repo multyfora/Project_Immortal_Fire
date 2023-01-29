@@ -57,11 +57,11 @@ public class PlayerTwo extends AppCompatActivity {
         BoardCards2 = Arrays.copyOf(getIntent().getExtras().getStringArray("EnemyCards"), 6);
         Log.i("Intent Data", "onCreate: " + Arrays.toString(BoardCards2));
         ConstraintLayout TurnScreen = findViewById(R.id.TurnScreen);
-        MaterialCardView card1 = findViewById(R.id.Card1);
-        MaterialCardView card2 = findViewById(R.id.Card2);
-        MaterialCardView card3 = findViewById(R.id.Card3);
-        MaterialCardView card4 = findViewById(R.id.Card4);
-        MaterialCardView card5 = findViewById(R.id.Card5);
+        TextView card1 = findViewById(R.id.Card1);
+        TextView card2 = findViewById(R.id.Card2);
+        TextView card3 = findViewById(R.id.Card3);
+        TextView card4 = findViewById(R.id.Card4);
+        TextView card5 = findViewById(R.id.Card5);
         ImageView EnemyCard1 = findViewById(R.id.EnemyCard1);
         ImageView EnemyCard2 = findViewById(R.id.EnemyCard2);
         ImageView EnemyCard3 = findViewById(R.id.EnemyCard3);
@@ -69,11 +69,6 @@ public class PlayerTwo extends AppCompatActivity {
         ImageView EnemyCard5 = findViewById(R.id.EnemyCard5);
         ImageView EnemyCard6 = findViewById(R.id.EnemyCard6);
         ImageView CardViewer = findViewById(R.id.CardViewer);
-        ImageView card1Image = findViewById(R.id.Card1Image);
-        ImageView card2Image = findViewById(R.id.Card2Image);
-        ImageView card3Image = findViewById(R.id.Card3Image);
-        ImageView card4Image = findViewById(R.id.Card4Image);
-        ImageView card5Image = findViewById(R.id.Card5Image);
         ImageView BoardCard1 = findViewById(R.id.BoardCard1);
         ImageView BoardCard2 = findViewById(R.id.BoardCard2);
         ImageView BoardCard3 = findViewById(R.id.BoardCard3);
@@ -243,7 +238,7 @@ public class PlayerTwo extends AppCompatActivity {
             } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card5Image.getDrawable());
+                CardViewer.setImageDrawable(card1.getBackground());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -279,7 +274,7 @@ public class PlayerTwo extends AppCompatActivity {
             } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card5Image.getDrawable());
+                CardViewer.setImageDrawable(card5.getBackground());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -315,7 +310,7 @@ public class PlayerTwo extends AppCompatActivity {
             } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card5Image.getDrawable());
+                CardViewer.setImageDrawable(card3.getBackground());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -351,7 +346,7 @@ public class PlayerTwo extends AppCompatActivity {
             } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card5Image.getDrawable());
+                CardViewer.setImageDrawable(card4.getBackground());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -387,7 +382,7 @@ public class PlayerTwo extends AppCompatActivity {
             } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card5Image.getDrawable());
+                CardViewer.setImageDrawable(card5.getBackground());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -462,19 +457,19 @@ public class PlayerTwo extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
                     if ("Card1".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card1Image.getDrawable());
+                        BoardCard1.setImageDrawable(card1.getBackground());
                         BoardCards2[0] = buffer[0];
                     } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card2Image.getDrawable());
+                        BoardCard1.setImageDrawable(card2.getBackground());
                         BoardCards2[0] = buffer[0];
                     } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card3Image.getDrawable());
+                        BoardCard1.setImageDrawable(card3.getBackground());
                         BoardCards2[0] = buffer[0];
                     } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card4Image.getDrawable());
+                        BoardCard1.setImageDrawable(card4.getBackground());
                         BoardCards2[0] = buffer[0];
                     } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card5Image.getDrawable());
+                        BoardCard1.setImageDrawable(card5.getBackground());
                         BoardCards2[0] = buffer[0];
                     } else {
                         throw new IllegalStateException("Unexpected value: " + dragData);
@@ -494,7 +489,7 @@ public class PlayerTwo extends AppCompatActivity {
 
                 case DragEvent.ACTION_DRAG_ENDED:
                     if (!e.getResult()) {
-                        CardReturner.Return(card1, card2, card3, card4, card5,card1Image,card2Image,card3Image,card4Image,card5Image, CardsArr2, buffer, AvailableBoardSlots2);
+                        CardReturner.Return(card1, card2, card3, card4, card5, CardsArr2, buffer, AvailableBoardSlots2);
                         CardsPlacedCount2.getAndDecrement();
                     }
 
@@ -583,19 +578,19 @@ public class PlayerTwo extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
                     if ("Card1".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card1Image.getDrawable());
+                        BoardCard2.setImageDrawable(card1.getBackground());
                         BoardCards2[1] = buffer[0];
                     } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card2Image.getDrawable());
+                        BoardCard2.setImageDrawable(card2.getBackground());
                         BoardCards2[1] = buffer[0];
                     } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card3Image.getDrawable());
+                        BoardCard2.setImageDrawable(card3.getBackground());
                         BoardCards2[1] = buffer[0];
                     } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card4Image.getDrawable());
+                        BoardCard2.setImageDrawable(card4.getBackground());
                         BoardCards2[1] = buffer[0];
                     } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card5Image.getDrawable());
+                        BoardCard2.setImageDrawable(card5.getBackground());
                         BoardCards2[1] = buffer[0];
                     } else {
                         throw new IllegalStateException("Unexpected value: " + dragData);
@@ -615,7 +610,7 @@ public class PlayerTwo extends AppCompatActivity {
 
                 case DragEvent.ACTION_DRAG_ENDED:
                     if (!e.getResult()) {
-                        CardReturner.Return(card1, card2, card3, card4, card5,card1Image,card2Image,card3Image,card4Image,card5Image, CardsArr2, buffer, AvailableBoardSlots2);
+                        CardReturner.Return(card1, card2, card3, card4, card5, CardsArr2, buffer, AvailableBoardSlots2);
                         CardsPlacedCount2.getAndDecrement();
                     }
 
@@ -704,19 +699,19 @@ public class PlayerTwo extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
                     if ("Card1".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card1Image.getDrawable());
+                        BoardCard3.setImageDrawable(card1.getBackground());
                         BoardCards2[2] = buffer[0];
                     } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card2Image.getDrawable());
+                        BoardCard3.setImageDrawable(card2.getBackground());
                         BoardCards2[2] = buffer[0];
                     } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card3Image.getDrawable());
+                        BoardCard3.setImageDrawable(card3.getBackground());
                         BoardCards2[2] = buffer[0];
                     } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card4Image.getDrawable());
+                        BoardCard3.setImageDrawable(card4.getBackground());
                         BoardCards2[2] = buffer[0];
                     } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card5Image.getDrawable());
+                        BoardCard3.setImageDrawable(card5.getBackground());
                         BoardCards2[2] = buffer[0];
                     } else {
                         throw new IllegalStateException("Unexpected value: " + dragData);
@@ -737,7 +732,7 @@ public class PlayerTwo extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENDED:
 
                     if (!e.getResult()) {
-                        CardReturner.Return(card1, card2, card3, card4, card5,card1Image,card2Image,card3Image,card4Image,card5Image, CardsArr2, buffer, AvailableBoardSlots2);
+                        CardReturner.Return(card1, card2, card3, card4, card5, CardsArr2, buffer, AvailableBoardSlots2);
                         CardsPlacedCount2.getAndDecrement();
                     }
 
@@ -826,19 +821,19 @@ public class PlayerTwo extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
                     if ("Card1".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card1Image.getDrawable());
+                        BoardCard4.setImageDrawable(card1.getBackground());
                         BoardCards2[3] = buffer[0];
                     } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card2Image.getDrawable());
+                        BoardCard4.setImageDrawable(card2.getBackground());
                         BoardCards2[3] = buffer[0];
                     } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card3Image.getDrawable());
+                        BoardCard4.setImageDrawable(card3.getBackground());
                         BoardCards2[3] = buffer[0];
                     } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card4Image.getDrawable());
+                        BoardCard4.setImageDrawable(card4.getBackground());
                         BoardCards2[3] = buffer[0];
                     } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card5Image.getDrawable());
+                        BoardCard4.setImageDrawable(card5.getBackground());
                         BoardCards2[3] = buffer[0];
                     } else {
                         throw new IllegalStateException("Unexpected value: " + dragData);
@@ -858,7 +853,7 @@ public class PlayerTwo extends AppCompatActivity {
 
                 case DragEvent.ACTION_DRAG_ENDED:
                     if (!e.getResult()) {
-                        CardReturner.Return(card1, card2, card3, card4, card5,card1Image,card2Image,card3Image,card4Image,card5Image, CardsArr2, buffer, AvailableBoardSlots2);
+                        CardReturner.Return(card1, card2, card3, card4, card5, CardsArr2, buffer, AvailableBoardSlots2);
                         CardsPlacedCount2.getAndDecrement();
                     }
                     // Turns off any color tinting.
@@ -946,19 +941,19 @@ public class PlayerTwo extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
                     if ("Card1".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card1Image.getDrawable());
+                        BoardCard5.setImageDrawable(card1.getBackground());
                         BoardCards2[4] = buffer[0];
                     } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card2Image.getDrawable());
+                        BoardCard5.setImageDrawable(card2.getBackground());
                         BoardCards2[4] = buffer[0];
                     } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card3Image.getDrawable());
+                        BoardCard5.setImageDrawable(card3.getBackground());
                         BoardCards2[4] = buffer[0];
                     } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card4Image.getDrawable());
+                        BoardCard5.setImageDrawable(card4.getBackground());
                         BoardCards2[4] = buffer[0];
                     } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card5Image.getDrawable());
+                        BoardCard5.setImageDrawable(card5.getBackground());
                         BoardCards2[4] = buffer[0];
                     } else {
                         throw new IllegalStateException("Unexpected value: " + dragData);
@@ -978,7 +973,7 @@ public class PlayerTwo extends AppCompatActivity {
 
                 case DragEvent.ACTION_DRAG_ENDED:
                     if (!e.getResult()) {
-                        CardReturner.Return(card1, card2, card3, card4, card5,card1Image,card2Image,card3Image,card4Image,card5Image, CardsArr2, buffer, AvailableBoardSlots2);
+                        CardReturner.Return(card1, card2, card3, card4, card5, CardsArr2, buffer, AvailableBoardSlots2);
                         CardsPlacedCount2.getAndDecrement();
                     }
 
@@ -1067,19 +1062,19 @@ public class PlayerTwo extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
                     if ("Card1".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card1Image.getDrawable());
+                        BoardCard6.setImageDrawable(card1.getBackground());
                         BoardCards2[5] = buffer[0];
                     } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card2Image.getDrawable());
+                        BoardCard6.setImageDrawable(card2.getBackground());
                         BoardCards2[5] = buffer[0];
                     } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card3Image.getDrawable());
+                        BoardCard6.setImageDrawable(card3.getBackground());
                         BoardCards2[5] = buffer[0];
                     } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card4Image.getDrawable());
+                        BoardCard6.setImageDrawable(card4.getBackground());
                         BoardCards2[5] = buffer[0];
                     } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card5Image.getDrawable());
+                        BoardCard6.setImageDrawable(card5.getBackground());
                         BoardCards2[5] = buffer[0];
                     } else {
                         throw new IllegalStateException("Unexpected value: " + dragData);
@@ -1099,7 +1094,7 @@ public class PlayerTwo extends AppCompatActivity {
 
                 case DragEvent.ACTION_DRAG_ENDED:
                     if (!e.getResult()) {
-                        CardReturner.Return(card1, card2, card3, card4, card5,card1Image,card2Image,card3Image,card4Image,card5Image, CardsArr2, buffer, AvailableBoardSlots2);
+                        CardReturner.Return(card1, card2, card3, card4, card5, CardsArr2, buffer, AvailableBoardSlots2);
                         CardsPlacedCount2.getAndDecrement();
                     }
                     // Turns off any color tinting.
@@ -1127,7 +1122,7 @@ public class PlayerTwo extends AppCompatActivity {
         Log.i("idk", "before P2" + Arrays.toString(CardsArr2));
         shuffler.shuffle(true);
         Log.i("idk", "onCreate before setting  " + Arrays.toString(CardsArr2));
-        CardsSet.set(card1Image, card2Image, card3Image, card4Image, card5Image, CardsArr2);
+        CardsSet.set(card1, card2, card3, card4, card5, CardsArr2);
         Log.i("idk", "onCreate cards been set  " + Arrays.toString(CardsArr2));
 
     }
