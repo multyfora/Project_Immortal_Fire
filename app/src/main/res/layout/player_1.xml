@@ -22,35 +22,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.4" />
+            app:layout_constraintGuide_begin="103dp" />
 
-        <com.google.android.material.card.MaterialCardView
+        <TextView
             android:id="@+id/Card1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:cardBackgroundColor="@color/transparent"
+            android:background="@drawable/placeholder"
+            android:gravity="bottom"
+            android:text="@string/placeholder"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="0.678"
             app:layout_constraintEnd_toStartOf="@id/Card2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline3">
 
 
-
-            <ImageView
-                android:id="@+id/Card1Image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                app:srcCompat="@drawable/placeholder"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|top"
-                android:text="TEST TEST" />
-
-
-        </com.google.android.material.card.MaterialCardView>
+        </TextView>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/Card2"
@@ -84,7 +75,9 @@
             android:layout_width="wrap_content"
             app:srcCompat="@drawable/placeholder" />
 
-    </com.google.android.material.card.MaterialCardView>
+
+
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/Card4"
@@ -359,7 +352,9 @@
 
         </TextView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
