@@ -272,9 +272,10 @@ public class PlayerTwo extends AppCompatActivity {
 
                 });
             } else if (!CardViewerPoped[0]) {
+
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card5.getBackground());
+                CardViewer.setImageDrawable(card2.getBackground());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());

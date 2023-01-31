@@ -28,7 +28,7 @@
             android:id="@+id/Card1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/kirin_fire_card04"
+            android:background="@drawable/placeholder"
             android:gravity="bottom"
             android:text="@string/placeholder"
             android:textColor="@color/white"

@@ -3,31 +3,24 @@ package com.example.project_immortal_fire;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.NotificationCompat;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.ClipData;
 import android.content.ClipDescription;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.DragEvent;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.card.MaterialCardView;
 
 import java.util.Arrays;
 
@@ -293,6 +286,8 @@ public class PlayerOne extends AppCompatActivity {
                 alphaAnim.addUpdateListener(valueAnimator -> {
                     float alphaValue = (float) valueAnimator.getAnimatedValue();
                     CardViewer.setAlpha(alphaValue);
+
+
                 });
                 CardViewerPoped[0] = true;
             }
@@ -394,6 +389,7 @@ public class PlayerOne extends AppCompatActivity {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
                 CardViewer.setImageDrawable(card4.getBackground());
+
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
