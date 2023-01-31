@@ -134,6 +134,7 @@ public class PlayerOne extends AppCompatActivity {
                 buffer[0] = CardsArr[0];
                 buffer[1] = "0";
                 CardsPlacedCount.getAndIncrement();
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr);
                 Log.i("card1", "long click listener: " + Arrays.toString(buffer));
                 CardsArr[0] = "none";
                 CardsSet.renew(card1,card2,card3,card4,card5,CardsArr);
@@ -156,6 +157,7 @@ public class PlayerOne extends AppCompatActivity {
                 buffer[0] = CardsArr[1];
                 buffer[1] = "1";
                 CardsPlacedCount.getAndIncrement();
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr);
                 CardsArr[1] = "none";
                 CardsSet.renew(card1,card2,card3,card4,card5,CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
@@ -177,6 +179,7 @@ public class PlayerOne extends AppCompatActivity {
                 buffer[0] = CardsArr[2];
                 buffer[1] = "2";
                 CardsPlacedCount.getAndIncrement();
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr);
                 CardsArr[2] = "none";
                 CardsSet.renew(card1,card2,card3,card4,card5,CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
@@ -198,6 +201,7 @@ public class PlayerOne extends AppCompatActivity {
                 buffer[0] = CardsArr[3];
                 buffer[1] = "3";
                 CardsPlacedCount.getAndIncrement();
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr);
                 CardsArr[3] = "none";
                 CardsSet.renew(card1,card2,card3,card4,card5,CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
@@ -219,7 +223,7 @@ public class PlayerOne extends AppCompatActivity {
                 buffer[0] = CardsArr[4];
                 buffer[1] = "4";
                 CardsPlacedCount.getAndIncrement();
-
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr);
                 CardsArr[4] = "none";
                 CardsSet.renew(card1,card2,card3,card4,card5,CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());

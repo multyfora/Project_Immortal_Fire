@@ -53,12 +53,11 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="italic"
-            app:layout_constraintDimensionRatio="0.678"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="0.678"
             app:layout_constraintEnd_toStartOf="@id/Card3"
             app:layout_constraintStart_toEndOf="@id/Card1"
-            app:layout_constraintTop_toTopOf="@+id/guideline3">
-        </TextView>
+            app:layout_constraintTop_toTopOf="@+id/guideline3"/>
 
         <TextView
             android:id="@+id/Card3"
