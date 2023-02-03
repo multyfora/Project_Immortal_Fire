@@ -295,7 +295,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
+    <androidx.cardview.widget.CardView
         android:id="@+id/CardViewer"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -304,11 +304,12 @@
         android:layout_marginEnd="75dp"
         android:layout_marginBottom="75dp"
         android:visibility="gone"
+        app:layout_constraintDimensionRatio="0.678"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/placeholder" />
+        android:background="@drawable/placeholder" />
 
 
     <ImageView

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.card.MaterialCardView;
@@ -68,7 +69,7 @@ public class PlayerTwo extends AppCompatActivity {
         ImageView EnemyCard4 = findViewById(R.id.EnemyCard4);
         ImageView EnemyCard5 = findViewById(R.id.EnemyCard5);
         ImageView EnemyCard6 = findViewById(R.id.EnemyCard6);
-        ImageView CardViewer = findViewById(R.id.CardViewer);
+        CardView CardViewer = findViewById(R.id.CardViewer);
         ImageView BoardCard1 = findViewById(R.id.BoardCard1);
         ImageView BoardCard2 = findViewById(R.id.BoardCard2);
         ImageView BoardCard3 = findViewById(R.id.BoardCard3);
