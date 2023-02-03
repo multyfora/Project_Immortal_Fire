@@ -118,6 +118,7 @@ public class PlayerTwo extends AppCompatActivity {
                 v.startDragAndDrop(dragData, myShadow, null, 0);
                 buffer[0] = CardsArr2[0];
                 buffer[1] = "0";
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
                 CardsArr2[0] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
                 return true;
@@ -129,6 +130,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardsPlacedCount2.getAndIncrement();
                 buffer[0] = CardsArr2[1];
                 buffer[1] = "1";
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
                 CardsArr2[1] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
                 ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
@@ -147,6 +149,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardsPlacedCount2.getAndIncrement();
                 buffer[0] = CardsArr2[2];
                 buffer[1] = "2";
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
                 CardsArr2[2] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
                 ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
@@ -165,6 +168,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardsPlacedCount2.getAndIncrement();
                 buffer[0] = CardsArr2[3];
                 buffer[1] = "3";
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
                 CardsArr2[3] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
                 ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
@@ -183,6 +187,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardsPlacedCount2.getAndIncrement();
                 buffer[0] = CardsArr2[4];
                 buffer[1] = "4";
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
                 CardsArr2[4] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
                 ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
@@ -238,7 +243,7 @@ public class PlayerTwo extends AppCompatActivity {
             } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card1.getBackground());
+                CardViewer.setBackground(card1.getBackground());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -275,7 +280,7 @@ public class PlayerTwo extends AppCompatActivity {
 
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card2.getBackground());
+                CardViewer.setBackground(card2.getBackground());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -311,7 +316,7 @@ public class PlayerTwo extends AppCompatActivity {
             } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card3.getBackground());
+                CardViewer.setBackground(card3.getBackground());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -347,7 +352,7 @@ public class PlayerTwo extends AppCompatActivity {
             } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card4.getBackground());
+                CardViewer.setBackground(card4.getBackground());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -383,7 +388,7 @@ public class PlayerTwo extends AppCompatActivity {
             } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card5.getBackground());
+                CardViewer.setBackground(card5.getBackground());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());

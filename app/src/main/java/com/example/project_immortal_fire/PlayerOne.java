@@ -2,6 +2,7 @@ package com.example.project_immortal_fire;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.ValueAnimator;
@@ -64,7 +65,7 @@ public class PlayerOne extends AppCompatActivity {
         final boolean[] card5Poped = {false};
 
         ConstraintLayout TurnScreen = findViewById(R.id.TurnScreen);
-        ImageView CardViewer = findViewById(R.id.CardViewer);
+        CardView CardViewer = findViewById(R.id.CardViewer);
         TextView card1 = findViewById(R.id.Card1);
         TextView card2 = findViewById(R.id.Card2);
         TextView card3 = findViewById(R.id.Card3);
@@ -83,6 +84,9 @@ public class PlayerOne extends AppCompatActivity {
         ImageView EnemyCard5 = findViewById(R.id.EnemyCard5);
         ImageView EnemyCard6 = findViewById(R.id.EnemyCard6);
         ImageView EndTurn1 = findViewById(R.id.EndTurn);
+
+
+
 
 
         if(IsFirst){
@@ -135,7 +139,6 @@ public class PlayerOne extends AppCompatActivity {
                 buffer[1] = "0";
                 CardsPlacedCount.getAndIncrement();
                 CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr);
-                Log.i("card1", "long click listener: " + Arrays.toString(buffer));
                 CardsArr[0] = "none";
                 CardsSet.renew(card1,card2,card3,card4,card5,CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
@@ -250,8 +253,10 @@ public class PlayerOne extends AppCompatActivity {
                 goingAnim.addUpdateListener(valueAnimator -> {
                     float goingalpha = (float) valueAnimator.getAnimatedValue();
                     CardViewer.setAlpha(goingalpha);
+                    card1.invalidate();
                     if (goingalpha == 0F){
                         CardViewer.setVisibility(View.GONE);
+                        card1.invalidate();
                     }
                 });
                 CardViewerPoped[0] = false;
@@ -282,7 +287,14 @@ public class PlayerOne extends AppCompatActivity {
         }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card1.getBackground());
+                int PaddingTopC1 = card1.getPaddingTop();
+                int PaddingBottomC1 = card1.getPaddingBottom();
+                int PaddingLeftC1 = card1.getPaddingLeft();
+                int PaddingRightC1 = card1.getPaddingRight();
+                CardViewer.setBackground(card1.getBackground());
+                card1.setPadding(PaddingLeftC1,PaddingTopC1,PaddingRightC1,PaddingBottomC1);
+                CardViewer.setPadding(PaddingLeftC1,PaddingTopC1,PaddingRightC1,PaddingBottomC1);
+
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -320,7 +332,7 @@ public class PlayerOne extends AppCompatActivity {
             }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card2.getBackground());
+                CardViewer.setBackground(card2.getBackground());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -356,7 +368,7 @@ public class PlayerOne extends AppCompatActivity {
             }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card3.getBackground());
+                CardViewer.setBackground(card3.getBackground());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -392,7 +404,7 @@ public class PlayerOne extends AppCompatActivity {
             }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card4.getBackground());
+                CardViewer.setBackground(card4.getBackground());
 
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
@@ -429,7 +441,7 @@ public class PlayerOne extends AppCompatActivity {
             }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setImageDrawable(card5.getBackground());
+                CardViewer.setBackground(card5.getBackground());
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
