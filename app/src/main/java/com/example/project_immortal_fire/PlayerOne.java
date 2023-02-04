@@ -253,10 +253,9 @@ public class PlayerOne extends AppCompatActivity {
                 goingAnim.addUpdateListener(valueAnimator -> {
                     float goingalpha = (float) valueAnimator.getAnimatedValue();
                     CardViewer.setAlpha(goingalpha);
-                    card1.invalidate();
                     if (goingalpha == 0F){
                         CardViewer.setVisibility(View.GONE);
-                        card1.invalidate();
+
                     }
                 });
                 CardViewerPoped[0] = false;
@@ -287,14 +286,7 @@ public class PlayerOne extends AppCompatActivity {
         }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                int PaddingTopC1 = card1.getPaddingTop();
-                int PaddingBottomC1 = card1.getPaddingBottom();
-                int PaddingLeftC1 = card1.getPaddingLeft();
-                int PaddingRightC1 = card1.getPaddingRight();
                 CardViewer.setBackground(card1.getBackground());
-                card1.setPadding(PaddingLeftC1,PaddingTopC1,PaddingRightC1,PaddingBottomC1);
-                CardViewer.setPadding(PaddingLeftC1,PaddingTopC1,PaddingRightC1,PaddingBottomC1);
-
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
