@@ -1,5 +1,7 @@
 package com.example.project_immortal_fire;
 
+import static com.example.project_immortal_fire.CardsSet.draw;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -16,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
@@ -33,6 +36,7 @@ public class PlayerOne extends AppCompatActivity {
     int AvailableBoardSlots = 6;
 
     static boolean IsFirst = true;
+    private static final String TAG = "player1";
     private static final String IMAGEVIEW_TAG_CARD1 = "Card1";
     private static final String IMAGEVIEW_TAG_CARD2 = "Card2";
     private static final String IMAGEVIEW_TAG_CARD3 = "Card3";
@@ -91,11 +95,11 @@ public class PlayerOne extends AppCompatActivity {
 
         if(IsFirst){
             TurnScreen.setVisibility(View.GONE);
-            Log.i("player1", "IsFirst made gone " + IsFirst);
+            Log.i(TAG, "IsFirst made gone " + IsFirst);
         }
         else {
             TurnScreen.setVisibility(View.VISIBLE);
-            Log.i("player1", "IsFirst made visible " + IsFirst);
+            Log.i(TAG, "IsFirst made visible " + IsFirst);
         }
         IsFirst = false;
 
@@ -116,7 +120,8 @@ public class PlayerOne extends AppCompatActivity {
 
 
         EndTurn1.setOnClickListener(view -> {
-            Log.i("player1", "atomic count: " + CardsPlacedCount.get());
+            Log.i(TAG, "atomic count: " + CardsPlacedCount.get());
+            Log.i(TAG, "boardcards: " + Arrays.toString(BoardCards));
             Intent i = new Intent(PlayerOne.this, PlayerTwo.class);
             Bundle extras = new Bundle();
             extras.putStringArray("BoardCards",BoardCards);
@@ -286,7 +291,10 @@ public class PlayerOne extends AppCompatActivity {
         }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setBackground(card1.getBackground());
+                String ViewTmp = CardsArr[0];
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                CardViewer.setBackgroundResource(draw[key]);
+
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -324,7 +332,9 @@ public class PlayerOne extends AppCompatActivity {
             }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setBackground(card2.getBackground());
+                String ViewTmp = CardsArr[1];
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                CardViewer.setBackgroundResource(draw[key]);
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -360,7 +370,9 @@ public class PlayerOne extends AppCompatActivity {
             }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setBackground(card3.getBackground());
+                String ViewTmp = CardsArr[2];
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                CardViewer.setBackgroundResource(draw[key]);
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -396,7 +408,9 @@ public class PlayerOne extends AppCompatActivity {
             }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setBackground(card4.getBackground());
+                String ViewTmp = CardsArr[3];
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                CardViewer.setBackgroundResource(draw[key]);
 
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
@@ -433,7 +447,9 @@ public class PlayerOne extends AppCompatActivity {
             }else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setBackground(card5.getBackground());
+                String ViewTmp = CardsArr[4];
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                CardViewer.setBackgroundResource(draw[key]);
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -1173,12 +1189,13 @@ public class PlayerOne extends AppCompatActivity {
             return false;
 
         });
-        Log.i("Player1", "Cardsarr: " + Arrays.toString(CardsArr));
+        Log.i(TAG, "Cardsarr: " + Arrays.toString(CardsArr));
         shuffler.shuffle(false);
-        Log.i("Player1", "Cardsarr: " + Arrays.toString(CardsArr));
+        Log.i(TAG, "Cardsarr: " + Arrays.toString(CardsArr));
         CardsSet.set(card1,card2,card3,card4,card5,CardsArr);
 
     }
+
 
 
 
@@ -1187,7 +1204,7 @@ public class PlayerOne extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-        Log.i("player1", "onKeyDown: " + keyCode + "  key event  " + event);
+        Log.i(TAG, "onKeyDown: " + keyCode + "  key event  " + event);
 
         String channelId = "my_channel_id";
         CharSequence channelName = "My Channel";
@@ -1215,7 +1232,7 @@ public class PlayerOne extends AppCompatActivity {
 
 
         if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-            Log.d("player1", "Screenshot Taken " + keyCode);
+            Log.d(TAG, "Screenshot Taken " + keyCode);
             notificationManager.notify(1, builder.build());
             return true;
         }

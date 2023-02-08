@@ -1,5 +1,7 @@
 package com.example.project_immortal_fire;
 
+import static com.example.project_immortal_fire.CardsSet.draw;
+
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.ClipData;
@@ -244,7 +246,9 @@ public class PlayerTwo extends AppCompatActivity {
             } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setBackground(card1.getBackground());
+                String ViewTmp = CardsArr2[0];
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                CardViewer.setBackgroundResource(draw[key]);
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -281,7 +285,9 @@ public class PlayerTwo extends AppCompatActivity {
 
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setBackground(card2.getBackground());
+                String ViewTmp = CardsArr2[1];
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                CardViewer.setBackgroundResource(draw[key]);
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -317,7 +323,9 @@ public class PlayerTwo extends AppCompatActivity {
             } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setBackground(card3.getBackground());
+                String ViewTmp = CardsArr2[2];
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                CardViewer.setBackgroundResource(draw[key]);
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -353,7 +361,9 @@ public class PlayerTwo extends AppCompatActivity {
             } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setBackground(card4.getBackground());
+                String ViewTmp = CardsArr2[3];
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                CardViewer.setBackgroundResource(draw[key]);
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
@@ -389,7 +399,9 @@ public class PlayerTwo extends AppCompatActivity {
             } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
-                CardViewer.setBackground(card5.getBackground());
+                String ViewTmp = CardsArr2[4];
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                CardViewer.setBackgroundResource(draw[key]);
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
                 alphaAnim.setInterpolator(new LinearInterpolator());
