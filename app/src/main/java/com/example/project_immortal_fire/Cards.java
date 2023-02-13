@@ -1,20 +1,97 @@
 package com.example.project_immortal_fire;
 
 
+import android.widget.ArrayAdapter;
+
 import java.util.Arrays;
 
 public abstract class Cards {
     public final static String[] AllCards = new String[]{"salamander_fire_card01", "phoenix_fire_card02", "dragon_fire_card03", "kirin_fire_card04", "lion_fire_card05", "koi_fish_water_card06", "leviathan_water_card07", "shark_water_card08", "09", "10", "raiden_electro_card11", "mjolnir_electro_card12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", };
     public final static int[] ATK = new int[]{-1,12,10,20,11,13,5,23,12,-1,-1,21,15};
     public final static int[] HP = new int[]{-1,10,11,20,11,15,30,25,13,-1,-1,18,15};
+
+
     public static int getHP(String CardName){
-        int key = Integer.parseInt(CardName.charAt(CardName.length() - 2)+String.valueOf(CardName.charAt(CardName.length() - 1)));
-        return Arrays.binarySearch(HP,key);
-    }
-    public static int getATK(String CardName){
-        int key = Integer.parseInt(CardName.charAt(CardName.length() - 2)+String.valueOf(CardName.charAt(CardName.length() - 1)));
-        return Arrays.binarySearch(ATK,key);
+        if(!CardName.equals("none")) {
+            int key = Integer.parseInt(CardName.charAt(CardName.length() - 2) + String.valueOf(CardName.charAt(CardName.length() - 1)));
+            return Arrays.binarySearch(HP, key);
+        }else return -1;
     }
 
+
+    public static int getATK(String CardName){
+        if(!CardName.equals("none")) {
+            int key = Integer.parseInt(CardName.charAt(CardName.length() - 2) + String.valueOf(CardName.charAt(CardName.length() - 1)));
+            return Arrays.binarySearch(ATK, key);
+        }else return -1;
+    }
+
+
+    //setting by number of card
+    public static void setHP(int num,int hp){
+        HP[num] = hp;
+    }
+    //setting by the name of card
+    public static void setHP(String CardName,int hp){
+        int key = Integer.parseInt(CardName.charAt(CardName.length() - 2)+String.valueOf(CardName.charAt(CardName.length() - 1)));
+        HP[key] = hp;
+    }
+    //setting by number of card
+    public static void setAtk(int num,int atk){
+        ATK[num] = atk;
+    }
+    //setting by the name of card
+    public static void setAtk(String CardName,int atk){
+        int key = Integer.parseInt(CardName.charAt(CardName.length() - 2)+String.valueOf(CardName.charAt(CardName.length() - 1)));
+        ATK[key] = atk;
+    }
+
+
+    //a = board cards
+    //b = enemy cards
+    public static void Moved(String[] a, String[] b){
+
+        int[] AtkBuffer = new int[4];
+        int[] HpBuffer = new int[4];
+
+        //* first step
+
+        //damaging enemy cards
+        //taking away atk of frien from hp of enemy
+
+        for (int i = 0; i < 5; i++) {
+
+            AtkBuffer[i] =getATK(a[i]);
+            HpBuffer[i] =getHP(b[i]);
+
+        }
+
+        for (int i = 0; i < 5; i++) {
+
+            HpBuffer[i] -= AtkBuffer[i];
+        }
+
+        //* second step
+
+        //cleaning buffers
+        Arrays.fill(AtkBuffer,0);
+        Arrays.fill(HpBuffer,0);
+
+        //damaging frien cards
+        //taking away atk of enemy from hp of frien
+
+        for (int i = 0; i < 5; i++) {
+
+            AtkBuffer[i] =getATK(b[i]);
+            HpBuffer[i] =getHP(a[i]);
+
+        }
+
+        for (int i = 0; i < 5; i++) {
+
+            HpBuffer[i] -= AtkBuffer[i];
+        }
+
+    }
 }
 

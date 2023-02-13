@@ -93,6 +93,7 @@ public class PlayerTwo extends AppCompatActivity {
         card4.setTag(IMAGEVIEW_TAG_CARD4);
         card5.setTag(IMAGEVIEW_TAG_CARD5);
         EndTurn2.setOnClickListener(view -> {
+            Cards.Moved(CardsArr2,EnemyCards2);
             Log.i("boardCards", "array: " + Arrays.toString(BoardCards2) + "visibility: " + BoardCard1.getVisibility() + BoardCard2.getVisibility() + BoardCard3.getVisibility() + BoardCard4.getVisibility() + BoardCard5.getVisibility() + BoardCard6.getVisibility());
             Intent i1 = new Intent(PlayerTwo.this, PlayerOne.class);
             Bundle extras = new Bundle();
