@@ -32,7 +32,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class PlayerOne extends AppCompatActivity {
 
-    public static final int CardsCount = 13;
+    public static final int CardsCount = 12;
     int AvailableBoardSlots = 6;
 
     static boolean IsFirst = true;
@@ -95,11 +95,9 @@ public class PlayerOne extends AppCompatActivity {
 
         if(IsFirst){
             TurnScreen.setVisibility(View.GONE);
-            Log.i(TAG, "IsFirst made gone " + IsFirst);
         }
         else {
             TurnScreen.setVisibility(View.VISIBLE);
-            Log.i(TAG, "IsFirst made visible " + IsFirst);
         }
         IsFirst = false;
 

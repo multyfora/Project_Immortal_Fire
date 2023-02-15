@@ -1,29 +1,39 @@
 package com.example.project_immortal_fire;
 
 
-import android.widget.ArrayAdapter;
-
+import android.util.Log;
 import java.util.Arrays;
 
 public abstract class Cards {
     public final static String[] AllCards = new String[]{"salamander_fire_card01", "phoenix_fire_card02", "dragon_fire_card03", "kirin_fire_card04", "lion_fire_card05", "koi_fish_water_card06", "leviathan_water_card07", "shark_water_card08", "09", "10", "raiden_electro_card11", "mjolnir_electro_card12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", };
-    public final static int[] ATK = new int[]{-1,12,10,20,11,13,5,23,12,-1,-1,21,15};
-    public final static int[] HP = new int[]{-1,10,11,20,11,15,30,25,13,-1,-1,18,15};
+    public static int[] ATK = new int[]{-1,12,10,20,11,13,5,23,12,-1,-1,21,15};
+    public static int[] HP = new int[]{-1,10,11,20,11,15,30,25,13,-1,-1,18,15};
+    static String TAG = "Cards";
+
+    public static int linearSearch(int[] arr, int target) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == target) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 
 
     public static int getHP(String CardName){
-        if(!CardName.equals("none")) {
+        if(CardName!=null) {
             int key = Integer.parseInt(CardName.charAt(CardName.length() - 2) + String.valueOf(CardName.charAt(CardName.length() - 1)));
-            return Arrays.binarySearch(HP, key);
-        }else return -1;
+            return HP[key];
+        }else return 0;
     }
 
 
     public static int getATK(String CardName){
-        if(!CardName.equals("none")) {
+        if(CardName!=null) {
             int key = Integer.parseInt(CardName.charAt(CardName.length() - 2) + String.valueOf(CardName.charAt(CardName.length() - 1)));
-            return Arrays.binarySearch(ATK, key);
-        }else return -1;
+            return ATK[key];
+        }else return 0;
     }
 
 
@@ -47,12 +57,13 @@ public abstract class Cards {
     }
 
 
-    //a = board cards
-    //b = enemy cards
-    public static void Moved(String[] a, String[] b){
 
-        int[] AtkBuffer = new int[4];
-        int[] HpBuffer = new int[4];
+    public static void Moved(String[] boardCards, String[] enemyCards){
+
+        Log.i(TAG, "string a: " + Arrays.toString(boardCards) +"\nstring b: " + Arrays.toString(enemyCards));
+
+        int[] AtkBuffer = new int[5];
+        int[] HpBuffer = new int[5];
 
         //* first step
 
@@ -61,15 +72,16 @@ public abstract class Cards {
 
         for (int i = 0; i < 5; i++) {
 
-            AtkBuffer[i] =getATK(a[i]);
-            HpBuffer[i] =getHP(b[i]);
+            AtkBuffer[i] =getATK(boardCards[i]);
+            HpBuffer[i] =getHP(enemyCards[i]);
 
         }
-
+        Log.i(TAG, "ENEMY HP BEFORE: " + Arrays.toString(HpBuffer));
         for (int i = 0; i < 5; i++) {
 
             HpBuffer[i] -= AtkBuffer[i];
         }
+        Log.i(TAG, "ENEMY AFTER: " + Arrays.toString(HpBuffer));
 
         //* second step
 
@@ -82,15 +94,24 @@ public abstract class Cards {
 
         for (int i = 0; i < 5; i++) {
 
-            AtkBuffer[i] =getATK(b[i]);
-            HpBuffer[i] =getHP(a[i]);
+            AtkBuffer[i] =getATK(enemyCards[i]);
+            HpBuffer[i] =getHP(boardCards[i]);
 
         }
+        Log.i(TAG, "ALLY BEFORE: " + Arrays.toString(HpBuffer));
 
         for (int i = 0; i < 5; i++) {
 
             HpBuffer[i] -= AtkBuffer[i];
         }
+
+        Log.i(TAG, "ALLY AFTER: " + Arrays.toString(HpBuffer));
+
+
+        //* third step
+        //making all <0 hp cards disappear
+
+        //!call card disappearing method
 
     }
 }
