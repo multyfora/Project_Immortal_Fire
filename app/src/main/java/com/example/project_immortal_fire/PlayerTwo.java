@@ -25,8 +25,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.google.android.material.card.MaterialCardView;
-
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -80,6 +78,9 @@ public class PlayerTwo extends AppCompatActivity {
         ImageView BoardCard6 = findViewById(R.id.BoardCard6);
         ImageView EndTurn2 = findViewById(R.id.EndTurn2);
 
+        ImageView[] BCards = {BoardCard1,BoardCard2,BoardCard3,BoardCard4,BoardCard5,
+                EnemyCard1,EnemyCard2,EnemyCard3,EnemyCard4,EnemyCard5};
+
         CardsSet.boardset(BoardCard1, BoardCard2, BoardCard3, BoardCard4, BoardCard5, BoardCard6, BoardCards2);
         CardsSet.enemyset(EnemyCard1, EnemyCard2, EnemyCard3, EnemyCard4, EnemyCard5, EnemyCard6, EnemyCards2);
 
@@ -93,7 +94,7 @@ public class PlayerTwo extends AppCompatActivity {
         card4.setTag(IMAGEVIEW_TAG_CARD4);
         card5.setTag(IMAGEVIEW_TAG_CARD5);
         EndTurn2.setOnClickListener(view -> {
-            Cards.Moved(BoardCards2,EnemyCards2);
+            Cards.Moved(BoardCards2,EnemyCards2,BCards);
             Log.i("boardCards", "array: " + Arrays.toString(BoardCards2) + "visibility: " + BoardCard1.getVisibility() + BoardCard2.getVisibility() + BoardCard3.getVisibility() + BoardCard4.getVisibility() + BoardCard5.getVisibility() + BoardCard6.getVisibility());
             Intent i1 = new Intent(PlayerTwo.this, PlayerOne.class);
             Bundle extras = new Bundle();
@@ -113,7 +114,7 @@ public class PlayerTwo extends AppCompatActivity {
 
             if (card1Poped[0]&& CardsPlacedCount2.get()<2) {
                 CardsPlacedCount2.getAndIncrement();
-                ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
+                ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
                 ClipData dragData = new ClipData(
                         (CharSequence) v.getTag(),
                         new String[]{ClipDescription.MIMETYPE_TEXT_PLAIN},
@@ -137,7 +138,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
                 CardsArr2[1] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
-                ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
+                ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
                 ClipData dragData = new ClipData(
                         (CharSequence) v.getTag(),
                         new String[]{ClipDescription.MIMETYPE_TEXT_PLAIN},
@@ -156,7 +157,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
                 CardsArr2[2] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
-                ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
+                ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
                 ClipData dragData = new ClipData(
                         (CharSequence) v.getTag(),
                         new String[]{ClipDescription.MIMETYPE_TEXT_PLAIN},
@@ -175,7 +176,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
                 CardsArr2[3] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
-                ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
+                ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
                 ClipData dragData = new ClipData(
                         (CharSequence) v.getTag(),
                         new String[]{ClipDescription.MIMETYPE_TEXT_PLAIN},
@@ -194,7 +195,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
                 CardsArr2[4] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
-                ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
+                ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
                 ClipData dragData = new ClipData(
                         (CharSequence) v.getTag(),
                         new String[]{ClipDescription.MIMETYPE_TEXT_PLAIN},
@@ -476,24 +477,8 @@ public class PlayerTwo extends AppCompatActivity {
                     // Gets the text data from the item.
                     CharSequence dragData = item.getText();
 
-                    if ("Card1".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card1.getBackground());
-                        BoardCards2[0] = buffer[0];
-                    } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card2.getBackground());
-                        BoardCards2[0] = buffer[0];
-                    } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card3.getBackground());
-                        BoardCards2[0] = buffer[0];
-                    } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card4.getBackground());
-                        BoardCards2[0] = buffer[0];
-                    } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard1.setImageDrawable(card5.getBackground());
-                        BoardCards2[0] = buffer[0];
-                    } else {
-                        throw new IllegalStateException("Unexpected value: " + dragData);
-                    }
+                    Cards.boardSet((String)dragData,BoardCard1);
+                    BoardCards2[0] = buffer[0];
 
                     // Displays a message containing the dragged data.
                     Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
@@ -597,24 +582,8 @@ public class PlayerTwo extends AppCompatActivity {
                     // Gets the text data from the item.
                     CharSequence dragData = item.getText();
 
-                    if ("Card1".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card1.getBackground());
-                        BoardCards2[1] = buffer[0];
-                    } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card2.getBackground());
-                        BoardCards2[1] = buffer[0];
-                    } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card3.getBackground());
-                        BoardCards2[1] = buffer[0];
-                    } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card4.getBackground());
-                        BoardCards2[1] = buffer[0];
-                    } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard2.setImageDrawable(card5.getBackground());
-                        BoardCards2[1] = buffer[0];
-                    } else {
-                        throw new IllegalStateException("Unexpected value: " + dragData);
-                    }
+                    Cards.boardSet((String)dragData,BoardCard2);
+                    BoardCards2[1] = buffer[0];
 
                     // Displays a message containing the dragged data.
                     Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
@@ -718,24 +687,8 @@ public class PlayerTwo extends AppCompatActivity {
                     // Gets the text data from the item.
                     CharSequence dragData = item.getText();
 
-                    if ("Card1".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card1.getBackground());
-                        BoardCards2[2] = buffer[0];
-                    } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card2.getBackground());
-                        BoardCards2[2] = buffer[0];
-                    } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card3.getBackground());
-                        BoardCards2[2] = buffer[0];
-                    } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card4.getBackground());
-                        BoardCards2[2] = buffer[0];
-                    } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard3.setImageDrawable(card5.getBackground());
-                        BoardCards2[2] = buffer[0];
-                    } else {
-                        throw new IllegalStateException("Unexpected value: " + dragData);
-                    }
+                    Cards.boardSet((String)dragData,BoardCard3);
+                    BoardCards2[2] = buffer[0];
 
                     // Displays a message containing the dragged data.
                     Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
@@ -840,24 +793,8 @@ public class PlayerTwo extends AppCompatActivity {
                     // Gets the text data from the item.
                     CharSequence dragData = item.getText();
 
-                    if ("Card1".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card1.getBackground());
-                        BoardCards2[3] = buffer[0];
-                    } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card2.getBackground());
-                        BoardCards2[3] = buffer[0];
-                    } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card3.getBackground());
-                        BoardCards2[3] = buffer[0];
-                    } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card4.getBackground());
-                        BoardCards2[3] = buffer[0];
-                    } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard4.setImageDrawable(card5.getBackground());
-                        BoardCards2[3] = buffer[0];
-                    } else {
-                        throw new IllegalStateException("Unexpected value: " + dragData);
-                    }
+                    Cards.boardSet((String)dragData,BoardCard4);
+                    BoardCards2[3] = buffer[0];
 
                     // Displays a message containing the dragged data.
                     Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
@@ -960,24 +897,8 @@ public class PlayerTwo extends AppCompatActivity {
                     // Gets the text data from the item.
                     CharSequence dragData = item.getText();
 
-                    if ("Card1".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card1.getBackground());
-                        BoardCards2[4] = buffer[0];
-                    } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card2.getBackground());
-                        BoardCards2[4] = buffer[0];
-                    } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card3.getBackground());
-                        BoardCards2[4] = buffer[0];
-                    } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card4.getBackground());
-                        BoardCards2[4] = buffer[0];
-                    } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard5.setImageDrawable(card5.getBackground());
-                        BoardCards2[4] = buffer[0];
-                    } else {
-                        throw new IllegalStateException("Unexpected value: " + dragData);
-                    }
+                    Cards.boardSet((String)dragData,BoardCard5);
+                    BoardCards2[4] = buffer[0];
 
                     // Displays a message containing the dragged data.
                     Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
@@ -1081,24 +1002,8 @@ public class PlayerTwo extends AppCompatActivity {
                     // Gets the text data from the item.
                     CharSequence dragData = item.getText();
 
-                    if ("Card1".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card1.getBackground());
-                        BoardCards2[5] = buffer[0];
-                    } else if ("Card2".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card2.getBackground());
-                        BoardCards2[5] = buffer[0];
-                    } else if ("Card3".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card3.getBackground());
-                        BoardCards2[5] = buffer[0];
-                    } else if ("Card4".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card4.getBackground());
-                        BoardCards2[5] = buffer[0];
-                    } else if ("Card5".contentEquals(dragData)) {
-                        BoardCard6.setImageDrawable(card5.getBackground());
-                        BoardCards2[5] = buffer[0];
-                    } else {
-                        throw new IllegalStateException("Unexpected value: " + dragData);
-                    }
+                    Cards.boardSet((String)dragData,BoardCard6);
+                    BoardCards2[5] = buffer[0];
 
                     // Displays a message containing the dragged data.
                     Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();

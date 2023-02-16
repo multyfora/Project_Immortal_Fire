@@ -1,13 +1,21 @@
 package com.example.project_immortal_fire;
 
 
+import static com.example.project_immortal_fire.CardsSet.draw;
+
 import android.util.Log;
+import android.widget.ImageView;
+
 import java.util.Arrays;
 
 public abstract class Cards {
     public final static String[] AllCards = new String[]{"salamander_fire_card01", "phoenix_fire_card02", "dragon_fire_card03", "kirin_fire_card04", "lion_fire_card05", "koi_fish_water_card06", "leviathan_water_card07", "shark_water_card08", "09", "10", "raiden_electro_card11", "mjolnir_electro_card12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", };
     public static int[] ATK = new int[]{-1,12,10,20,11,13,5,23,12,-1,-1,21,15};
     public static int[] HP = new int[]{-1,10,11,20,11,15,30,25,13,-1,-1,18,15};
+
+    static int[] BoardHp = new int[5];
+    static int[] EnemyHp = new int[5];
+
     static String TAG = "Cards";
 
     public static int linearSearch(int[] arr, int target) {
@@ -57,8 +65,14 @@ public abstract class Cards {
     }
 
 
+    public static void boardSet(String dragData, ImageView BoardCard){
+        int key = Integer.parseInt(dragData.charAt(dragData.length() - 2)+String.valueOf(dragData.charAt(dragData.length() - 1)));
+        BoardCard.setImageResource(draw[key]);
 
-    public static void Moved(String[] boardCards, String[] enemyCards){
+    }
+
+
+    public static void Moved(String[] boardCards, String[] enemyCards, ImageView[] BCards){
 
         Log.i(TAG, "string a: " + Arrays.toString(boardCards) +"\nstring b: " + Arrays.toString(enemyCards));
 
@@ -76,12 +90,13 @@ public abstract class Cards {
             HpBuffer[i] =getHP(enemyCards[i]);
 
         }
-        Log.i(TAG, "ENEMY HP BEFORE: " + Arrays.toString(HpBuffer));
+        Log.i(TAG, "ENEMY HP BEFORE: " + Arrays.toString(BoardHp));
         for (int i = 0; i < 5; i++) {
 
             HpBuffer[i] -= AtkBuffer[i];
         }
-        Log.i(TAG, "ENEMY AFTER: " + Arrays.toString(HpBuffer));
+        EnemyHp = Arrays.copyOf(HpBuffer,HpBuffer.length);
+        Log.i(TAG, "ENEMY AFTER: " + Arrays.toString(BoardHp));
 
         //* second step
 
@@ -98,20 +113,33 @@ public abstract class Cards {
             HpBuffer[i] =getHP(boardCards[i]);
 
         }
-        Log.i(TAG, "ALLY BEFORE: " + Arrays.toString(HpBuffer));
+        Log.i(TAG, "ALLY BEFORE: " + Arrays.toString(BoardHp));
 
         for (int i = 0; i < 5; i++) {
 
             HpBuffer[i] -= AtkBuffer[i];
         }
-
-        Log.i(TAG, "ALLY AFTER: " + Arrays.toString(HpBuffer));
+        BoardHp = Arrays.copyOf(HpBuffer,HpBuffer.length);
+        Log.i(TAG, "ALLY AFTER: " + Arrays.toString(BoardHp));
 
 
         //* third step
         //making all <0 hp cards disappear
 
         //!call card disappearing method
+
+        for (int board = 0; board < 5; board++) {
+
+            if(BoardHp[board]<0){
+                BoardCards.remove(boardCards,enemyCards,BCards,board);
+            }
+        }
+        for (int enemy = 0; enemy < 5; enemy++) {
+
+            if(EnemyHp[enemy]<0){
+                BoardCards.remove(boardCards,enemyCards,BCards,enemy+5);
+            }
+        }
 
     }
 }
