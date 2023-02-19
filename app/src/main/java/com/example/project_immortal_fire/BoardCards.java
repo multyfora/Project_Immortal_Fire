@@ -11,7 +11,7 @@ public class BoardCards {
             BoardCards[num] = null;
         }
         else {
-            EnemyCards[num] = null;
+            EnemyCards[num-5] = null;
 
         }
         BCards[num].setImageResource(R.drawable.placeholder);
