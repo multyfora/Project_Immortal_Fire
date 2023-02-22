@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".PlayerOne">
 
 
@@ -34,8 +34,8 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="italic"
-            app:layout_constraintDimensionRatio="0.678"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="0.678"
             app:layout_constraintEnd_toStartOf="@id/Card2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline3">
@@ -57,7 +57,7 @@
             app:layout_constraintDimensionRatio="0.678"
             app:layout_constraintEnd_toStartOf="@id/Card3"
             app:layout_constraintStart_toEndOf="@id/Card1"
-            app:layout_constraintTop_toTopOf="@+id/guideline3"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <TextView
             android:id="@+id/Card3"
@@ -69,12 +69,11 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="italic"
-            app:layout_constraintDimensionRatio="0.678"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="0.678"
             app:layout_constraintEnd_toStartOf="@id/Card4"
             app:layout_constraintStart_toEndOf="@id/Card2"
-            app:layout_constraintTop_toTopOf="@+id/guideline3"
-            />
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <TextView
             android:id="@+id/Card4"
@@ -86,12 +85,11 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="italic"
-            app:layout_constraintDimensionRatio="0.678"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="0.678"
             app:layout_constraintEnd_toStartOf="@id/Card5"
             app:layout_constraintStart_toEndOf="@id/Card3"
-            app:layout_constraintTop_toTopOf="@+id/guideline3"
-         />
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
 
         <TextView
@@ -104,12 +102,11 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="italic"
-            app:layout_constraintDimensionRatio="0.678"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="0.678"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/Card4"
-            app:layout_constraintTop_toTopOf="@+id/guideline3"
-        />
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -130,8 +127,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="414dp"
+        android:layout_height="366dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -294,13 +291,13 @@
         android:layout_marginTop="75dp"
         android:layout_marginEnd="75dp"
         android:layout_marginBottom="75dp"
+        android:background="@drawable/placeholder"
         android:visibility="gone"
-        app:layout_constraintDimensionRatio="0.678"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="0.678"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/placeholder" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/EndTurn"
@@ -318,6 +315,41 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.3" />
+
+
+
+    <ImageView
+        android:id="@+id/crystal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/crystal" />
+
+    <TextView
+        android:id="@+id/crystalHealth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/anton"
+        android:text="99"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/crystal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/TurnScreen"
@@ -354,40 +386,5 @@
         </TextView>
 
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/crystal"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/crystal" />
-
-    <TextView
-        android:id="@+id/crystalHealth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/anton"
-        android:text="99"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/crystal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.6" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -125,19 +125,19 @@ public abstract class Cards {
 
 
         //* third step
-        //making all <0 hp cards disappear
+        //making all <1 hp cards disappear
 
         //call card disappearing method
 
         for (int board = 0; board < 6; board++) {
 
-            if(BoardHp[board]<0){
+            if(BoardHp[board]<1){
                 BoardCards.remove(boardCards,enemyCards,BCards,board);
             }
         }
         for (int enemy = 0; enemy < 6; enemy++) {
 
-            if(EnemyHp[enemy]<0){
+            if(EnemyHp[enemy]<1){
                 BoardCards.remove(boardCards,enemyCards,BCards,enemy+6);
             }
         }

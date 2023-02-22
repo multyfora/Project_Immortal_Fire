@@ -56,6 +56,7 @@ public class PlayerOne extends AppCompatActivity {
 
 
 
+
         AtomicInteger CardsPlacedCount = new AtomicInteger();
         CardsPlacedCount.set(0);
         final String[] buffer = {null,null};
@@ -68,6 +69,7 @@ public class PlayerOne extends AppCompatActivity {
 
         ConstraintLayout TurnScreen = findViewById(R.id.TurnScreen);
         CardView CardViewer = findViewById(R.id.CardViewer);
+        TextView CrystalHp = findViewById(R.id.crystalHealth);
         TextView card1 = findViewById(R.id.Card1);
         TextView card2 = findViewById(R.id.Card2);
         TextView card3 = findViewById(R.id.Card3);
@@ -87,7 +89,7 @@ public class PlayerOne extends AppCompatActivity {
         ImageView EnemyCard6 = findViewById(R.id.EnemyCard6);
         ImageView EndTurn1 = findViewById(R.id.EndTurn);
 
-
+        Crystal.setHp1(50,CrystalHp);
 
         if(IsFirst){
             TurnScreen.setVisibility(View.GONE);

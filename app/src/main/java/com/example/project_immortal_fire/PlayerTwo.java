@@ -63,6 +63,7 @@ public class PlayerTwo extends AppCompatActivity {
         TextView card3 = findViewById(R.id.Card3);
         TextView card4 = findViewById(R.id.Card4);
         TextView card5 = findViewById(R.id.Card5);
+        TextView CrystalHp  = findViewById(R.id.crystalHealth);
         ImageView EnemyCard1 = findViewById(R.id.EnemyCard1);
         ImageView EnemyCard2 = findViewById(R.id.EnemyCard2);
         ImageView EnemyCard3 = findViewById(R.id.EnemyCard3);
@@ -77,6 +78,7 @@ public class PlayerTwo extends AppCompatActivity {
         ImageView BoardCard5 = findViewById(R.id.BoardCard5);
         ImageView BoardCard6 = findViewById(R.id.BoardCard6);
         ImageView EndTurn2 = findViewById(R.id.EndTurn2);
+        Crystal.setHp2(50,CrystalHp);
 
         ImageView[] BCards = {BoardCard1,BoardCard2,BoardCard3,BoardCard4,BoardCard5,
                 EnemyCard1,EnemyCard2,EnemyCard3,EnemyCard4,EnemyCard5};
