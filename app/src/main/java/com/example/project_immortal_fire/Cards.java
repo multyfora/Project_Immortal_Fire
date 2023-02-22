@@ -13,8 +13,8 @@ public abstract class Cards {
     public static int[] ATK = new int[]{-1,12,10,20,11,13,5,23,12,-1,-1,21,15};
     public static int[] HP = new int[]{-1,10,11,20,11,15,30,25,13,-1,-1,18,15};
 
-    static int[] BoardHp = new int[5];
-    static int[] EnemyHp = new int[5];
+    static int[] BoardHp = new int[6];
+    static int[] EnemyHp = new int[6];
 
     static String TAG = "Cards";
 
@@ -76,27 +76,28 @@ public abstract class Cards {
 
         Log.i(TAG, "string a: " + Arrays.toString(boardCards) +"\nstring b: " + Arrays.toString(enemyCards));
 
-        int[] AtkBuffer = new int[5];
-        int[] HpBuffer = new int[5];
+        int[] AtkBuffer = new int[6];
+        int[] HpBuffer = new int[6];
 
         //* first step
 
         //damaging enemy cards
         //taking away atk of frien from hp of enemy
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
 
             AtkBuffer[i] =getATK(boardCards[i]);
             HpBuffer[i] =getHP(enemyCards[i]);
+            EnemyHp = Arrays.copyOf(HpBuffer,HpBuffer.length);
 
         }
-        Log.i(TAG, "ENEMY HP BEFORE: " + Arrays.toString(BoardHp));
-        for (int i = 0; i < 5; i++) {
+        Log.i(TAG, "ENEMY BEFORE: " + Arrays.toString(EnemyHp));
+        for (int i = 0; i < 6; i++) {
 
             HpBuffer[i] -= AtkBuffer[i];
         }
         EnemyHp = Arrays.copyOf(HpBuffer,HpBuffer.length);
-        Log.i(TAG, "ENEMY AFTER: " + Arrays.toString(BoardHp));
+        Log.i(TAG, "ENEMY AFTER: " + Arrays.toString(EnemyHp));
 
         //* second step
 
@@ -107,15 +108,15 @@ public abstract class Cards {
         //damaging frien cards
         //taking away atk of enemy from hp of frien
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
 
             AtkBuffer[i] =getATK(enemyCards[i]);
             HpBuffer[i] =getHP(boardCards[i]);
-
+            BoardHp = Arrays.copyOf(HpBuffer,HpBuffer.length);
         }
         Log.i(TAG, "ALLY BEFORE: " + Arrays.toString(BoardHp));
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
 
             HpBuffer[i] -= AtkBuffer[i];
         }
@@ -126,18 +127,18 @@ public abstract class Cards {
         //* third step
         //making all <0 hp cards disappear
 
-        //!call card disappearing method
+        //call card disappearing method
 
-        for (int board = 0; board < 5; board++) {
+        for (int board = 0; board < 6; board++) {
 
             if(BoardHp[board]<0){
                 BoardCards.remove(boardCards,enemyCards,BCards,board);
             }
         }
-        for (int enemy = 0; enemy < 5; enemy++) {
+        for (int enemy = 0; enemy < 6; enemy++) {
 
             if(EnemyHp[enemy]<0){
-                BoardCards.remove(boardCards,enemyCards,BCards,enemy+5);
+                BoardCards.remove(boardCards,enemyCards,BCards,enemy+6);
             }
         }
 
