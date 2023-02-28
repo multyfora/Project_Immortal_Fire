@@ -133,12 +133,14 @@ public abstract class Cards {
         for (int board = 0; board < 6; board++) {
 
             if (BoardHp[board] < 1) {
+                BoardHp[board]=0;
                 BoardCards.remove(boardCards, enemyCards, BCards, board);
             }
         }
         for (int enemy = 0; enemy < 6; enemy++) {
 
             if (EnemyHp[enemy] < 1) {
+                EnemyHp[enemy]=0;
                 BoardCards.remove(boardCards, enemyCards, BCards, enemy + 6);
             }
         }

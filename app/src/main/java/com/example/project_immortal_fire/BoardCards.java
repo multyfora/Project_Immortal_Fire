@@ -23,6 +23,7 @@ public class BoardCards {
             EnemyCards[num-6] = null;
 
         }
+        Log.i(TAG, "bebra: " + Arrays.toString(EnemyCards));
         BCards[num].setImageResource(R.drawable.placeholder);
 
 
