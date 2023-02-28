@@ -80,8 +80,8 @@ public class PlayerTwo extends AppCompatActivity {
         ImageView EndTurn2 = findViewById(R.id.EndTurn2);
         Crystal.setHp2(50,CrystalHp);
 
-        ImageView[] BCards = {BoardCard1,BoardCard2,BoardCard3,BoardCard4,BoardCard5,
-                EnemyCard1,EnemyCard2,EnemyCard3,EnemyCard4,EnemyCard5};
+        ImageView[] BCards = {BoardCard1,BoardCard2,BoardCard3,BoardCard4,BoardCard5,BoardCard6,
+                EnemyCard1,EnemyCard2,EnemyCard3,EnemyCard4,EnemyCard5,EnemyCard6};
 
         CardsSet.boardset(BoardCard1, BoardCard2, BoardCard3, BoardCard4, BoardCard5, BoardCard6, BoardCards2);
         CardsSet.enemyset(EnemyCard1, EnemyCard2, EnemyCard3, EnemyCard4, EnemyCard5, EnemyCard6, EnemyCards2);

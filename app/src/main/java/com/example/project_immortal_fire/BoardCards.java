@@ -13,14 +13,14 @@ public class BoardCards {
 
         //!if boardCards is null then i know i should damage the crystal!!!!
 
-        if(num<5) {
+        if(num<6) {
             Log.i(TAG, "removed: " + BoardCards[num]);
             BoardCards[num] = null;
 
         }
         else {
             Log.i(TAG, "removed: " + EnemyCards[num-6]);
-            EnemyCards[num-5] = null;
+            EnemyCards[num-6] = null;
 
         }
         BCards[num].setImageResource(R.drawable.placeholder);
