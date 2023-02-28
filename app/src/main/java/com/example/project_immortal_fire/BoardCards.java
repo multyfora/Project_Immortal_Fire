@@ -11,7 +11,7 @@ public class BoardCards {
 
     public static void remove(String[] BoardCards,String[] EnemyCards, ImageView[] BCards, int num){
 
-        //!if boardCards is null then i know i should damage the crystal
+        //!if boardCards is null then i know i should damage the crystal!!!!
 
         if(num<5) {
             Log.i(TAG, "removed: " + BoardCards[num]);

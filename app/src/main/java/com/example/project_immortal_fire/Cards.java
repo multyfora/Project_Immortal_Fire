@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import java.util.Arrays;
 
 public abstract class Cards {
-    public final static String[] AllCards = new String[]{"salamander_fire_card01", "phoenix_fire_card02", "dragon_fire_card03", "kirin_fire_card04", "lion_fire_card05", "koi_fish_water_card06", "leviathan_water_card07", "shark_water_card08", "09", "10", "raiden_electro_card11", "mjolnir_electro_card12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", };
-    public static int[] ATK = new int[]{-1,12,10,20,11,13,5,23,12,-1,-1,21,15};
-    public static int[] HP = new int[]{-1,10,11,20,11,15,30,25,13,-1,-1,18,15};
+    public final static String[] AllCards = new String[]{"salamander_fire_card01", "phoenix_fire_card02", "dragon_fire_card03", "kirin_fire_card04", "lion_fire_card05", "koi_fish_water_card06", "leviathan_water_card07", "shark_water_card08", "09", "10", "raiden_electro_card11", "mjolnir_electro_card12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25",};
+    public static int[] ATK = new int[]{-1, 12, 10, 20, 11, 13, 5, 23, 12, -1, -1, 21, 15};
+    public static int[] HP = new int[]{-1, 10, 11, 20, 11, 15, 30, 25, 13, -1, -1, 18, 15};
 
     static int[] BoardHp = new int[6];
     static int[] EnemyHp = new int[6];
@@ -28,53 +28,55 @@ public abstract class Cards {
     }
 
 
-
-    public static int getHP(String CardName){
-        if(CardName!=null) {
+    public static int getHP(String CardName) {
+        if (CardName != null) {
             int key = Integer.parseInt(CardName.charAt(CardName.length() - 2) + String.valueOf(CardName.charAt(CardName.length() - 1)));
             return HP[key];
-        }else return 0;
+        } else return 0;
     }
 
 
-    public static int getATK(String CardName){
-        if(CardName!=null) {
+    public static int getATK(String CardName) {
+        if (CardName != null) {
             int key = Integer.parseInt(CardName.charAt(CardName.length() - 2) + String.valueOf(CardName.charAt(CardName.length() - 1)));
             return ATK[key];
-        }else return 0;
+        } else return 0;
     }
 
 
     //setting by number of card
-    public static void setHP(int num,int hp){
+    public static void setHP(int num, int hp) {
         HP[num] = hp;
     }
+
     //setting by the name of card
-    public static void setHP(String CardName,int hp){
-        int key = Integer.parseInt(CardName.charAt(CardName.length() - 2)+String.valueOf(CardName.charAt(CardName.length() - 1)));
+    public static void setHP(String CardName, int hp) {
+        int key = Integer.parseInt(CardName.charAt(CardName.length() - 2) + String.valueOf(CardName.charAt(CardName.length() - 1)));
         HP[key] = hp;
     }
+
     //setting by number of card
-    public static void setAtk(int num,int atk){
+    public static void setAtk(int num, int atk) {
         ATK[num] = atk;
     }
+
     //setting by the name of card
-    public static void setAtk(String CardName,int atk){
-        int key = Integer.parseInt(CardName.charAt(CardName.length() - 2)+String.valueOf(CardName.charAt(CardName.length() - 1)));
+    public static void setAtk(String CardName, int atk) {
+        int key = Integer.parseInt(CardName.charAt(CardName.length() - 2) + String.valueOf(CardName.charAt(CardName.length() - 1)));
         ATK[key] = atk;
     }
 
 
-    public static void boardSet(String dragData, ImageView BoardCard){
-        int key = Integer.parseInt(dragData.charAt(dragData.length() - 2)+String.valueOf(dragData.charAt(dragData.length() - 1)));
+    public static void boardSet(String dragData, ImageView BoardCard) {
+        int key = Integer.parseInt(dragData.charAt(dragData.length() - 2) + String.valueOf(dragData.charAt(dragData.length() - 1)));
         BoardCard.setImageResource(draw[key]);
 
     }
 
 
-    public static void Moved(String[] boardCards, String[] enemyCards, ImageView[] BCards){
+    public static void Moved(String[] boardCards, String[] enemyCards, ImageView[] BCards) {
 
-        Log.i(TAG, "string a: " + Arrays.toString(boardCards) +"\nstring b: " + Arrays.toString(enemyCards));
+        Log.i(TAG, "string a: " + Arrays.toString(boardCards) + "\nstring b: " + Arrays.toString(enemyCards));
 
         int[] AtkBuffer = new int[6];
         int[] HpBuffer = new int[6];
@@ -86,59 +88,58 @@ public abstract class Cards {
 
         for (int i = 0; i < 6; i++) {
 
-            AtkBuffer[i] =getATK(boardCards[i]);
-            HpBuffer[i] =getHP(enemyCards[i]);
-            EnemyHp = Arrays.copyOf(HpBuffer,HpBuffer.length);
-
+            AtkBuffer[i] = getATK(boardCards[i]);
+            if(EnemyHp[i]==0) {
+                EnemyHp[i] = getHP(enemyCards[i]);
+            }
         }
         Log.i(TAG, "ENEMY BEFORE: " + Arrays.toString(EnemyHp));
         for (int i = 0; i < 6; i++) {
 
-            HpBuffer[i] -= AtkBuffer[i];
+            EnemyHp[i] -= AtkBuffer[i];
         }
-        EnemyHp = Arrays.copyOf(HpBuffer,HpBuffer.length);
         Log.i(TAG, "ENEMY AFTER: " + Arrays.toString(EnemyHp));
 
         //* second step
 
         //cleaning buffers
-        Arrays.fill(AtkBuffer,0);
-        Arrays.fill(HpBuffer,0);
+        Arrays.fill(AtkBuffer, 0);
+        Arrays.fill(HpBuffer, 0);
 
         //damaging frien cards
         //taking away atk of enemy from hp of frien
 
         for (int i = 0; i < 6; i++) {
 
-            AtkBuffer[i] =getATK(enemyCards[i]);
-            HpBuffer[i] =getHP(boardCards[i]);
-            BoardHp = Arrays.copyOf(HpBuffer,HpBuffer.length);
+            AtkBuffer[i] = getATK(enemyCards[i]);
+            if(BoardHp[i]==0) {
+                BoardHp[i] = getHP(boardCards[i]);
+            }
         }
         Log.i(TAG, "ALLY BEFORE: " + Arrays.toString(BoardHp));
 
         for (int i = 0; i < 6; i++) {
-
-            HpBuffer[i] -= AtkBuffer[i];
+            BoardHp[i] -= AtkBuffer[i];
         }
-        BoardHp = Arrays.copyOf(HpBuffer,HpBuffer.length);
         Log.i(TAG, "ALLY AFTER: " + Arrays.toString(BoardHp));
 
 
         //* third step
+
         //making all <1 hp cards disappear
 
         //call card disappearing method
 
         for (int board = 0; board < 6; board++) {
 
-            if(BoardHp[board]<1){
-                BoardCards.remove(boardCards,enemyCards,BCards,board);
+            if (BoardHp[board] < 1) {
+                BoardCards.remove(boardCards, enemyCards, BCards, board);
             }
         }
         for (int enemy = 0; enemy < 6; enemy++) {
 
-            if(EnemyHp[enemy]<1){
-                BoardCards.remove(boardCards,enemyCards,BCards,enemy+6);
+            if (EnemyHp[enemy] < 1) {
+                BoardCards.remove(boardCards, enemyCards, BCards, enemy + 6);
             }
         }
 
