@@ -46,4 +46,12 @@ public class Crystal {
     public static void renew2(TextView Hp1) {
         Hp1.setText(hp1 + "");
     }
+    public static void HpCheck(){
+        if(hp1<1){
+            //!call game ending method
+        }
+        if (hp2<1){
+            //!call game ending method
+        }
+    }
 }
