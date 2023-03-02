@@ -15,12 +15,21 @@ public class BoardCards {
 
         if(num<6) {
             Log.i(TAG, "removed: " + BoardCards[num]);
-            BoardCards[num] = null;
-
+            if (BoardCards[num]!=null) {
+                BoardCards[num] = null;
+            }
+            else {
+                Crystal.dmg1(Cards.getATK(EnemyCards[num]));
+            }
         }
         else {
             Log.i(TAG, "removed: " + EnemyCards[num-6]);
-            EnemyCards[num-6] = null;
+            if(EnemyCards[num-6]!=null) {
+                EnemyCards[num - 6] = null;
+            }
+            else {
+                Crystal.dmg2(Cards.getATK(BoardCards[num-6]));
+            }
 
         }
         Log.i(TAG, "bebra: " + Arrays.toString(EnemyCards));

@@ -78,7 +78,7 @@ public class PlayerTwo extends AppCompatActivity {
         ImageView BoardCard5 = findViewById(R.id.BoardCard5);
         ImageView BoardCard6 = findViewById(R.id.BoardCard6);
         ImageView EndTurn2 = findViewById(R.id.EndTurn2);
-        Crystal.setHp2(50,CrystalHp);
+        Crystal.renew2(CrystalHp);
 
         ImageView[] BCards = {BoardCard1,BoardCard2,BoardCard3,BoardCard4,BoardCard5,BoardCard6,
                 EnemyCard1,EnemyCard2,EnemyCard3,EnemyCard4,EnemyCard5,EnemyCard6};

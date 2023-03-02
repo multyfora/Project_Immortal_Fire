@@ -88,8 +88,7 @@ public class PlayerOne extends AppCompatActivity {
         ImageView EnemyCard5 = findViewById(R.id.EnemyCard5);
         ImageView EnemyCard6 = findViewById(R.id.EnemyCard6);
         ImageView EndTurn1 = findViewById(R.id.EndTurn);
-
-        Crystal.setHp1(50,CrystalHp);
+        Crystal.renew1(CrystalHp);
 
         if(IsFirst){
             TurnScreen.setVisibility(View.GONE);

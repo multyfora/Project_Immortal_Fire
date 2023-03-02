@@ -18,25 +18,32 @@ public class Crystal {
         return hp1;
     }
 
-    public static void dmg1(int dmg, TextView HP) {
+    //*requires renew method!
+    public static void dmg1(int dmg) {
         hp1 -= dmg;
-        HP.setText(hp1);
     }
 
 
     @SuppressLint("SetTextI18n")
     public static void setHp2(int hp, TextView HP) {
         hp2 = hp;
-        HP.setText(hp+ "");
+        HP.setText(hp + "");
     }
 
     public static int getHp2() {
         return hp2;
     }
 
-    public static void dmg2(int dmg, TextView HP) {
+    //*requires renew method!
+    public static void dmg2(int dmg) {
         hp2 -= dmg;
-        HP.setText(hp2);
     }
 
+    public static void renew1(TextView Hp2) {
+        Hp2.setText(hp2 + "");
+    }
+
+    public static void renew2(TextView Hp1) {
+        Hp1.setText(hp1 + "");
+    }
 }
