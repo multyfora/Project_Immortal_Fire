@@ -1,6 +1,7 @@
 package com.example.project_immortal_fire;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.widget.TextView;
 
 public class Crystal {
@@ -52,6 +53,7 @@ public class Crystal {
         }
         if (hp2<1){
             //!call game ending method
+            PlayerOne.GameOver1();
         }
     }
 }

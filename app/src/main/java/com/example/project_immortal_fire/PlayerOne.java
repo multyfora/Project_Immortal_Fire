@@ -2,6 +2,7 @@ package com.example.project_immortal_fire;
 
 import static com.example.project_immortal_fire.CardsSet.draw;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -20,6 +21,7 @@ import android.view.DragEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,8 @@ public class PlayerOne extends AppCompatActivity {
 
     public static final int CardsCount = 12;
     int AvailableBoardSlots = 6;
+
+    static Boolean GameEnded = false;
 
     static boolean IsFirst = true;
     private static final String TAG = "player1";
@@ -75,6 +79,10 @@ public class PlayerOne extends AppCompatActivity {
         TextView card3 = findViewById(R.id.Card3);
         TextView card4 = findViewById(R.id.Card4);
         TextView card5 = findViewById(R.id.Card5);
+        ImageView GameoverImg = findViewById(R.id.GameOverScreen);
+        TextView GameoverTxt = findViewById(R.id.GameOverText);
+        TextView WinnerName = findViewById(R.id.WinnerName);
+        ImageView Replay = findViewById(R.id.ReplayButton);
         ImageView BoardCard1 = findViewById(R.id.BoardCard1);
         ImageView BoardCard2 = findViewById(R.id.BoardCard2);
         ImageView BoardCard3 = findViewById(R.id.BoardCard3);
@@ -456,6 +464,29 @@ public class PlayerOne extends AppCompatActivity {
                 CardViewerPoped[0] = true;
             }
         });
+        Crystal.HpCheck();
+
+        if(GameEnded){
+            TurnScreen.setVisibility(View.GONE);
+            GameoverImg.setVisibility(View.VISIBLE);
+            GameoverTxt.setVisibility(View.VISIBLE);
+            WinnerName.setVisibility(View.VISIBLE);
+            WinnerName.setText("Player 2 Wins");
+            WinnerName.setAlpha(0F);
+            GameoverImg.setAlpha(0F);
+            GameoverTxt.setAlpha(0F);
+            ValueAnimator OverImgAnim = ValueAnimator.ofFloat(0F,1F);
+            OverImgAnim.setDuration(1000);
+            OverImgAnim.setInterpolator(new LinearInterpolator());
+            OverImgAnim.start();
+            OverImgAnim.addUpdateListener(animation -> {
+                float alpha = (float) animation.getAnimatedValue();
+                GameoverImg.setAlpha(alpha/2);
+                GameoverTxt.setAlpha(alpha);
+                WinnerName.setAlpha(alpha);
+            });
+
+        }
 
         BoardCard1.setOnDragListener( (v, e) -> {
 
@@ -1153,5 +1184,10 @@ public class PlayerOne extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    protected static void GameOver1(){
+        GameEnded = true;
+        Log.i(TAG, "GameOver");
     }
 }
