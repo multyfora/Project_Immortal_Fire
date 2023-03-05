@@ -50,6 +50,7 @@ public class Crystal {
     public static void HpCheck(){
         if(hp1<1){
             //!call game ending method
+            PlayerTwo.GameOver2();
         }
         if (hp2<1){
             //!call game ending method

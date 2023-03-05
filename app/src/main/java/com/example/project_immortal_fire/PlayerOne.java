@@ -26,6 +26,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jakewharton.processphoenix.ProcessPhoenix;
+
 import java.util.Arrays;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -38,6 +40,8 @@ public class PlayerOne extends AppCompatActivity {
     static Boolean GameEnded = false;
 
     static boolean IsFirst = true;
+
+    static boolean IsReplayed = false;
     private static final String TAG = "player1";
     private static final String IMAGEVIEW_TAG_CARD1 = "Card1";
     private static final String IMAGEVIEW_TAG_CARD2 = "Card2";
@@ -129,8 +133,10 @@ public class PlayerOne extends AppCompatActivity {
             Bundle extras = new Bundle();
             extras.putStringArray("BoardCards",BoardCards);
             extras.putStringArray("EnemyCards",EnemyCards);
+            extras.putBoolean("Replay",IsReplayed);
             i.putExtras(extras);
             startActivity(i);
+            IsReplayed = false;
         });
 
 
@@ -270,6 +276,26 @@ public class PlayerOne extends AppCompatActivity {
             }
         });
 
+/*
+        Replay.setOnClickListener(v -> {
+
+            Intent intent = getBaseContext().getPackageManager()
+                    .getLaunchIntentForPackage(getBaseContext().getPackageName());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            GameEnded = false;
+            IsFirst = true;
+            Crystal.setHp2(100,CrystalHp);
+            GameoverImg.setVisibility(View.GONE);
+            GameoverTxt.setVisibility(View.GONE);
+            Replay.setVisibility(View.GONE);
+            WinnerName.setVisibility(View.GONE);
+            IsReplayed = true;
+            startActivity(intent);
+            finish();
+
+        });
+*/
         card1.setOnClickListener(view -> {
             if (!card1Poped[0]){
 
@@ -467,10 +493,17 @@ public class PlayerOne extends AppCompatActivity {
         Crystal.HpCheck();
 
         if(GameEnded){
+            EndTurn1.setEnabled(false);
+            card1.setEnabled(false);
+            card2.setEnabled(false);
+            card3.setEnabled(false);
+            card4.setEnabled(false);
+            card5.setEnabled(false);
             TurnScreen.setVisibility(View.GONE);
             GameoverImg.setVisibility(View.VISIBLE);
             GameoverTxt.setVisibility(View.VISIBLE);
             WinnerName.setVisibility(View.VISIBLE);
+            Replay.setVisibility(View.VISIBLE);
             WinnerName.setText("Player 2 Wins");
             WinnerName.setAlpha(0F);
             GameoverImg.setAlpha(0F);
@@ -484,6 +517,15 @@ public class PlayerOne extends AppCompatActivity {
                 GameoverImg.setAlpha(alpha/2);
                 GameoverTxt.setAlpha(alpha);
                 WinnerName.setAlpha(alpha);
+            });
+            ValueAnimator ReplayAnim = ValueAnimator.ofFloat(0F,1.5F);
+            ReplayAnim.setDuration(3000);
+            ReplayAnim.setInterpolator(new LinearInterpolator());
+            ReplayAnim.start();
+            ReplayAnim.addUpdateListener(animation -> {
+                        float alpha = (float) animation.getAnimatedValue();
+                        Replay.setAlpha(alpha-0.5F);
+
             });
 
         }

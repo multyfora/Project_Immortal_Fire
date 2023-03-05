@@ -18,7 +18,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.jakewharton.processphoenix.ProcessPhoenix;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +30,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class PlayerTwo extends AppCompatActivity {
     int AvailableBoardSlots2 = 6;
+
+    static boolean GameEnded = false;
     public static String[] BoardCards2 = new String[]{null, null, null, null, null, null};
     public static String[] EnemyCards2 = new String[]{null, null, null, null, null, null};
     private static final String IMAGEVIEW_TAG_CARD1 = "Card1";
@@ -53,6 +55,7 @@ public class PlayerTwo extends AppCompatActivity {
         setContentView(R.layout.player_2);
 
 
+
         AtomicInteger CardsPlacedCount2 = new AtomicInteger();
         EnemyCards2 = Arrays.copyOf(getIntent().getExtras().getStringArray("BoardCards"), 6);
         BoardCards2 = Arrays.copyOf(getIntent().getExtras().getStringArray("EnemyCards"), 6);
@@ -63,6 +66,10 @@ public class PlayerTwo extends AppCompatActivity {
         TextView card3 = findViewById(R.id.Card3);
         TextView card4 = findViewById(R.id.Card4);
         TextView card5 = findViewById(R.id.Card5);
+        ImageView GameoverImg = findViewById(R.id.GameOverScreen);
+        TextView GameoverTxt = findViewById(R.id.GameOverText);
+        TextView WinnerName = findViewById(R.id.WinnerName);
+        ImageView Replay = findViewById(R.id.ReplayButton);
         TextView CrystalHp  = findViewById(R.id.crystalHealth);
         ImageView EnemyCard1 = findViewById(R.id.EnemyCard1);
         ImageView EnemyCard2 = findViewById(R.id.EnemyCard2);
@@ -79,6 +86,18 @@ public class PlayerTwo extends AppCompatActivity {
         ImageView BoardCard6 = findViewById(R.id.BoardCard6);
         ImageView EndTurn2 = findViewById(R.id.EndTurn2);
         Crystal.renew2(CrystalHp);
+
+
+        //!update the removing variables everytime anything new appears
+        /*
+        if (getIntent().getExtras().getBoolean("Replay")){
+            GameEnded = false;
+            Crystal.setHp1(100,CrystalHp);
+            Arrays.fill(BoardCards2,null);
+            Arrays.fill(EnemyCards2,null);
+        }
+        */
+
 
         ImageView[] BCards = {BoardCard1,BoardCard2,BoardCard3,BoardCard4,BoardCard5,BoardCard6,
                 EnemyCard1,EnemyCard2,EnemyCard3,EnemyCard4,EnemyCard5,EnemyCard6};
@@ -225,6 +244,9 @@ public class PlayerTwo extends AppCompatActivity {
                 });
                 CardViewerPoped[0] = false;
             }
+        });
+
+        Replay.setOnClickListener(v -> {
         });
 
         card1.setOnClickListener(view -> {
@@ -418,6 +440,45 @@ public class PlayerTwo extends AppCompatActivity {
                 CardViewerPoped[0] = true;
             }
         });
+
+
+        if(GameEnded){
+            EndTurn2.setEnabled(false);
+            card1.setEnabled(false);
+            card2.setEnabled(false);
+            card3.setEnabled(false);
+            card4.setEnabled(false);
+            card5.setEnabled(false);
+            TurnScreen.setVisibility(View.GONE);
+            GameoverImg.setVisibility(View.VISIBLE);
+            GameoverTxt.setVisibility(View.VISIBLE);
+            WinnerName.setVisibility(View.VISIBLE);
+            Replay.setVisibility(View.VISIBLE);
+            WinnerName.setText("Player 1 Wins");
+            WinnerName.setAlpha(0F);
+            GameoverImg.setAlpha(0F);
+            GameoverTxt.setAlpha(0F);
+            ValueAnimator OverImgAnim = ValueAnimator.ofFloat(0F,1F);
+            OverImgAnim.setDuration(1000);
+            OverImgAnim.setInterpolator(new LinearInterpolator());
+            OverImgAnim.start();
+            OverImgAnim.addUpdateListener(animation -> {
+                float alpha = (float) animation.getAnimatedValue();
+                GameoverImg.setAlpha(alpha/2);
+                GameoverTxt.setAlpha(alpha);
+                WinnerName.setAlpha(alpha);
+            });
+            ValueAnimator ReplayAnim = ValueAnimator.ofFloat(0F,1.5F);
+            ReplayAnim.setDuration(3000);
+            ReplayAnim.setInterpolator(new LinearInterpolator());
+            ReplayAnim.start();
+            ReplayAnim.addUpdateListener(animation -> {
+                float alpha = (float) animation.getAnimatedValue();
+                Replay.setAlpha(alpha-0.5F);
+
+            });
+
+        }
 
         BoardCard1.setOnDragListener((v, e) -> {
 
@@ -1053,6 +1114,10 @@ public class PlayerTwo extends AppCompatActivity {
         CardsSet.set(card1, card2, card3, card4, card5, CardsArr2);
         Log.i("idk", "onCreate cards been set  " + Arrays.toString(CardsArr2));
 
+    }
+    protected static void GameOver2(){
+        GameEnded = true;
+        Log.i("player 2", "GameOver");
     }
 
 
