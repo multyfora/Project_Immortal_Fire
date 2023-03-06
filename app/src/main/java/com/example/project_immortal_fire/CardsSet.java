@@ -163,23 +163,56 @@ public class CardsSet {
 
         if(newarr[0]!=-1) {
             card1.setText(string2[newarr[0]]);
-            card1.setTextSize(13);
+            card1.setTextSize(12.5F);
         }
         if(newarr[1]!=-1) {
             card2.setText(string2[newarr[1]]);
-            card2.setTextSize(13);
+            card2.setTextSize(12.5F);
         }
         if(newarr[2]!=-1) {
             card3.setText(string2[newarr[2]]);
-            card3.setTextSize(13);
+            card3.setTextSize(12.5F);
         }
         if(newarr[3]!=-1) {
             card4.setText(string2[newarr[3]]);
-            card4.setTextSize(13);
+            card4.setTextSize(12.5F);
         }
         if(newarr[4]!=-1) {
             card5.setText(string2[newarr[4]]);
-            card5.setTextSize(13);
+            card5.setTextSize(12.5F);
+        }
+    }
+
+    public static void toScaleBack(TextView card1, TextView card2, TextView card3, TextView card4, TextView card5, String[] arr){
+
+        int[] newarr = new int[5];
+        for (int i = 0; i < 5; i++) {
+            if (!arr[i].equals("none")){
+                newarr[i] = Integer.parseInt(arr[i].charAt(arr[i].length() - 2)+String.valueOf(arr[i].charAt(arr[i].length() - 1)));
+            }
+            else {newarr[i] = -1;}
+        }
+
+
+        if(newarr[0]!=-1) {
+            card1.setText(string[newarr[0]]);
+            card1.setTextSize(12);
+        }
+        if(newarr[1]!=-1) {
+            card2.setText(string[newarr[1]]);
+            card2.setTextSize(12);
+        }
+        if(newarr[2]!=-1) {
+            card3.setText(string[newarr[2]]);
+            card3.setTextSize(12);
+        }
+        if(newarr[3]!=-1) {
+            card4.setText(string[newarr[3]]);
+            card4.setTextSize(12);
+        }
+        if(newarr[4]!=-1) {
+            card5.setText(string[newarr[4]]);
+            card5.setTextSize(12);
         }
     }
 

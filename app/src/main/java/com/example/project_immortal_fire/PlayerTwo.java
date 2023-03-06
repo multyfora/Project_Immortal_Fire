@@ -85,6 +85,20 @@ public class PlayerTwo extends AppCompatActivity {
         ImageView BoardCard5 = findViewById(R.id.BoardCard5);
         ImageView BoardCard6 = findViewById(R.id.BoardCard6);
         ImageView EndTurn2 = findViewById(R.id.EndTurn2);
+        TextView BoardCard1Txt = findViewById(R.id.BoardCard1Txt);
+        TextView BoardCard2Txt = findViewById(R.id.BoardCard2Txt);
+        TextView BoardCard3Txt = findViewById(R.id.BoardCard3Txt);
+        TextView BoardCard4Txt = findViewById(R.id.BoardCard4Txt);
+        TextView BoardCard5Txt = findViewById(R.id.BoardCard5Txt);
+        TextView BoardCard6Txt = findViewById(R.id.BoardCard6Txt);
+        TextView EnemyCard1Txt = findViewById(R.id.EnemyCard1Txt);
+        TextView EnemyCard2Txt = findViewById(R.id.EnemyCard2Txt);
+        TextView EnemyCard3Txt = findViewById(R.id.EnemyCard3Txt);
+        TextView EnemyCard4Txt = findViewById(R.id.EnemyCard4Txt);
+        TextView EnemyCard5Txt = findViewById(R.id.EnemyCard5Txt);
+        TextView EnemyCard6Txt = findViewById(R.id.EnemyCard6Txt);
+        TextView[] BText2 = {BoardCard1Txt, BoardCard2Txt, BoardCard3Txt, BoardCard4Txt, BoardCard5Txt, BoardCard6Txt,
+                EnemyCard1Txt, EnemyCard2Txt, EnemyCard3Txt, EnemyCard4Txt, EnemyCard5Txt, EnemyCard6Txt};
         Crystal.renew2(CrystalHp);
 
 
@@ -116,7 +130,7 @@ public class PlayerTwo extends AppCompatActivity {
         card5.setTag(IMAGEVIEW_TAG_CARD5);
 
         EndTurn2.setOnClickListener(view -> {
-            Cards.Moved(BoardCards2,EnemyCards2,BCards);
+            Cards.Moved(BoardCards2,EnemyCards2,BCards,BText2);
             Log.i("boardCards", "array: " + Arrays.toString(BoardCards2) + "visibility: " + BoardCard1.getVisibility() + BoardCard2.getVisibility() + BoardCard3.getVisibility() + BoardCard4.getVisibility() + BoardCard5.getVisibility() + BoardCard6.getVisibility());
             Intent i1 = new Intent(PlayerTwo.this, PlayerOne.class);
             Bundle extras = new Bundle();
@@ -559,6 +573,7 @@ public class PlayerTwo extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENDED:
                     if (!e.getResult()) {
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr2, buffer, AvailableBoardSlots2);
+                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr2);
                         CardsPlacedCount2.getAndDecrement();
                     }
 
@@ -664,6 +679,7 @@ public class PlayerTwo extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENDED:
                     if (!e.getResult()) {
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr2, buffer, AvailableBoardSlots2);
+                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr2);
                         CardsPlacedCount2.getAndDecrement();
                     }
 
@@ -770,6 +786,7 @@ public class PlayerTwo extends AppCompatActivity {
 
                     if (!e.getResult()) {
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr2, buffer, AvailableBoardSlots2);
+                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr2);
                         CardsPlacedCount2.getAndDecrement();
                     }
 
@@ -875,6 +892,7 @@ public class PlayerTwo extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENDED:
                     if (!e.getResult()) {
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr2, buffer, AvailableBoardSlots2);
+                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr2);
                         CardsPlacedCount2.getAndDecrement();
                     }
                     // Turns off any color tinting.
@@ -979,6 +997,7 @@ public class PlayerTwo extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENDED:
                     if (!e.getResult()) {
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr2, buffer, AvailableBoardSlots2);
+                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr2);
                         CardsPlacedCount2.getAndDecrement();
                     }
 
@@ -1084,6 +1103,7 @@ public class PlayerTwo extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENDED:
                     if (!e.getResult()) {
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr2, buffer, AvailableBoardSlots2);
+                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr2);
                         CardsPlacedCount2.getAndDecrement();
                     }
                     // Turns off any color tinting.

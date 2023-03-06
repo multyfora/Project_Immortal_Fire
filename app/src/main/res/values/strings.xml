@@ -21,7 +21,6 @@
    <!-- cringe code -->
 
 
-
     <string name="placeholder">\u0020\u0020\u0020\u0020<!--ATK--> 00 \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020 <!--HP-->00</string>
     <string name="placeholder2">\u0020\u0020\u0020\u0020\u0020\u0020<!--ATK-->00<!--ATK-->\n\n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020 \u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020<!--HP--> 00<!--HP--></string>
     <string name="salamander_fire_card01">\u0020\u0020\u0020\u0020<!--ATK--> 12 \n\n\n\n\n\n\n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020 <!--HP-->10</string>

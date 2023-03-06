@@ -2,7 +2,6 @@ package com.example.project_immortal_fire;
 
 import static com.example.project_immortal_fire.CardsSet.draw;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -21,12 +20,9 @@ import android.view.DragEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.jakewharton.processphoenix.ProcessPhoenix;
 
 import java.util.Arrays;
 
@@ -99,6 +95,20 @@ public class PlayerOne extends AppCompatActivity {
         ImageView EnemyCard4 = findViewById(R.id.EnemyCard4);
         ImageView EnemyCard5 = findViewById(R.id.EnemyCard5);
         ImageView EnemyCard6 = findViewById(R.id.EnemyCard6);
+        TextView BoardCard1Txt = findViewById(R.id.BoardCard1Txt);
+        TextView BoardCard2Txt = findViewById(R.id.BoardCard2Txt);
+        TextView BoardCard3Txt = findViewById(R.id.BoardCard3Txt);
+        TextView BoardCard4Txt = findViewById(R.id.BoardCard4Txt);
+        TextView BoardCard5Txt = findViewById(R.id.BoardCard5Txt);
+        TextView BoardCard6Txt = findViewById(R.id.BoardCard6Txt);
+        TextView EnemyCard1Txt = findViewById(R.id.EnemyCard1Txt);
+        TextView EnemyCard2Txt = findViewById(R.id.EnemyCard2Txt);
+        TextView EnemyCard3Txt = findViewById(R.id.EnemyCard3Txt);
+        TextView EnemyCard4Txt = findViewById(R.id.EnemyCard4Txt);
+        TextView EnemyCard5Txt = findViewById(R.id.EnemyCard5Txt);
+        TextView EnemyCard6Txt = findViewById(R.id.EnemyCard6Txt);
+        TextView[] BText1 = {BoardCard1Txt, BoardCard2Txt, BoardCard3Txt, BoardCard4Txt, BoardCard5Txt, BoardCard6Txt,
+                            EnemyCard1Txt, EnemyCard2Txt, EnemyCard3Txt, EnemyCard4Txt, EnemyCard5Txt, EnemyCard6Txt};
         ImageView EndTurn1 = findViewById(R.id.EndTurn);
         Crystal.renew1(CrystalHp);
 
@@ -615,7 +625,9 @@ public class PlayerOne extends AppCompatActivity {
                     if(!e.getResult()) {
 
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
+                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr);
                         CardsPlacedCount.getAndDecrement();
+
                     }
 
                     // Turns off any color tinting.
@@ -720,7 +732,9 @@ public class PlayerOne extends AppCompatActivity {
                     if(!e.getResult()) {
 
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
+                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr);
                         CardsPlacedCount.getAndDecrement();
+
                     }else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
                     // Turns off any color tinting.
                     ((ImageView)v).clearColorFilter();
@@ -825,7 +839,9 @@ public class PlayerOne extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENDED:
                     if(!e.getResult()) {
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
+                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr);
                         CardsPlacedCount.getAndDecrement();
+
                     }
                     else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
                     // Turns off any color tinting.
@@ -931,7 +947,9 @@ public class PlayerOne extends AppCompatActivity {
                     if(!e.getResult()) {
 
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
+                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr);
                         CardsPlacedCount.getAndDecrement();
+
                     }else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
                     // Turns off any color tinting.
                     ((ImageView)v).clearColorFilter();
@@ -1037,7 +1055,9 @@ public class PlayerOne extends AppCompatActivity {
                     if(!e.getResult()) {
 
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
+                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr);
                         CardsPlacedCount.getAndDecrement();
+
                     }else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
                     // Turns off any color tinting.
                     ((ImageView)v).clearColorFilter();
@@ -1143,7 +1163,9 @@ public class PlayerOne extends AppCompatActivity {
                     if(!e.getResult()) {
 
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
+                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr);
                         CardsPlacedCount.getAndDecrement();
+
                     }else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
                     // Turns off any color tinting.
                     ((ImageView)v).clearColorFilter();

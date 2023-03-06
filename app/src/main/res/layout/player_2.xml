@@ -207,6 +207,87 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/placeholder" />
 
+        <TextView
+            android:id="@+id/BoardCard1Txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/placeholder"
+            android:textColor="@color/white"
+            android:textSize="10.2sp"
+            app:layout_constraintBottom_toBottomOf="@+id/BoardCard1"
+            app:layout_constraintDimensionRatio="0.7"
+            app:layout_constraintEnd_toStartOf="@+id/BoardCard2"
+            app:layout_constraintStart_toStartOf="@id/BoardCard1"
+            app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+        <TextView
+            android:id="@+id/BoardCard2Txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/placeholder"
+            android:textColor="@color/white"
+            android:textSize="10.2sp"
+            app:layout_constraintBottom_toBottomOf="@+id/BoardCard2"
+            app:layout_constraintDimensionRatio="0.7"
+            app:layout_constraintEnd_toStartOf="@+id/BoardCard3"
+            app:layout_constraintStart_toStartOf="@id/BoardCard2"
+            app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+        <TextView
+            android:id="@+id/BoardCard3Txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/placeholder"
+            android:textColor="@color/white"
+            android:textSize="10.2sp"
+            app:layout_constraintBottom_toBottomOf="@+id/BoardCard3"
+            app:layout_constraintDimensionRatio="0.7"
+            app:layout_constraintEnd_toStartOf="@+id/BoardCard4"
+            app:layout_constraintStart_toStartOf="@id/BoardCard3"
+            app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+        <TextView
+            android:id="@+id/BoardCard4Txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/placeholder"
+            android:textColor="@color/white"
+            android:textSize="10.2sp"
+            app:layout_constraintBottom_toBottomOf="@+id/BoardCard4"
+            app:layout_constraintDimensionRatio="0.7"
+            app:layout_constraintEnd_toStartOf="@+id/BoardCard5"
+            app:layout_constraintStart_toStartOf="@id/BoardCard4"
+            app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+        <TextView
+            android:id="@+id/BoardCard5Txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/placeholder"
+            android:textColor="@color/white"
+            android:textSize="10.2sp"
+            app:layout_constraintBottom_toBottomOf="@+id/BoardCard5"
+            app:layout_constraintDimensionRatio="0.7"
+            app:layout_constraintEnd_toStartOf="@+id/BoardCard6"
+            app:layout_constraintStart_toStartOf="@id/BoardCard5"
+            app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+        <TextView
+            android:id="@+id/BoardCard6Txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/placeholder"
+            android:textColor="@color/white"
+            android:textSize="10.2sp"
+            app:layout_constraintBottom_toBottomOf="@+id/BoardCard6"
+            app:layout_constraintDimensionRatio="0.7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/BoardCard6"
+            app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+
+
+
 
         <ImageView
             android:id="@+id/EnemyCard1"
@@ -279,6 +360,84 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/placeholder" />
+
+        <TextView
+            android:id="@+id/EnemyCard1Txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/placeholder"
+            android:textColor="@color/white"
+            android:textSize="10.2sp"
+            app:layout_constraintBottom_toBottomOf="@+id/EnemyCard1"
+            app:layout_constraintDimensionRatio="0.7"
+            app:layout_constraintEnd_toStartOf="@+id/EnemyCard2"
+            app:layout_constraintStart_toStartOf="@id/EnemyCard1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/EnemyCard2Txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/placeholder"
+            android:textColor="@color/white"
+            android:textSize="10.2sp"
+            app:layout_constraintBottom_toBottomOf="@+id/EnemyCard2"
+            app:layout_constraintDimensionRatio="0.7"
+            app:layout_constraintEnd_toStartOf="@+id/EnemyCard3"
+            app:layout_constraintStart_toStartOf="@id/EnemyCard2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/EnemyCard3Txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/placeholder"
+            android:textColor="@color/white"
+            android:textSize="10.2sp"
+            app:layout_constraintBottom_toBottomOf="@+id/EnemyCard3"
+            app:layout_constraintDimensionRatio="0.7"
+            app:layout_constraintEnd_toStartOf="@+id/EnemyCard4"
+            app:layout_constraintStart_toStartOf="@id/EnemyCard3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/EnemyCard4Txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/placeholder"
+            android:textColor="@color/white"
+            android:textSize="10.2sp"
+            app:layout_constraintBottom_toBottomOf="@+id/EnemyCard4"
+            app:layout_constraintDimensionRatio="0.7"
+            app:layout_constraintEnd_toStartOf="@+id/EnemyCard5"
+            app:layout_constraintStart_toStartOf="@id/EnemyCard4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/EnemyCard5Txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/placeholder"
+            android:textColor="@color/white"
+            android:textSize="10.2sp"
+            app:layout_constraintBottom_toBottomOf="@+id/EnemyCard5"
+            app:layout_constraintDimensionRatio="0.7"
+            app:layout_constraintEnd_toStartOf="@+id/EnemyCard6"
+            app:layout_constraintStart_toStartOf="@id/EnemyCard5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/EnemyCard6Txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/placeholder"
+            android:textColor="@color/white"
+            android:textSize="10.2sp"
+            app:layout_constraintBottom_toBottomOf="@+id/EnemyCard6"
+            app:layout_constraintDimensionRatio="0.7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/EnemyCard6"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

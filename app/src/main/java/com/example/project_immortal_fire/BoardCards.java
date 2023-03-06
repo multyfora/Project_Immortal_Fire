@@ -1,9 +1,13 @@
 package com.example.project_immortal_fire;
 
+import static com.example.project_immortal_fire.CardsSet.string;
+
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class BoardCards {
 
@@ -11,7 +15,6 @@ public class BoardCards {
 
     public static void remove(String[] BoardCards,String[] EnemyCards, ImageView[] BCards, int num){
 
-        //!if boardCards is null then i know i should damage the crystal!!!!
 
         if(num<6) {
             Log.i(TAG, "removed: " + BoardCards[num]);
@@ -32,9 +35,20 @@ public class BoardCards {
             }
 
         }
-        Log.i(TAG, "bebra: " + Arrays.toString(EnemyCards));
         BCards[num].setImageResource(R.drawable.placeholder);
 
 
+    }
+
+    public static void renew(int[] BoardHp, int[] EnemyHp,String[] BoardCards, String[] EnemyCards, TextView[] BText){
+        Log.i(TAG, "renew CALLED ");
+        for (int i = 0; i < BoardCards.length; i++) {
+            if(BoardCards[i]!=null && !Objects.equals(BoardCards[i], "none")){
+                BText[i].setText(string[Integer.parseInt(BoardCards[i].charAt(BoardCards[i].length() - 2) + String.valueOf(BoardCards[i].charAt(BoardCards[i].length() - 1)))]);
+                Log.i(TAG, "BText: " + BText[i].getText());
+            }
+
+
+        }
     }
 }

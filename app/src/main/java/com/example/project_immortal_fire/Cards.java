@@ -5,6 +5,7 @@ import static com.example.project_immortal_fire.CardsSet.draw;
 
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.Arrays;
 
@@ -68,13 +69,14 @@ public abstract class Cards {
 
 
     public static void boardSet(String dragData, ImageView BoardCard) {
+        Log.i(TAG, "key: " + dragData);
         int key = Integer.parseInt(dragData.charAt(dragData.length() - 2) + String.valueOf(dragData.charAt(dragData.length() - 1)));
         BoardCard.setImageResource(draw[key]);
 
     }
 
 
-    public static void Moved(String[] boardCards, String[] enemyCards, ImageView[] BCards) {
+    public static void Moved(String[] boardCards, String[] enemyCards, ImageView[] BCards, TextView[] BText) {
 
         Log.i(TAG, "string a: " + Arrays.toString(boardCards) + "\nstring b: " + Arrays.toString(enemyCards));
 
@@ -144,6 +146,12 @@ public abstract class Cards {
                 BoardCards.remove(boardCards, enemyCards, BCards, enemy + 6);
             }
         }
+
+        //* forth step
+
+        //updating the visual hp for all board cards
+
+        BoardCards.renew(BoardHp,EnemyHp,boardCards,enemyCards,BText);
 
     }
 }
