@@ -100,7 +100,8 @@ public class PlayerTwo extends AppCompatActivity {
         TextView[] BText2 = {BoardCard1Txt, BoardCard2Txt, BoardCard3Txt, BoardCard4Txt, BoardCard5Txt, BoardCard6Txt,
                 EnemyCard1Txt, EnemyCard2Txt, EnemyCard3Txt, EnemyCard4Txt, EnemyCard5Txt, EnemyCard6Txt};
         Crystal.renew2(CrystalHp);
-
+        BoardCards.invalidate(BText2);
+        BoardCards.renew(BoardCards2,EnemyCards2,BText2);
 
         //!update the removing variables everytime anything new appears
         /*
@@ -555,6 +556,8 @@ public class PlayerTwo extends AppCompatActivity {
                     // Gets the text data from the item.
                     CharSequence dragData = item.getText();
 
+                        dragData = buffer[0];
+
                     Cards.boardSet((String)dragData,BoardCard1);
                     BoardCards2[0] = buffer[0];
 
@@ -586,6 +589,7 @@ public class PlayerTwo extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        BoardCards.renew(BoardCards2,EnemyCards2,BText2);
                     }
 
                     // Returns true; the value is ignored.
@@ -692,6 +696,7 @@ public class PlayerTwo extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        BoardCards.renew(BoardCards2,EnemyCards2,BText2);
                     }
 
                     // Returns true; the value is ignored.
@@ -799,6 +804,7 @@ public class PlayerTwo extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        BoardCards.renew(BoardCards2,EnemyCards2,BText2);
                     }
 
                     // Returns true; the value is ignored.
@@ -904,6 +910,7 @@ public class PlayerTwo extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        BoardCards.renew(BoardCards2,EnemyCards2,BText2);
                     }
 
                     // Returns true; the value is ignored.
@@ -1010,6 +1017,7 @@ public class PlayerTwo extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        BoardCards.renew(BoardCards2,EnemyCards2,BText2);
                     }
 
                     // Returns true; the value is ignored.
@@ -1115,6 +1123,7 @@ public class PlayerTwo extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        BoardCards.renew(BoardCards2,EnemyCards2,BText2);
                     }
                     // Returns true; the value is ignored.
                     return true;
