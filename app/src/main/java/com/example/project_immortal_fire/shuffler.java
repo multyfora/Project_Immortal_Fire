@@ -7,6 +7,7 @@ import static com.example.project_immortal_fire.PlayerOne.CardsArr;
 import static com.example.project_immortal_fire.PlayerTwo.CardsArr2;
 import static com.example.project_immortal_fire.PlayerOne.CardsCount;
 
+import android.animation.ValueAnimator;
 import android.util.Log;
 import java.util.Arrays;
 import java.util.Collections;

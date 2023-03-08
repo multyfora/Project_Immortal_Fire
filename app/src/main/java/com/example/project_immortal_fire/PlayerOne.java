@@ -7,22 +7,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioAttributes;
+import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.internal.ReversableAnimatedValueInterpolator;
 
 import java.util.Arrays;
 
@@ -36,6 +45,9 @@ public class PlayerOne extends AppCompatActivity {
     static Boolean GameEnded = false;
 
     static boolean IsFirst = true;
+
+    private SoundPool soundPool;
+    private int Music;
 
     static boolean IsReplayed = false;
     private static final String TAG = "player1";
@@ -56,8 +68,6 @@ public class PlayerOne extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_1);
-
-
 
 
 
@@ -112,6 +122,22 @@ public class PlayerOne extends AppCompatActivity {
         ImageView EndTurn1 = findViewById(R.id.EndTurn);
         Crystal.renew1(CrystalHp);
 
+
+
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_GAME)
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .build();
+
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(6)
+                .setAudioAttributes(audioAttributes)
+                .build();
+        Music = soundPool.load(this, R.raw.test, 1);
+        int BackMusicId = soundPool.play(Music, 1, 1, 0, 0, 1);
+
+        Log.i(TAG, "sound started: " + BackMusicId);
+
         if(IsFirst){
             TurnScreen.setVisibility(View.GONE);
         }
@@ -128,7 +154,7 @@ public class PlayerOne extends AppCompatActivity {
             CardsSet.enemyset(EnemyCard1, EnemyCard2, EnemyCard3, EnemyCard4, EnemyCard5, EnemyCard6, EnemyCards);
         }
         Log.i("BoardCards", "Player1 boardcards: " + Arrays.toString(BoardCards));
-
+        com.example.project_immortal_fire.BoardCards.renew(BoardCards,EnemyCards,BText1);
         card1.setTag(IMAGEVIEW_TAG_CARD1);
         card2.setTag(IMAGEVIEW_TAG_CARD2);
         card3.setTag(IMAGEVIEW_TAG_CARD3);
@@ -137,16 +163,18 @@ public class PlayerOne extends AppCompatActivity {
 
 
         EndTurn1.setOnClickListener(view -> {
-            Log.i(TAG, "atomic count: " + CardsPlacedCount.get());
-            Log.i(TAG, "boardcards: " + Arrays.toString(BoardCards));
-            Intent i = new Intent(PlayerOne.this, PlayerTwo.class);
-            Bundle extras = new Bundle();
-            extras.putStringArray("BoardCards",BoardCards);
-            extras.putStringArray("EnemyCards",EnemyCards);
-            extras.putBoolean("Replay",IsReplayed);
-            i.putExtras(extras);
-            startActivity(i);
-            IsReplayed = false;
+
+                                        Log.i(TAG, "atomic count: " + CardsPlacedCount.get());
+                                        Log.i(TAG, "boardcards: " + Arrays.toString(BoardCards));
+                                        Intent i = new Intent(PlayerOne.this, PlayerTwo.class);
+                                        Bundle extras = new Bundle();
+                                        extras.putStringArray("BoardCards",BoardCards);
+                                        extras.putStringArray("EnemyCards",EnemyCards);
+                                        extras.putBoolean("Replay",IsReplayed);
+                                        extras.putInt("MusicId", BackMusicId);
+                                        i.putExtras(extras);
+                                        startActivity(i);
+                                        IsReplayed = false;
         });
 
 
@@ -639,6 +667,7 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        com.example.project_immortal_fire.BoardCards.renew(BoardCards,EnemyCards,BText1);
                     }
                     // Returns true; the value is ignored.
                     return true;
@@ -745,6 +774,7 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        com.example.project_immortal_fire.BoardCards.renew(BoardCards,EnemyCards,BText1);
                     }
                     // Returns true; the value is ignored.
                     return true;
@@ -853,6 +883,7 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        com.example.project_immortal_fire.BoardCards.renew(BoardCards,EnemyCards,BText1);
                     }
                     // Returns true; the value is ignored.
                     return true;
@@ -960,6 +991,7 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        com.example.project_immortal_fire.BoardCards.renew(BoardCards,EnemyCards,BText1);
                     }
                     // Returns true; the value is ignored.
                     return true;
@@ -1068,6 +1100,7 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        com.example.project_immortal_fire.BoardCards.renew(BoardCards,EnemyCards,BText1);
                     }
                     // Returns true; the value is ignored.
                     return true;
@@ -1176,6 +1209,7 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        com.example.project_immortal_fire.BoardCards.renew(BoardCards,EnemyCards,BText1);
                     }
                     // Returns true; the value is ignored.
                     return true;

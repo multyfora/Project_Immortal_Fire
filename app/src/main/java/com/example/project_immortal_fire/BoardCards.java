@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class BoardCards {
@@ -89,20 +90,27 @@ public class BoardCards {
                 }
             }
 
-
+            Log.i(TAG, "BText: " + Arrays.toString(BText));
             BoardText = BText.clone();
             First = false;
         }
     }
 
     public static void invalidate(TextView[] BText) {
-        if (!First) {
-            for (int i = 0; i < BText.length; i++) {
+        //if (!First) {
+            for (int i = 6; i < BText.length; i++) {
                 if (BoardText[i] != null) {
-                    BText[i].setText(BoardText[i].getText());
+                    BText[i].setText(BoardText[i-6].getText());
                 }
             }
-        }
+            for (int i = 0; i < 6; i++) {
+                if (BoardText[i] != null) {
+                    assert BoardText[i + 6] != null;
+                    BText[i].setText(BoardText[i+6].getText());
+                    Log.i(TAG, "BoardText: " + BoardText[i+6].getText());
+                }
+            }
+        //}
     }
 }
 

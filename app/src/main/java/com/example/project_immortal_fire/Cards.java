@@ -3,7 +3,12 @@ package com.example.project_immortal_fire;
 
 import static com.example.project_immortal_fire.CardsSet.draw;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.util.Log;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -91,7 +96,7 @@ public abstract class Cards {
         for (int i = 0; i < 6; i++) {
 
             AtkBuffer[i] = getATK(boardCards[i]);
-            if(EnemyHp[i]==0) {
+            if (EnemyHp[i] == 0) {
                 EnemyHp[i] = getHP(enemyCards[i]);
             }
         }
@@ -114,7 +119,7 @@ public abstract class Cards {
         for (int i = 0; i < 6; i++) {
 
             AtkBuffer[i] = getATK(enemyCards[i]);
-            if(BoardHp[i]==0) {
+            if (BoardHp[i] == 0) {
                 BoardHp[i] = getHP(boardCards[i]);
             }
         }
@@ -135,14 +140,14 @@ public abstract class Cards {
         for (int board = 0; board < 6; board++) {
 
             if (BoardHp[board] < 1) {
-                BoardHp[board]=0;
+                BoardHp[board] = 0;
                 BoardCards.remove(boardCards, enemyCards, BCards, board);
             }
         }
         for (int enemy = 0; enemy < 6; enemy++) {
 
             if (EnemyHp[enemy] < 1) {
-                EnemyHp[enemy]=0;
+                EnemyHp[enemy] = 0;
                 BoardCards.remove(boardCards, enemyCards, BCards, enemy + 6);
             }
         }
@@ -151,7 +156,7 @@ public abstract class Cards {
 
         //updating the visual hp for all board cards
 
-        BoardCards.renew(BoardHp,EnemyHp,boardCards,enemyCards,BText);
+        BoardCards.renew(BoardHp, EnemyHp, boardCards, enemyCards, BText);
 
     }
 }

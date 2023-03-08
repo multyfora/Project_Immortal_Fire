@@ -2,17 +2,22 @@ package com.example.project_immortal_fire;
 
 import static com.example.project_immortal_fire.CardsSet.draw;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
@@ -53,7 +58,7 @@ public class PlayerTwo extends AppCompatActivity {
         final boolean[] card5Poped = {false};
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_2);
-
+        final boolean[] isEndTurn = {true};
 
 
         AtomicInteger CardsPlacedCount2 = new AtomicInteger();
@@ -100,8 +105,11 @@ public class PlayerTwo extends AppCompatActivity {
         TextView[] BText2 = {BoardCard1Txt, BoardCard2Txt, BoardCard3Txt, BoardCard4Txt, BoardCard5Txt, BoardCard6Txt,
                 EnemyCard1Txt, EnemyCard2Txt, EnemyCard3Txt, EnemyCard4Txt, EnemyCard5Txt, EnemyCard6Txt};
         Crystal.renew2(CrystalHp);
-        BoardCards.invalidate(BText2);
-        BoardCards.renew(BoardCards2,EnemyCards2,BText2);
+
+        //BoardCards.renew(BoardCards2,EnemyCards2,BText2);
+
+
+
 
         //!update the removing variables everytime anything new appears
         /*
@@ -129,17 +137,393 @@ public class PlayerTwo extends AppCompatActivity {
         card3.setTag(IMAGEVIEW_TAG_CARD3);
         card4.setTag(IMAGEVIEW_TAG_CARD4);
         card5.setTag(IMAGEVIEW_TAG_CARD5);
+        BoardCards.invalidate(BText2);
 
         EndTurn2.setOnClickListener(view -> {
-            Cards.Moved(BoardCards2,EnemyCards2,BCards,BText2);
-            Log.i("boardCards", "array: " + Arrays.toString(BoardCards2) + "visibility: " + BoardCard1.getVisibility() + BoardCard2.getVisibility() + BoardCard3.getVisibility() + BoardCard4.getVisibility() + BoardCard5.getVisibility() + BoardCard6.getVisibility());
-            Intent i1 = new Intent(PlayerTwo.this, PlayerOne.class);
-            Bundle extras = new Bundle();
-            extras.putStringArray("BoardCards2", BoardCards2);
-            extras.putStringArray("EnemyCards2", EnemyCards2);
-            i1.putExtras(extras);
 
-            startActivity(i1);
+
+                //!this could be HEAVILY optimised by making all cards follow one animation. but im too lazy now :)
+                //! so ill do it only for HitAnim 1 and only for enemies
+
+                ValueAnimator HitAnim = ValueAnimator.ofFloat(1f, 1.5f);
+                HitAnim.setDuration(700);
+                HitAnim.setInterpolator(new DecelerateInterpolator());
+                HitAnim.start();
+                HitAnim.addUpdateListener(valueAnimator -> {
+                    float goingalpha = (float) valueAnimator.getAnimatedValue();
+                    if(!BoardCard1Txt.getText().equals("")) {
+                        BoardCard1.setScaleY(goingalpha);
+                        BoardCard1.setScaleX(goingalpha);
+                        BoardCard1Txt.setScaleX(goingalpha);
+                        BoardCard1Txt.setScaleY(goingalpha);
+                    }
+
+                    //*enemies
+
+                    if(!EnemyCard1Txt.getText().equals("")) {
+                        EnemyCard1.setScaleY(goingalpha);
+                        EnemyCard1.setScaleX(goingalpha);
+                        EnemyCard1Txt.setScaleX(goingalpha);
+                        EnemyCard1Txt.setScaleY(goingalpha);
+                    }
+                    if(!EnemyCard2Txt.getText().equals("")) {
+                        EnemyCard2.setScaleY(goingalpha);
+                        EnemyCard2.setScaleX(goingalpha);
+                        EnemyCard2Txt.setScaleX(goingalpha);
+                        EnemyCard2Txt.setScaleY(goingalpha);
+                    }
+                    if(!EnemyCard3Txt.getText().equals("")) {
+                        EnemyCard3.setScaleY(goingalpha);
+                        EnemyCard3.setScaleX(goingalpha);
+                        EnemyCard3Txt.setScaleX(goingalpha);
+                        EnemyCard3Txt.setScaleY(goingalpha);
+                    }
+                    if(!EnemyCard4Txt.getText().equals("")) {
+                        EnemyCard4.setScaleY(goingalpha);
+                        EnemyCard4.setScaleX(goingalpha);
+                        EnemyCard4Txt.setScaleX(goingalpha);
+                        EnemyCard4Txt.setScaleY(goingalpha);
+                    }
+                    if(!EnemyCard5Txt.getText().equals("")) {
+                        EnemyCard5.setScaleY(goingalpha);
+                        EnemyCard5.setScaleX(goingalpha);
+                        EnemyCard5Txt.setScaleX(goingalpha);
+                        EnemyCard5Txt.setScaleY(goingalpha);
+                    }
+                    if(!EnemyCard6Txt.getText().equals("")) {
+                        EnemyCard6.setScaleY(goingalpha);
+                        EnemyCard6.setScaleX(goingalpha);
+                        EnemyCard6Txt.setScaleX(goingalpha);
+                        EnemyCard6Txt.setScaleY(goingalpha);
+                    }
+
+                });
+                HitAnim.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        ValueAnimator HitAnim2 = ValueAnimator.ofFloat(1.5f, 1f);
+                        HitAnim2.setDuration(200);
+                        HitAnim2.setInterpolator(new AccelerateInterpolator());
+                        HitAnim2.start();
+                        HitAnim2.addUpdateListener(valueAnimator -> {
+                            float goingalpha = (float) valueAnimator.getAnimatedValue();
+                            if(!BoardCard1Txt.getText().equals("")) {
+                                BoardCard1.setScaleY(goingalpha);
+                                BoardCard1.setScaleX(goingalpha);
+                                BoardCard1Txt.setScaleX(goingalpha);
+                                BoardCard1Txt.setScaleY(goingalpha);
+                                }
+
+                                //*enemies
+
+
+                                if(!EnemyCard1Txt.getText().equals("")) {
+
+                                    EnemyCard1.setScaleY(goingalpha);
+                                    EnemyCard1.setScaleX(goingalpha);
+                                    EnemyCard1Txt.setScaleX(goingalpha);
+                                    EnemyCard1Txt.setScaleY(goingalpha);
+                                }
+                                if(!EnemyCard2Txt.getText().equals("")) {
+                                    EnemyCard2.setScaleY(goingalpha);
+                                    EnemyCard2.setScaleX(goingalpha);
+                                    EnemyCard2Txt.setScaleX(goingalpha);
+                                    EnemyCard2Txt.setScaleY(goingalpha);
+                                }
+                                if(!EnemyCard3Txt.getText().equals("")) {
+                                    EnemyCard3.setScaleY(goingalpha);
+                                    EnemyCard3.setScaleX(goingalpha);
+                                    EnemyCard3Txt.setScaleX(goingalpha);
+                                    EnemyCard3Txt.setScaleY(goingalpha);
+                                }
+                                if(!EnemyCard4Txt.getText().equals("")) {
+                                    EnemyCard4.setScaleY(goingalpha);
+                                    EnemyCard4.setScaleX(goingalpha);
+                                    EnemyCard4Txt.setScaleX(goingalpha);
+                                    EnemyCard4Txt.setScaleY(goingalpha);
+                                }
+                                if(!EnemyCard5Txt.getText().equals("")) {
+                                    EnemyCard5.setScaleY(goingalpha);
+                                    EnemyCard5.setScaleX(goingalpha);
+                                    EnemyCard5Txt.setScaleX(goingalpha);
+                                    EnemyCard5Txt.setScaleY(goingalpha);
+                                }
+                                if(!EnemyCard6Txt.getText().equals("")) {
+                                    EnemyCard6.setScaleY(goingalpha);
+                                    EnemyCard6.setScaleX(goingalpha);
+                                    EnemyCard6Txt.setScaleX(goingalpha);
+                                    EnemyCard6Txt.setScaleY(goingalpha);
+                                }
+
+
+
+                            HitAnim2.addListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    if (isEndTurn[0]) {
+                                        Cards.Moved(BoardCards2, EnemyCards2, BCards, BText2);
+                                        Log.i("boardCards", "array: " + Arrays.toString(BoardCards2) + "visibility: " + BoardCard1.getVisibility() + BoardCard2.getVisibility() + BoardCard3.getVisibility() + BoardCard4.getVisibility() + BoardCard5.getVisibility() + BoardCard6.getVisibility());
+                                        Intent i1 = new Intent(PlayerTwo.this, PlayerOne.class);
+                                        Bundle extras = new Bundle();
+                                        extras.putStringArray("BoardCards2", BoardCards2);
+                                        extras.putStringArray("EnemyCards2", EnemyCards2);
+                                        i1.putExtras(extras);
+                                        startActivity(i1);
+                                        isEndTurn[0] = false;
+                                    }
+                                }
+                            });
+                        });
+                    }
+                });
+            ValueAnimator HitAnim1 = ValueAnimator.ofFloat(1f, 1.5f);
+            HitAnim.setDuration(500);
+            HitAnim.setInterpolator(new DecelerateInterpolator());
+            HitAnim.start();
+            HitAnim.addUpdateListener(valueAnimator -> {
+                float goingalpha = (float) valueAnimator.getAnimatedValue();
+                if(!BoardCard2Txt.getText().equals("")) {
+                    BoardCard2.setScaleY(goingalpha);
+                    BoardCard2.setScaleX(goingalpha);
+                    BoardCard2Txt.setScaleX(goingalpha);
+                    BoardCard2Txt.setScaleY(goingalpha);
+                }
+            });
+            HitAnim.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    ValueAnimator HitAnim2 = ValueAnimator.ofFloat(1.5f, 1f);
+                    HitAnim2.setDuration(300);
+                    HitAnim2.setInterpolator(new AccelerateInterpolator());
+                    HitAnim2.start();
+                    HitAnim2.addUpdateListener(valueAnimator -> {
+                        float goingalpha = (float) valueAnimator.getAnimatedValue();
+                        if(!BoardCard2Txt.getText().equals("")) {
+                            BoardCard2.setScaleY(goingalpha);
+                            BoardCard2.setScaleX(goingalpha);
+                            BoardCard2Txt.setScaleX(goingalpha);
+                            BoardCard2Txt.setScaleY(goingalpha);
+                        }
+
+
+                        HitAnim2.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                if (isEndTurn[0]) {
+                                    Cards.Moved(BoardCards2, EnemyCards2, BCards, BText2);
+                                    Log.i("boardCards", "array: " + Arrays.toString(BoardCards2) + "visibility: " + BoardCard1.getVisibility() + BoardCard2.getVisibility() + BoardCard3.getVisibility() + BoardCard4.getVisibility() + BoardCard5.getVisibility() + BoardCard6.getVisibility());
+                                    Intent i1 = new Intent(PlayerTwo.this, PlayerOne.class);
+                                    Bundle extras = new Bundle();
+                                    extras.putStringArray("BoardCards2", BoardCards2);
+                                    extras.putStringArray("EnemyCards2", EnemyCards2);
+                                    i1.putExtras(extras);
+                                    startActivity(i1);
+                                    isEndTurn[0] = false;
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+            ValueAnimator HitAnim22 = ValueAnimator.ofFloat(1f, 1.5f);
+            HitAnim.setDuration(500);
+            HitAnim.setInterpolator(new DecelerateInterpolator());
+            HitAnim.start();
+            HitAnim.addUpdateListener(valueAnimator -> {
+                float goingalpha = (float) valueAnimator.getAnimatedValue();
+                if(!BoardCard3Txt.getText().equals("")) {
+                    BoardCard3.setScaleY(goingalpha);
+                    BoardCard3.setScaleX(goingalpha);
+                    BoardCard3Txt.setScaleX(goingalpha);
+                    BoardCard3Txt.setScaleY(goingalpha);
+                }
+            });
+            HitAnim.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    ValueAnimator HitAnim2 = ValueAnimator.ofFloat(1.5f, 1f);
+                    HitAnim2.setDuration(300);
+                    HitAnim2.setInterpolator(new AccelerateInterpolator());
+                    HitAnim2.start();
+                    HitAnim2.addUpdateListener(valueAnimator -> {
+                        float goingalpha = (float) valueAnimator.getAnimatedValue();
+                        if(!BoardCard3Txt.getText().equals("")) {
+                            BoardCard3.setScaleY(goingalpha);
+                            BoardCard3.setScaleX(goingalpha);
+                            BoardCard3Txt.setScaleX(goingalpha);
+                            BoardCard3Txt.setScaleY(goingalpha);
+                        }
+
+
+                        HitAnim2.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                if (isEndTurn[0]) {
+                                    Cards.Moved(BoardCards2, EnemyCards2, BCards, BText2);
+                                    Log.i("boardCards", "array: " + Arrays.toString(BoardCards2) + "visibility: " + BoardCard1.getVisibility() + BoardCard2.getVisibility() + BoardCard3.getVisibility() + BoardCard4.getVisibility() + BoardCard5.getVisibility() + BoardCard6.getVisibility());
+                                    Intent i1 = new Intent(PlayerTwo.this, PlayerOne.class);
+                                    Bundle extras = new Bundle();
+                                    extras.putStringArray("BoardCards2", BoardCards2);
+                                    extras.putStringArray("EnemyCards2", EnemyCards2);
+                                    i1.putExtras(extras);
+                                    startActivity(i1);
+                                    isEndTurn[0] = false;
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+            ValueAnimator HitAnim3 = ValueAnimator.ofFloat(1f, 1.5f);
+            HitAnim.setDuration(500);
+            HitAnim.setInterpolator(new DecelerateInterpolator());
+            HitAnim.start();
+            HitAnim.addUpdateListener(valueAnimator -> {
+                float goingalpha = (float) valueAnimator.getAnimatedValue();
+                if(!BoardCard4Txt.getText().equals("")) {
+                    BoardCard4.setScaleY(goingalpha);
+                    BoardCard4.setScaleX(goingalpha);
+                    BoardCard4Txt.setScaleX(goingalpha);
+                    BoardCard4Txt.setScaleY(goingalpha);
+                }
+            });
+            HitAnim.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    ValueAnimator HitAnim2 = ValueAnimator.ofFloat(1.5f, 1f);
+                    HitAnim2.setDuration(300);
+                    HitAnim2.setInterpolator(new AccelerateInterpolator());
+                    HitAnim2.start();
+                    HitAnim2.addUpdateListener(valueAnimator -> {
+                        float goingalpha = (float) valueAnimator.getAnimatedValue();
+                        if(!BoardCard4Txt.getText().equals("")) {
+                            BoardCard4.setScaleY(goingalpha);
+                            BoardCard4.setScaleX(goingalpha);
+                            BoardCard4Txt.setScaleX(goingalpha);
+                            BoardCard4Txt.setScaleY(goingalpha);
+                        }
+
+
+                        HitAnim2.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                if (isEndTurn[0]) {
+                                    Cards.Moved(BoardCards2, EnemyCards2, BCards, BText2);
+                                    Log.i("boardCards", "array: " + Arrays.toString(BoardCards2) + "visibility: " + BoardCard1.getVisibility() + BoardCard2.getVisibility() + BoardCard3.getVisibility() + BoardCard4.getVisibility() + BoardCard5.getVisibility() + BoardCard6.getVisibility());
+                                    Intent i1 = new Intent(PlayerTwo.this, PlayerOne.class);
+                                    Bundle extras = new Bundle();
+                                    extras.putStringArray("BoardCards2", BoardCards2);
+                                    extras.putStringArray("EnemyCards2", EnemyCards2);
+                                    i1.putExtras(extras);
+                                    startActivity(i1);
+                                    isEndTurn[0] = false;
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+            ValueAnimator HitAnim4 = ValueAnimator.ofFloat(1f, 1.5f);
+            HitAnim.setDuration(500);
+            HitAnim.setInterpolator(new DecelerateInterpolator());
+            HitAnim.start();
+            HitAnim.addUpdateListener(valueAnimator -> {
+                float goingalpha = (float) valueAnimator.getAnimatedValue();
+                if(!BoardCard5Txt.getText().equals("")) {
+                    BoardCard5.setScaleY(goingalpha);
+                    BoardCard5.setScaleX(goingalpha);
+                    BoardCard5Txt.setScaleX(goingalpha);
+                    BoardCard5Txt.setScaleY(goingalpha);
+                }
+            });
+            HitAnim.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    ValueAnimator HitAnim2 = ValueAnimator.ofFloat(1.5f, 1f);
+                    HitAnim2.setDuration(300);
+                    HitAnim2.setInterpolator(new AccelerateInterpolator());
+                    HitAnim2.start();
+                    HitAnim2.addUpdateListener(valueAnimator -> {
+                        float goingalpha = (float) valueAnimator.getAnimatedValue();
+                        if(!BoardCard5Txt.getText().equals("")) {
+                            BoardCard5.setScaleY(goingalpha);
+                            BoardCard5.setScaleX(goingalpha);
+                            BoardCard5Txt.setScaleX(goingalpha);
+                            BoardCard5Txt.setScaleY(goingalpha);
+                        }
+
+
+                        HitAnim2.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                if (isEndTurn[0]) {
+                                    Cards.Moved(BoardCards2, EnemyCards2, BCards, BText2);
+                                    Log.i("boardCards", "array: " + Arrays.toString(BoardCards2) + "visibility: " + BoardCard1.getVisibility() + BoardCard2.getVisibility() + BoardCard3.getVisibility() + BoardCard4.getVisibility() + BoardCard5.getVisibility() + BoardCard6.getVisibility());
+                                    Intent i1 = new Intent(PlayerTwo.this, PlayerOne.class);
+                                    Bundle extras = new Bundle();
+                                    extras.putStringArray("BoardCards2", BoardCards2);
+                                    extras.putStringArray("EnemyCards2", EnemyCards2);
+                                    i1.putExtras(extras);
+                                    startActivity(i1);
+                                    isEndTurn[0] = false;
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+            ValueAnimator HitAnim5 = ValueAnimator.ofFloat(1f, 1.5f);
+            HitAnim.setDuration(500);
+            HitAnim.setInterpolator(new DecelerateInterpolator());
+            HitAnim.start();
+            HitAnim.addUpdateListener(valueAnimator -> {
+                float goingalpha = (float) valueAnimator.getAnimatedValue();
+                if(!BoardCard6Txt.getText().equals("")) {
+                    BoardCard6.setScaleY(goingalpha);
+                    BoardCard6.setScaleX(goingalpha);
+                    BoardCard6Txt.setScaleX(goingalpha);
+                    BoardCard6Txt.setScaleY(goingalpha);
+                }
+            });
+            HitAnim.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    ValueAnimator HitAnim2 = ValueAnimator.ofFloat(1.5f, 1f);
+                    HitAnim2.setDuration(300);
+                    HitAnim2.setInterpolator(new AccelerateInterpolator());
+                    HitAnim2.start();
+                    HitAnim2.addUpdateListener(valueAnimator -> {
+                        float goingalpha = (float) valueAnimator.getAnimatedValue();
+                        if(!BoardCard6Txt.getText().equals("")) {
+                            BoardCard6.setScaleY(goingalpha);
+                            BoardCard6.setScaleX(goingalpha);
+                            BoardCard6Txt.setScaleX(goingalpha);
+                            BoardCard6Txt.setScaleY(goingalpha);
+                        }
+
+
+                        HitAnim2.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                if (isEndTurn[0]) {
+                                    Cards.Moved(BoardCards2, EnemyCards2, BCards, BText2);
+                                    Log.i("boardCards", "array: " + Arrays.toString(BoardCards2) + "visibility: " + BoardCard1.getVisibility() + BoardCard2.getVisibility() + BoardCard3.getVisibility() + BoardCard4.getVisibility() + BoardCard5.getVisibility() + BoardCard6.getVisibility());
+                                    Intent i1 = new Intent(PlayerTwo.this, PlayerOne.class);
+                                    Bundle extras = new Bundle();
+                                    extras.putStringArray("BoardCards2", BoardCards2);
+                                    extras.putStringArray("EnemyCards2", EnemyCards2);
+                                    i1.putExtras(extras);
+                                    startActivity(i1);
+                                    isEndTurn[0] = false;
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+
+
+
         });
 
         TurnScreen.setOnTouchListener((view, motionEvent) -> {
@@ -151,6 +535,8 @@ public class PlayerTwo extends AppCompatActivity {
 
             if (card1Poped[0]&& CardsPlacedCount2.get()<2) {
                 CardsPlacedCount2.getAndIncrement();
+                buffer[0] = CardsArr2[0];
+                buffer[1] = "0";
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
                 ClipData dragData = new ClipData(
                         (CharSequence) v.getTag(),
@@ -158,8 +544,7 @@ public class PlayerTwo extends AppCompatActivity {
                         item);
                 View.DragShadowBuilder myShadow = new myDragShadowBuilder.MyDragShadowBuilder(card1);
                 v.startDragAndDrop(dragData, myShadow, null, 0);
-                buffer[0] = CardsArr2[0];
-                buffer[1] = "0";
+
                 CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
                 CardsArr2[0] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
@@ -176,6 +561,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardsArr2[1] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
+                Log.i("IDK", "buffer: " + buffer[0]);
                 ClipData dragData = new ClipData(
                         (CharSequence) v.getTag(),
                         new String[]{ClipDescription.MIMETYPE_TEXT_PLAIN},
@@ -555,8 +941,6 @@ public class PlayerTwo extends AppCompatActivity {
 
                     // Gets the text data from the item.
                     CharSequence dragData = item.getText();
-
-                        dragData = buffer[0];
 
                     Cards.boardSet((String)dragData,BoardCard1);
                     BoardCards2[0] = buffer[0];
@@ -1149,5 +1533,8 @@ public class PlayerTwo extends AppCompatActivity {
         Log.i("player 2", "GameOver");
     }
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }
