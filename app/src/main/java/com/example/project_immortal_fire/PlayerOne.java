@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.ClipData;
@@ -22,16 +20,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.internal.ReversableAnimatedValueInterpolator;
 
 import java.util.Arrays;
 
@@ -46,8 +39,12 @@ public class PlayerOne extends AppCompatActivity {
 
     static boolean IsFirst = true;
 
+    //*soundPool variables
     private SoundPool soundPool;
-    private int Music;
+    private int CardPopped;
+    private int CardTaken;
+
+
 
     static boolean IsReplayed = false;
     private static final String TAG = "player1";
@@ -70,10 +67,9 @@ public class PlayerOne extends AppCompatActivity {
         setContentView(R.layout.player_1);
 
 
-
         AtomicInteger CardsPlacedCount = new AtomicInteger();
         CardsPlacedCount.set(0);
-        final String[] buffer = {null,null};
+        final String[] buffer = {null, null};
         final boolean[] CardViewerPoped = {false};
         final boolean[] card1Poped = {false};
         final boolean[] card2Poped = {false};
@@ -117,31 +113,77 @@ public class PlayerOne extends AppCompatActivity {
         TextView EnemyCard4Txt = findViewById(R.id.EnemyCard4Txt);
         TextView EnemyCard5Txt = findViewById(R.id.EnemyCard5Txt);
         TextView EnemyCard6Txt = findViewById(R.id.EnemyCard6Txt);
+        ImageView g1 = findViewById(R.id.g1);
+        ImageView g2 = findViewById(R.id.g2);
+        ImageView g3 = findViewById(R.id.g3);
+        ImageView g4 = findViewById(R.id.g4);
+        ImageView g5 = findViewById(R.id.g5);
+        ImageView g6 = findViewById(R.id.g6);
+        ImageView g7 = findViewById(R.id.g7);
+        ImageView g8 = findViewById(R.id.g8);
+        ImageView g9 = findViewById(R.id.g9);
+        ImageView g10 = findViewById(R.id.g10);
+        ImageView[] welcome = {g1,g2,g3,g4,g5,g6,g7,g8,g9,g10};
         TextView[] BText1 = {BoardCard1Txt, BoardCard2Txt, BoardCard3Txt, BoardCard4Txt, BoardCard5Txt, BoardCard6Txt,
-                            EnemyCard1Txt, EnemyCard2Txt, EnemyCard3Txt, EnemyCard4Txt, EnemyCard5Txt, EnemyCard6Txt};
+                EnemyCard1Txt, EnemyCard2Txt, EnemyCard3Txt, EnemyCard4Txt, EnemyCard5Txt, EnemyCard6Txt};
         ImageView EndTurn1 = findViewById(R.id.EndTurn);
         Crystal.renew1(CrystalHp);
 
 
 
+
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_GAME)
-                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                 .build();
 
         soundPool = new SoundPool.Builder()
                 .setMaxStreams(6)
                 .setAudioAttributes(audioAttributes)
                 .build();
-        Music = soundPool.load(this, R.raw.test, 1);
-        int BackMusicId = soundPool.play(Music, 1, 1, 0, 0, 1);
+        CardPopped = soundPool.load(this, R.raw.cardpopsound, 1);
+        CardTaken = soundPool.load(this, R.raw.cardtaken, 1);
 
-        Log.i(TAG, "sound started: " + BackMusicId);
+
+
+
+        //* welcome screen
 
         if(IsFirst){
+            EndTurn1.setEnabled(false);
+            card1.setEnabled(false);
+            card2.setEnabled(false);
+            card3.setEnabled(false);
+            card4.setEnabled(false);
+            card5.setEnabled(false);
+            for (int i = 0; i < 9; i++) {
+                welcome[i].setVisibility(View.VISIBLE);
+            }
+            g1.setOnClickListener(v -> {
+
+                ValueAnimator animation = ValueAnimator.ofInt(0,9);
+                animation.setDuration(2000);
+                animation.setInterpolator(new LinearInterpolator());
+                animation.start();
+                animation.addUpdateListener(updatedAnimation -> {
+                    int animatedValue = (int) updatedAnimation.getAnimatedValue();
+                    welcome[animatedValue].setVisibility(View.GONE);
+
+                });
+
+                EndTurn1.setEnabled(true);
+                card1.setEnabled(true);
+                card2.setEnabled(true);
+                card3.setEnabled(true);
+                card4.setEnabled(true);
+                card5.setEnabled(true);
+            });
+                    }
+
+
+        if (IsFirst) {
             TurnScreen.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             TurnScreen.setVisibility(View.VISIBLE);
         }
         IsFirst = false;
@@ -154,7 +196,7 @@ public class PlayerOne extends AppCompatActivity {
             CardsSet.enemyset(EnemyCard1, EnemyCard2, EnemyCard3, EnemyCard4, EnemyCard5, EnemyCard6, EnemyCards);
         }
         Log.i("BoardCards", "Player1 boardcards: " + Arrays.toString(BoardCards));
-        com.example.project_immortal_fire.BoardCards.renew(BoardCards,EnemyCards,BText1);
+        com.example.project_immortal_fire.BoardCards.renew(BoardCards, EnemyCards, BText1);
         card1.setTag(IMAGEVIEW_TAG_CARD1);
         card2.setTag(IMAGEVIEW_TAG_CARD2);
         card3.setTag(IMAGEVIEW_TAG_CARD3);
@@ -164,17 +206,16 @@ public class PlayerOne extends AppCompatActivity {
 
         EndTurn1.setOnClickListener(view -> {
 
-                                        Log.i(TAG, "atomic count: " + CardsPlacedCount.get());
-                                        Log.i(TAG, "boardcards: " + Arrays.toString(BoardCards));
-                                        Intent i = new Intent(PlayerOne.this, PlayerTwo.class);
-                                        Bundle extras = new Bundle();
-                                        extras.putStringArray("BoardCards",BoardCards);
-                                        extras.putStringArray("EnemyCards",EnemyCards);
-                                        extras.putBoolean("Replay",IsReplayed);
-                                        extras.putInt("MusicId", BackMusicId);
-                                        i.putExtras(extras);
-                                        startActivity(i);
-                                        IsReplayed = false;
+            Log.i(TAG, "atomic count: " + CardsPlacedCount.get());
+            Log.i(TAG, "boardcards: " + Arrays.toString(BoardCards));
+            Intent i = new Intent(PlayerOne.this, PlayerTwo.class);
+            Bundle extras = new Bundle();
+            extras.putStringArray("BoardCards", BoardCards);
+            extras.putStringArray("EnemyCards", EnemyCards);
+            extras.putBoolean("Replay", IsReplayed);
+            i.putExtras(extras);
+            startActivity(i);
+            IsReplayed = false;
         });
 
 
@@ -184,15 +225,15 @@ public class PlayerOne extends AppCompatActivity {
         });
 
 
-
         card1.setOnLongClickListener(v -> {
-            if(card1Poped[0]&& CardsPlacedCount.get()<2) {
+            if (card1Poped[0] && CardsPlacedCount.get() < 2) {
+                soundPool.play(CardTaken, 0.7f, 0.7f, 0, 0, 1);
                 buffer[0] = CardsArr[0];
                 buffer[1] = "0";
                 CardsPlacedCount.getAndIncrement();
-                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr);
+                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr);
                 CardsArr[0] = "none";
-                CardsSet.renew(card1,card2,card3,card4,card5,CardsArr);
+                CardsSet.renew(card1, card2, card3, card4, card5, CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
                 ClipData dragData = new ClipData(
                         (CharSequence) v.getTag(),
@@ -201,20 +242,21 @@ public class PlayerOne extends AppCompatActivity {
                 View.DragShadowBuilder myShadow = new myDragShadowBuilder.MyDragShadowBuilder(card1);
                 v.startDragAndDrop(dragData, myShadow, null, 0);
                 return true;
-            }else {
-                Toast.makeText(getApplicationContext(),"cant pick that up", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
         card2.setOnLongClickListener(v -> {
 
-            if(card2Poped[0]&& CardsPlacedCount.get()<2) {
+            if (card2Poped[0] && CardsPlacedCount.get() < 2) {
+                soundPool.play(CardTaken, 0.7f, 0.7f, 0, 0, 1);
                 buffer[0] = CardsArr[1];
                 buffer[1] = "1";
                 CardsPlacedCount.getAndIncrement();
-                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr);
+                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr);
                 CardsArr[1] = "none";
-                CardsSet.renew(card1,card2,card3,card4,card5,CardsArr);
+                CardsSet.renew(card1, card2, card3, card4, card5, CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
                 ClipData dragData = new ClipData(
                         (CharSequence) v.getTag(),
@@ -223,20 +265,21 @@ public class PlayerOne extends AppCompatActivity {
                 View.DragShadowBuilder myShadow = new myDragShadowBuilder.MyDragShadowBuilder(card2);
                 v.startDragAndDrop(dragData, myShadow, null, 0);
                 return true;
-            }else {
-                Toast.makeText(getApplicationContext(),"cant pick that up", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
         card3.setOnLongClickListener(v -> {
 
-            if(card3Poped[0]&& CardsPlacedCount.get()<2) {
+            if (card3Poped[0] && CardsPlacedCount.get() < 2) {
+                soundPool.play(CardTaken, 0.7f, 0.7f, 0, 0, 1);
                 buffer[0] = CardsArr[2];
                 buffer[1] = "2";
                 CardsPlacedCount.getAndIncrement();
-                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr);
+                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr);
                 CardsArr[2] = "none";
-                CardsSet.renew(card1,card2,card3,card4,card5,CardsArr);
+                CardsSet.renew(card1, card2, card3, card4, card5, CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
                 ClipData dragData = new ClipData(
                         (CharSequence) v.getTag(),
@@ -245,20 +288,21 @@ public class PlayerOne extends AppCompatActivity {
                 View.DragShadowBuilder myShadow = new myDragShadowBuilder.MyDragShadowBuilder(card3);
                 v.startDragAndDrop(dragData, myShadow, null, 0);
                 return true;
-            }else {
-                Toast.makeText(getApplicationContext(),"cant pick that up", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
         card4.setOnLongClickListener(v -> {
 
-            if(card4Poped[0]&& CardsPlacedCount.get()<2) {
+            if (card4Poped[0] && CardsPlacedCount.get() < 2) {
+                soundPool.play(CardTaken, 0.7f, 0.7f, 0, 0, 1);
                 buffer[0] = CardsArr[3];
                 buffer[1] = "3";
                 CardsPlacedCount.getAndIncrement();
-                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr);
+                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr);
                 CardsArr[3] = "none";
-                CardsSet.renew(card1,card2,card3,card4,card5,CardsArr);
+                CardsSet.renew(card1, card2, card3, card4, card5, CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
                 ClipData dragData = new ClipData(
                         (CharSequence) v.getTag(),
@@ -267,20 +311,21 @@ public class PlayerOne extends AppCompatActivity {
                 View.DragShadowBuilder myShadow = new myDragShadowBuilder.MyDragShadowBuilder(card4);
                 v.startDragAndDrop(dragData, myShadow, null, 0);
                 return true;
-            }else {
-                Toast.makeText(getApplicationContext(),"cant pick that up", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
         card5.setOnLongClickListener(v -> {
 
-            if(card5Poped[0]&& CardsPlacedCount.get()<2) {
+            if (card5Poped[0] && CardsPlacedCount.get() < 2) {
+                soundPool.play(CardTaken, 0.7f, 0.7f, 0, 0, 1);
                 buffer[0] = CardsArr[4];
                 buffer[1] = "4";
                 CardsPlacedCount.getAndIncrement();
-                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr);
+                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr);
                 CardsArr[4] = "none";
-                CardsSet.renew(card1,card2,card3,card4,card5,CardsArr);
+                CardsSet.renew(card1, card2, card3, card4, card5, CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
                 ClipData dragData = new ClipData(
                         (CharSequence) v.getTag(),
@@ -289,14 +334,14 @@ public class PlayerOne extends AppCompatActivity {
                 View.DragShadowBuilder myShadow = new myDragShadowBuilder.MyDragShadowBuilder(card5);
                 v.startDragAndDrop(dragData, myShadow, null, 0);
                 return true;
-            }else {
-                Toast.makeText(getApplicationContext(),"cant pick that up", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
 
         CardViewer.setOnClickListener(view -> {
-            if (CardViewerPoped[0]){
+            if (CardViewerPoped[0]) {
                 Log.i("Board cards", "All board cards:" + Arrays.toString(BoardCards));
                 ValueAnimator goingAnim = ValueAnimator.ofFloat(1f, 0f);
                 goingAnim.setDuration(250);
@@ -305,7 +350,7 @@ public class PlayerOne extends AppCompatActivity {
                 goingAnim.addUpdateListener(valueAnimator -> {
                     float goingalpha = (float) valueAnimator.getAnimatedValue();
                     CardViewer.setAlpha(goingalpha);
-                    if (goingalpha == 0F){
+                    if (goingalpha == 0F) {
                         CardViewer.setVisibility(View.GONE);
 
                     }
@@ -314,7 +359,7 @@ public class PlayerOne extends AppCompatActivity {
             }
         });
 
-/*
+/*      replay button (doesn't work)
         Replay.setOnClickListener(v -> {
 
             Intent intent = getBaseContext().getPackageManager()
@@ -335,31 +380,32 @@ public class PlayerOne extends AppCompatActivity {
         });
 */
         card1.setOnClickListener(view -> {
-            if (!card1Poped[0]){
+            soundPool.play(CardPopped, 0.7f, 0.7f, 0, 0, 1);
+            if (!card1Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
-            animation.setDuration(500);
-            animation.setInterpolator(new OvershootInterpolator());
-            animation.start();
-            animation.addUpdateListener(updatedAnimation -> {
-                float animatedValue = (float) updatedAnimation.getAnimatedValue();
-                card1.setTranslationY(-animatedValue);
-                card2.setTranslationY(0);
-                card3.setTranslationY(0);
-                card4.setTranslationY(0);
-                card5.setTranslationY(0);
-                card1Poped[0] = true;
-                card2Poped[0] = false;
-                card3Poped[0] = false;
-                card4Poped[0] = false;
-                card5Poped[0] = false;
+                animation.setDuration(500);
+                animation.setInterpolator(new OvershootInterpolator());
+                animation.start();
+                animation.addUpdateListener(updatedAnimation -> {
+                    float animatedValue = (float) updatedAnimation.getAnimatedValue();
+                    card1.setTranslationY(-animatedValue);
+                    card2.setTranslationY(0);
+                    card3.setTranslationY(0);
+                    card4.setTranslationY(0);
+                    card5.setTranslationY(0);
+                    card1Poped[0] = true;
+                    card2Poped[0] = false;
+                    card3Poped[0] = false;
+                    card4Poped[0] = false;
+                    card5Poped[0] = false;
 
-            });
-        }else if (!CardViewerPoped[0]) {
+                });
+            } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
                 String ViewTmp = CardsArr[0];
-                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2) + String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
                 CardViewer.setBackgroundResource(draw[key]);
 
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
@@ -376,7 +422,8 @@ public class PlayerOne extends AppCompatActivity {
             }
         });
         card2.setOnClickListener(view -> {
-            if (!card2Poped[0]){
+            soundPool.play(CardPopped, 0.7f, 0.7f, 0, 0, 1);
+            if (!card2Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
                 animation.setDuration(500);
@@ -396,11 +443,11 @@ public class PlayerOne extends AppCompatActivity {
                     card5Poped[0] = false;
 
                 });
-            }else if (!CardViewerPoped[0]) {
+            } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
                 String ViewTmp = CardsArr[1];
-                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2) + String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
                 CardViewer.setBackgroundResource(draw[key]);
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
@@ -414,7 +461,8 @@ public class PlayerOne extends AppCompatActivity {
             }
         });
         card3.setOnClickListener(view -> {
-            if (!card3Poped[0]){
+            soundPool.play(CardPopped, 0.7f, 0.7f, 0, 0, 1);
+            if (!card3Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
                 animation.setDuration(500);
@@ -434,11 +482,11 @@ public class PlayerOne extends AppCompatActivity {
                     card5Poped[0] = false;
 
                 });
-            }else if (!CardViewerPoped[0]) {
+            } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
                 String ViewTmp = CardsArr[2];
-                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2) + String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
                 CardViewer.setBackgroundResource(draw[key]);
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
@@ -452,7 +500,8 @@ public class PlayerOne extends AppCompatActivity {
             }
         });
         card4.setOnClickListener(view -> {
-            if (!card4Poped[0]){
+            soundPool.play(CardPopped, 0.7f, 0.7f, 0, 0, 1);
+            if (!card4Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
                 animation.setDuration(500);
@@ -472,11 +521,11 @@ public class PlayerOne extends AppCompatActivity {
                     card5Poped[0] = false;
 
                 });
-            }else if (!CardViewerPoped[0]) {
+            } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
                 String ViewTmp = CardsArr[3];
-                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2) + String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
                 CardViewer.setBackgroundResource(draw[key]);
 
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
@@ -491,7 +540,8 @@ public class PlayerOne extends AppCompatActivity {
             }
         });
         card5.setOnClickListener(view -> {
-            if (!card5Poped[0]){
+            soundPool.play(CardPopped, 0.7f, 0.7f, 0, 0, 1);
+            if (!card5Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
                 animation.setDuration(500);
@@ -511,11 +561,11 @@ public class PlayerOne extends AppCompatActivity {
                     card3Poped[0] = false;
 
                 });
-            }else if (!CardViewerPoped[0]) {
+            } else if (!CardViewerPoped[0]) {
                 CardViewer.setVisibility(View.VISIBLE);
                 CardViewer.setAlpha(0F);
                 String ViewTmp = CardsArr[4];
-                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2)+String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
+                int key = Integer.parseInt(ViewTmp.charAt(ViewTmp.length() - 2) + String.valueOf(ViewTmp.charAt(ViewTmp.length() - 1)));
                 CardViewer.setBackgroundResource(draw[key]);
                 ValueAnimator alphaAnim = ValueAnimator.ofFloat(0F, 1F);
                 alphaAnim.setDuration(250);
@@ -530,7 +580,7 @@ public class PlayerOne extends AppCompatActivity {
         });
         Crystal.HpCheck();
 
-        if(GameEnded){
+        if (GameEnded) {
             EndTurn1.setEnabled(false);
             card1.setEnabled(false);
             card2.setEnabled(false);
@@ -546,41 +596,41 @@ public class PlayerOne extends AppCompatActivity {
             WinnerName.setAlpha(0F);
             GameoverImg.setAlpha(0F);
             GameoverTxt.setAlpha(0F);
-            ValueAnimator OverImgAnim = ValueAnimator.ofFloat(0F,1F);
+            ValueAnimator OverImgAnim = ValueAnimator.ofFloat(0F, 1F);
             OverImgAnim.setDuration(1000);
             OverImgAnim.setInterpolator(new LinearInterpolator());
             OverImgAnim.start();
             OverImgAnim.addUpdateListener(animation -> {
                 float alpha = (float) animation.getAnimatedValue();
-                GameoverImg.setAlpha(alpha/2);
+                GameoverImg.setAlpha(alpha / 2);
                 GameoverTxt.setAlpha(alpha);
                 WinnerName.setAlpha(alpha);
             });
-            ValueAnimator ReplayAnim = ValueAnimator.ofFloat(0F,1.5F);
+            ValueAnimator ReplayAnim = ValueAnimator.ofFloat(0F, 1.5F);
             ReplayAnim.setDuration(3000);
             ReplayAnim.setInterpolator(new LinearInterpolator());
             ReplayAnim.start();
             ReplayAnim.addUpdateListener(animation -> {
-                        float alpha = (float) animation.getAnimatedValue();
-                        Replay.setAlpha(alpha-0.5F);
+                float alpha = (float) animation.getAnimatedValue();
+                Replay.setAlpha(alpha - 0.5F);
 
             });
 
         }
 
-        BoardCard1.setOnDragListener( (v, e) -> {
+        BoardCard1.setOnDragListener((v, e) -> {
 
             // Handles each of the expected events.
-            switch(e.getAction()) {
+            switch (e.getAction()) {
 
                 case DragEvent.ACTION_DRAG_STARTED:
 
                     // Determines if this View can accept the dragged data.
-                    if (e.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)&&BoardCards[0]==null) {
+                    if (e.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) && BoardCards[0] == null) {
 
                         // As an example of what your application might do, applies a blue color tint
                         // to the View to indicate that it can accept data.
-                        ((ImageView)v).setColorFilter(Color.BLUE);
+                        ((ImageView) v).setColorFilter(Color.BLUE);
 
                         // Invalidate the view to force a redraw in the new tint.
                         v.invalidate();
@@ -588,7 +638,7 @@ public class PlayerOne extends AppCompatActivity {
                         // Returns true to indicate that the View can accept the dragged data.
                         return true;
 
-                    }else {
+                    } else {
 
                         // Returns false to indicate that, during the current drag and drop operation,
                         // this View will not receive events again until ACTION_DRAG_ENDED is sent.
@@ -597,7 +647,7 @@ public class PlayerOne extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENTERED:
 
                     // Applies a green tint to the View.
-                    ((ImageView)v).setColorFilter(Color.GREEN);
+                    ((ImageView) v).setColorFilter(Color.GREEN);
 
                     // Invalidates the view to force a redraw in the new tint.
                     v.invalidate();
@@ -613,9 +663,8 @@ public class PlayerOne extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_EXITED:
 
 
-
                     // Resets the color tint to blue.
-                    ((ImageView)v).setColorFilter(Color.BLUE);
+                    ((ImageView) v).setColorFilter(Color.BLUE);
 
                     // Invalidates the view to force a redraw in the new tint.
                     v.invalidate();
@@ -631,17 +680,15 @@ public class PlayerOne extends AppCompatActivity {
                     // Gets the text data from the item.
                     CharSequence dragData = item.getText();
 
-                    Cards.boardSet((String)dragData,BoardCard1);
+                    Cards.boardSet((String) dragData, BoardCard1);
                     BoardCards[0] = buffer[0];
-
-
 
 
                     // Displays a message containing the dragged data.
                     Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
-                    ((ImageView)v).clearColorFilter();
+                    ((ImageView) v).clearColorFilter();
 
                     // Invalidates the view to force a redraw.
                     v.invalidate();
@@ -650,16 +697,16 @@ public class PlayerOne extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DRAG_ENDED:
-                    if(!e.getResult()) {
+                    if (!e.getResult()) {
 
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
-                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr);
+                        CardsSet.toScaleBack(card1, card2, card3, card4, card5, CardsArr);
                         CardsPlacedCount.getAndDecrement();
 
                     }
 
                     // Turns off any color tinting.
-                    ((ImageView)v).clearColorFilter();
+                    ((ImageView) v).clearColorFilter();
 
                     // Invalidates the view to force a redraw.
                     v.invalidate();
@@ -667,33 +714,33 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        com.example.project_immortal_fire.BoardCards.renew(BoardCards,EnemyCards,BText1);
+                        com.example.project_immortal_fire.BoardCards.renew(BoardCards, EnemyCards, BText1);
                     }
                     // Returns true; the value is ignored.
                     return true;
 
                 // An unknown action type was received.
                 default:
-                    Log.e("DragDrop Example","Unknown action type received by View.OnDragListener.");
+                    Log.e("DragDrop Example", "Unknown action type received by View.OnDragListener.");
                     break;
             }
 
             return false;
 
         });
-        BoardCard2.setOnDragListener( (v, e) -> {
+        BoardCard2.setOnDragListener((v, e) -> {
 
             // Handles each of the expected events.
-            switch(e.getAction()) {
+            switch (e.getAction()) {
 
                 case DragEvent.ACTION_DRAG_STARTED:
 
                     // Determines if this View can accept the dragged data.
-                    if (e.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)&&BoardCards[1]==null) {
+                    if (e.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) && BoardCards[1] == null) {
 
                         // As an example of what your application might do, applies a blue color tint
                         // to the View to indicate that it can accept data.
-                        ((ImageView)v).setColorFilter(Color.BLUE);
+                        ((ImageView) v).setColorFilter(Color.BLUE);
 
                         // Invalidate the view to force a redraw in the new tint.
                         v.invalidate();
@@ -701,7 +748,7 @@ public class PlayerOne extends AppCompatActivity {
                         // Returns true to indicate that the View can accept the dragged data.
                         return true;
 
-                    }else {
+                    } else {
 
                         // Returns false to indicate that, during the current drag and drop operation,
                         // this View will not receive events again until ACTION_DRAG_ENDED is sent.
@@ -710,7 +757,7 @@ public class PlayerOne extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENTERED:
 
                     // Applies a green tint to the View.
-                    ((ImageView)v).setColorFilter(Color.GREEN);
+                    ((ImageView) v).setColorFilter(Color.GREEN);
 
                     // Invalidates the view to force a redraw in the new tint.
                     v.invalidate();
@@ -727,7 +774,7 @@ public class PlayerOne extends AppCompatActivity {
 
 
                     // Resets the color tint to blue.
-                    ((ImageView)v).setColorFilter(Color.BLUE);
+                    ((ImageView) v).setColorFilter(Color.BLUE);
 
                     // Invalidates the view to force a redraw in the new tint.
                     v.invalidate();
@@ -743,14 +790,14 @@ public class PlayerOne extends AppCompatActivity {
                     // Gets the text data from the item.
                     CharSequence dragData = item.getText();
 
-                    Cards.boardSet((String)dragData,BoardCard2);
+                    Cards.boardSet((String) dragData, BoardCard2);
                     BoardCards[1] = buffer[0];
 
                     // Displays a message containing the dragged data.
                     Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
-                    ((ImageView)v).clearColorFilter();
+                    ((ImageView) v).clearColorFilter();
                     // Invalidates the view to force a redraw.
                     v.invalidate();
 
@@ -758,15 +805,15 @@ public class PlayerOne extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DRAG_ENDED:
-                    if(!e.getResult()) {
+                    if (!e.getResult()) {
 
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
-                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr);
+                        CardsSet.toScaleBack(card1, card2, card3, card4, card5, CardsArr);
                         CardsPlacedCount.getAndDecrement();
 
-                    }else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
+                    } else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
                     // Turns off any color tinting.
-                    ((ImageView)v).clearColorFilter();
+                    ((ImageView) v).clearColorFilter();
 
                     // Invalidates the view to force a redraw.
                     v.invalidate();
@@ -774,33 +821,33 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        com.example.project_immortal_fire.BoardCards.renew(BoardCards,EnemyCards,BText1);
+                        com.example.project_immortal_fire.BoardCards.renew(BoardCards, EnemyCards, BText1);
                     }
                     // Returns true; the value is ignored.
                     return true;
 
                 // An unknown action type was received.
                 default:
-                    Log.e("DragDrop Example","Unknown action type received by View.OnDragListener.");
+                    Log.e("DragDrop Example", "Unknown action type received by View.OnDragListener.");
                     break;
             }
 
             return false;
 
         });
-        BoardCard3.setOnDragListener( (v, e) -> {
+        BoardCard3.setOnDragListener((v, e) -> {
 
             // Handles each of the expected events.
-            switch(e.getAction()) {
+            switch (e.getAction()) {
 
                 case DragEvent.ACTION_DRAG_STARTED:
 
                     // Determines if this View can accept the dragged data.
-                    if (e.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)&&BoardCards[2]==null) {
+                    if (e.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) && BoardCards[2] == null) {
 
                         // As an example of what your application might do, applies a blue color tint
                         // to the View to indicate that it can accept data.
-                        ((ImageView)v).setColorFilter(Color.BLUE);
+                        ((ImageView) v).setColorFilter(Color.BLUE);
 
                         // Invalidate the view to force a redraw in the new tint.
                         v.invalidate();
@@ -808,7 +855,7 @@ public class PlayerOne extends AppCompatActivity {
                         // Returns true to indicate that the View can accept the dragged data.
                         return true;
 
-                    }else {
+                    } else {
 
                         // Returns false to indicate that, during the current drag and drop operation,
                         // this View will not receive events again until ACTION_DRAG_ENDED is sent.
@@ -817,7 +864,7 @@ public class PlayerOne extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENTERED:
 
                     // Applies a green tint to the View.
-                    ((ImageView)v).setColorFilter(Color.GREEN);
+                    ((ImageView) v).setColorFilter(Color.GREEN);
 
                     // Invalidates the view to force a redraw in the new tint.
                     v.invalidate();
@@ -834,7 +881,7 @@ public class PlayerOne extends AppCompatActivity {
 
 
                     // Resets the color tint to blue.
-                    ((ImageView)v).setColorFilter(Color.BLUE);
+                    ((ImageView) v).setColorFilter(Color.BLUE);
 
                     // Invalidates the view to force a redraw in the new tint.
                     v.invalidate();
@@ -851,14 +898,14 @@ public class PlayerOne extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
 
-                    Cards.boardSet((String)dragData,BoardCard3);
+                    Cards.boardSet((String) dragData, BoardCard3);
                     BoardCards[2] = buffer[0];
 
                     // Displays a message containing the dragged data.
                     Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
-                    ((ImageView)v).clearColorFilter();
+                    ((ImageView) v).clearColorFilter();
 
                     // Invalidates the view to force a redraw.
                     v.invalidate();
@@ -867,15 +914,14 @@ public class PlayerOne extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DRAG_ENDED:
-                    if(!e.getResult()) {
+                    if (!e.getResult()) {
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
-                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr);
+                        CardsSet.toScaleBack(card1, card2, card3, card4, card5, CardsArr);
                         CardsPlacedCount.getAndDecrement();
 
-                    }
-                    else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
+                    } else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
                     // Turns off any color tinting.
-                    ((ImageView)v).clearColorFilter();
+                    ((ImageView) v).clearColorFilter();
                     Log.i("DragEvent", "ended: " + e.getResult());
                     // Invalidates the view to force a redraw.
                     v.invalidate();
@@ -883,33 +929,33 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        com.example.project_immortal_fire.BoardCards.renew(BoardCards,EnemyCards,BText1);
+                        com.example.project_immortal_fire.BoardCards.renew(BoardCards, EnemyCards, BText1);
                     }
                     // Returns true; the value is ignored.
                     return true;
 
                 // An unknown action type was received.
                 default:
-                    Log.e("DragDrop Example","Unknown action type received by View.OnDragListener.");
+                    Log.e("DragDrop Example", "Unknown action type received by View.OnDragListener.");
                     break;
             }
 
             return false;
 
         });
-        BoardCard4.setOnDragListener( (v, e) -> {
+        BoardCard4.setOnDragListener((v, e) -> {
 
             // Handles each of the expected events.
-            switch(e.getAction()) {
+            switch (e.getAction()) {
 
                 case DragEvent.ACTION_DRAG_STARTED:
 
                     // Determines if this View can accept the dragged data.
-                    if (e.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)&&BoardCards[3]==null) {
+                    if (e.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) && BoardCards[3] == null) {
 
                         // As an example of what your application might do, applies a blue color tint
                         // to the View to indicate that it can accept data.
-                        ((ImageView)v).setColorFilter(Color.BLUE);
+                        ((ImageView) v).setColorFilter(Color.BLUE);
 
                         // Invalidate the view to force a redraw in the new tint.
                         v.invalidate();
@@ -917,7 +963,7 @@ public class PlayerOne extends AppCompatActivity {
                         // Returns true to indicate that the View can accept the dragged data.
                         return true;
 
-                    }else {
+                    } else {
 
                         // Returns false to indicate that, during the current drag and drop operation,
                         // this View will not receive events again until ACTION_DRAG_ENDED is sent.
@@ -926,7 +972,7 @@ public class PlayerOne extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENTERED:
 
                     // Applies a green tint to the View.
-                    ((ImageView)v).setColorFilter(Color.GREEN);
+                    ((ImageView) v).setColorFilter(Color.GREEN);
 
                     // Invalidates the view to force a redraw in the new tint.
                     v.invalidate();
@@ -943,7 +989,7 @@ public class PlayerOne extends AppCompatActivity {
 
 
                     // Resets the color tint to blue.
-                    ((ImageView)v).setColorFilter(Color.BLUE);
+                    ((ImageView) v).setColorFilter(Color.BLUE);
 
                     // Invalidates the view to force a redraw in the new tint.
                     v.invalidate();
@@ -959,14 +1005,14 @@ public class PlayerOne extends AppCompatActivity {
                     // Gets the text data from the item.
                     CharSequence dragData = item.getText();
 
-                    Cards.boardSet((String)dragData,BoardCard4);
+                    Cards.boardSet((String) dragData, BoardCard4);
                     BoardCards[3] = buffer[0];
 
                     // Displays a message containing the dragged data.
                     Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
-                    ((ImageView)v).clearColorFilter();
+                    ((ImageView) v).clearColorFilter();
 
                     // Invalidates the view to force a redraw.
                     v.invalidate();
@@ -975,15 +1021,15 @@ public class PlayerOne extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DRAG_ENDED:
-                    if(!e.getResult()) {
+                    if (!e.getResult()) {
 
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
-                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr);
+                        CardsSet.toScaleBack(card1, card2, card3, card4, card5, CardsArr);
                         CardsPlacedCount.getAndDecrement();
 
-                    }else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
+                    } else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
                     // Turns off any color tinting.
-                    ((ImageView)v).clearColorFilter();
+                    ((ImageView) v).clearColorFilter();
 
                     // Invalidates the view to force a redraw.
                     v.invalidate();
@@ -991,33 +1037,33 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        com.example.project_immortal_fire.BoardCards.renew(BoardCards,EnemyCards,BText1);
+                        com.example.project_immortal_fire.BoardCards.renew(BoardCards, EnemyCards, BText1);
                     }
                     // Returns true; the value is ignored.
                     return true;
 
                 // An unknown action type was received.
                 default:
-                    Log.e("DragDrop Example","Unknown action type received by View.OnDragListener.");
+                    Log.e("DragDrop Example", "Unknown action type received by View.OnDragListener.");
                     break;
             }
 
             return false;
 
         });
-        BoardCard5.setOnDragListener( (v, e) -> {
+        BoardCard5.setOnDragListener((v, e) -> {
 
             // Handles each of the expected events.
-            switch(e.getAction()) {
+            switch (e.getAction()) {
 
                 case DragEvent.ACTION_DRAG_STARTED:
 
                     // Determines if this View can accept the dragged data.
-                    if (e.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)&&BoardCards[4]==null) {
+                    if (e.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) && BoardCards[4] == null) {
 
                         // As an example of what your application might do, applies a blue color tint
                         // to the View to indicate that it can accept data.
-                        ((ImageView)v).setColorFilter(Color.BLUE);
+                        ((ImageView) v).setColorFilter(Color.BLUE);
 
                         // Invalidate the view to force a redraw in the new tint.
                         v.invalidate();
@@ -1025,7 +1071,7 @@ public class PlayerOne extends AppCompatActivity {
                         // Returns true to indicate that the View can accept the dragged data.
                         return true;
 
-                    }else {
+                    } else {
 
                         // Returns false to indicate that, during the current drag and drop operation,
                         // this View will not receive events again until ACTION_DRAG_ENDED is sent.
@@ -1034,7 +1080,7 @@ public class PlayerOne extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENTERED:
 
                     // Applies a green tint to the View.
-                    ((ImageView)v).setColorFilter(Color.GREEN);
+                    ((ImageView) v).setColorFilter(Color.GREEN);
 
                     // Invalidates the view to force a redraw in the new tint.
                     v.invalidate();
@@ -1051,7 +1097,7 @@ public class PlayerOne extends AppCompatActivity {
 
 
                     // Resets the color tint to blue.
-                    ((ImageView)v).setColorFilter(Color.BLUE);
+                    ((ImageView) v).setColorFilter(Color.BLUE);
 
                     // Invalidates the view to force a redraw in the new tint.
                     v.invalidate();
@@ -1068,14 +1114,14 @@ public class PlayerOne extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
 
-                    Cards.boardSet((String)dragData,BoardCard5);
+                    Cards.boardSet((String) dragData, BoardCard5);
                     BoardCards[4] = buffer[0];
 
                     // Displays a message containing the dragged data.
                     Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
-                    ((ImageView)v).clearColorFilter();
+                    ((ImageView) v).clearColorFilter();
 
                     // Invalidates the view to force a redraw.
                     v.invalidate();
@@ -1084,15 +1130,15 @@ public class PlayerOne extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DRAG_ENDED:
-                    if(!e.getResult()) {
+                    if (!e.getResult()) {
 
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
-                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr);
+                        CardsSet.toScaleBack(card1, card2, card3, card4, card5, CardsArr);
                         CardsPlacedCount.getAndDecrement();
 
-                    }else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
+                    } else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
                     // Turns off any color tinting.
-                    ((ImageView)v).clearColorFilter();
+                    ((ImageView) v).clearColorFilter();
 
                     // Invalidates the view to force a redraw.
                     v.invalidate();
@@ -1100,33 +1146,33 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        com.example.project_immortal_fire.BoardCards.renew(BoardCards,EnemyCards,BText1);
+                        com.example.project_immortal_fire.BoardCards.renew(BoardCards, EnemyCards, BText1);
                     }
                     // Returns true; the value is ignored.
                     return true;
 
                 // An unknown action type was received.
                 default:
-                    Log.e("DragDrop Example","Unknown action type received by View.OnDragListener.");
+                    Log.e("DragDrop Example", "Unknown action type received by View.OnDragListener.");
                     break;
             }
 
             return false;
 
         });
-        BoardCard6.setOnDragListener( (v, e) -> {
+        BoardCard6.setOnDragListener((v, e) -> {
 
             // Handles each of the expected events.
-            switch(e.getAction()) {
+            switch (e.getAction()) {
 
                 case DragEvent.ACTION_DRAG_STARTED:
 
                     // Determines if this View can accept the dragged data.
-                    if (e.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)&&BoardCards[5]==null) {
+                    if (e.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) && BoardCards[5] == null) {
 
                         // As an example of what your application might do, applies a blue color tint
                         // to the View to indicate that it can accept data.
-                        ((ImageView)v).setColorFilter(Color.BLUE);
+                        ((ImageView) v).setColorFilter(Color.BLUE);
 
                         // Invalidate the view to force a redraw in the new tint.
                         v.invalidate();
@@ -1134,7 +1180,7 @@ public class PlayerOne extends AppCompatActivity {
                         // Returns true to indicate that the View can accept the dragged data.
                         return true;
 
-                    }else {
+                    } else {
 
                         // Returns false to indicate that, during the current drag and drop operation,
                         // this View will not receive events again until ACTION_DRAG_ENDED is sent.
@@ -1143,7 +1189,7 @@ public class PlayerOne extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENTERED:
 
                     // Applies a green tint to the View.
-                    ((ImageView)v).setColorFilter(Color.GREEN);
+                    ((ImageView) v).setColorFilter(Color.GREEN);
 
                     // Invalidates the view to force a redraw in the new tint.
                     v.invalidate();
@@ -1160,7 +1206,7 @@ public class PlayerOne extends AppCompatActivity {
 
 
                     // Resets the color tint to blue.
-                    ((ImageView)v).setColorFilter(Color.BLUE);
+                    ((ImageView) v).setColorFilter(Color.BLUE);
 
                     // Invalidates the view to force a redraw in the new tint.
                     v.invalidate();
@@ -1177,14 +1223,14 @@ public class PlayerOne extends AppCompatActivity {
                     CharSequence dragData = item.getText();
 
 
-                    Cards.boardSet((String)dragData,BoardCard6);
+                    Cards.boardSet((String) dragData, BoardCard6);
                     BoardCards[5] = buffer[0];
 
                     // Displays a message containing the dragged data.
                     Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
-                    ((ImageView)v).clearColorFilter();
+                    ((ImageView) v).clearColorFilter();
 
                     // Invalidates the view to force a redraw.
                     v.invalidate();
@@ -1193,15 +1239,15 @@ public class PlayerOne extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DRAG_ENDED:
-                    if(!e.getResult()) {
+                    if (!e.getResult()) {
 
                         CardReturner.Return(card1, card2, card3, card4, card5, CardsArr, buffer, AvailableBoardSlots);
-                        CardsSet.toScaleBack(card1,card2,card3,card4,card5,CardsArr);
+                        CardsSet.toScaleBack(card1, card2, card3, card4, card5, CardsArr);
                         CardsPlacedCount.getAndDecrement();
 
-                    }else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
+                    } else AvailableBoardSlots = CardsSet.NullCount(BoardCards);
                     // Turns off any color tinting.
-                    ((ImageView)v).clearColorFilter();
+                    ((ImageView) v).clearColorFilter();
 
                     // Invalidates the view to force a redraw.
                     v.invalidate();
@@ -1209,14 +1255,14 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        com.example.project_immortal_fire.BoardCards.renew(BoardCards,EnemyCards,BText1);
+                        com.example.project_immortal_fire.BoardCards.renew(BoardCards, EnemyCards, BText1);
                     }
                     // Returns true; the value is ignored.
                     return true;
 
                 // An unknown action type was received.
                 default:
-                    Log.e("DragDrop","Unknown action type received by View.OnDragListener.");
+                    Log.e("DragDrop", "Unknown action type received by View.OnDragListener.");
                     break;
             }
 
@@ -1226,11 +1272,9 @@ public class PlayerOne extends AppCompatActivity {
         Log.i(TAG, "Cardsarr: " + Arrays.toString(CardsArr));
         shuffler.shuffle(false);
         Log.i(TAG, "Cardsarr: " + Arrays.toString(CardsArr));
-        CardsSet.set(card1,card2,card3,card4,card5,CardsArr);
+        CardsSet.set(card1, card2, card3, card4, card5, CardsArr);
 
     }
-
-
 
 
     // TODO: 27.01.2023 forgotten achievement system :)
@@ -1284,7 +1328,7 @@ public class PlayerOne extends AppCompatActivity {
         super.onResume();
     }
 
-    protected static void GameOver1(){
+    protected static void GameOver1() {
         GameEnded = true;
         Log.i(TAG, "GameOver");
     }
