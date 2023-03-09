@@ -43,6 +43,7 @@ public class PlayerOne extends AppCompatActivity {
     private SoundPool soundPool;
     private int CardPopped;
     private int CardTaken;
+    private int IntroSound;
 
 
 
@@ -143,6 +144,7 @@ public class PlayerOne extends AppCompatActivity {
                 .build();
         CardPopped = soundPool.load(this, R.raw.cardpopsound, 1);
         CardTaken = soundPool.load(this, R.raw.cardtaken, 1);
+        IntroSound = soundPool.load(this, R.raw.intro, 1);
 
 
 
@@ -160,7 +162,7 @@ public class PlayerOne extends AppCompatActivity {
                 welcome[i].setVisibility(View.VISIBLE);
             }
             g1.setOnClickListener(v -> {
-
+                soundPool.play(IntroSound, 1, 1, 1,0,1.1f);
                 ValueAnimator animation = ValueAnimator.ofInt(0,9);
                 animation.setDuration(2000);
                 animation.setInterpolator(new LinearInterpolator());
