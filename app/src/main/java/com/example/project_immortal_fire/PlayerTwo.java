@@ -10,7 +10,9 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +41,17 @@ public class PlayerTwo extends AppCompatActivity {
     static boolean GameEnded = false;
     public static String[] BoardCards2 = new String[]{null, null, null, null, null, null};
     public static String[] EnemyCards2 = new String[]{null, null, null, null, null, null};
+
+
+    //*soundPool variables
+    private SoundPool soundPool;
+    private int CardPopped;
+    private int CardTaken;
+    private int CardPlaced;
+    private int CardViewerSound;
+    private int GameOver;
+
+
     private static final String IMAGEVIEW_TAG_CARD1 = "Card1";
     private static final String IMAGEVIEW_TAG_CARD2 = "Card2";
     private static final String IMAGEVIEW_TAG_CARD3 = "Card3";
@@ -106,11 +119,28 @@ public class PlayerTwo extends AppCompatActivity {
                 EnemyCard1Txt, EnemyCard2Txt, EnemyCard3Txt, EnemyCard4Txt, EnemyCard5Txt, EnemyCard6Txt};
         Crystal.renew2(CrystalHp);
 
-        //BoardCards.renew(BoardCards2,EnemyCards2,BText2);
 
 
 
 
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(6)
+                .setAudioAttributes(audioAttributes)
+                .build();
+        CardPopped = soundPool.load(this, R.raw.cardpopsound, 1);
+        CardTaken = soundPool.load(this, R.raw.cardtaken, 1);
+        CardPlaced = soundPool.load(this, R.raw.cardplaced, 1);
+        CardViewerSound = soundPool.load(this, R.raw.cardviewer, 1);
+        GameOver = soundPool.load(this, R.raw.gameover, 1);
+
+
+
+        //*reload button ig
         //!update the removing variables everytime anything new appears
         /*
         if (getIntent().getExtras().getBoolean("Replay")){
@@ -137,7 +167,7 @@ public class PlayerTwo extends AppCompatActivity {
         card3.setTag(IMAGEVIEW_TAG_CARD3);
         card4.setTag(IMAGEVIEW_TAG_CARD4);
         card5.setTag(IMAGEVIEW_TAG_CARD5);
-        BoardCards.invalidate(BText2);
+        //BoardCards.invalidate(BText2);
 
         EndTurn2.setOnClickListener(view -> {
 
@@ -534,6 +564,7 @@ public class PlayerTwo extends AppCompatActivity {
         card1.setOnLongClickListener(v -> {
 
             if (card1Poped[0]&& CardsPlacedCount2.get()<2) {
+                soundPool.play(CardTaken, 0.7f, 0.7f, 0, 0, 1);
                 CardsPlacedCount2.getAndIncrement();
                 buffer[0] = CardsArr2[0];
                 buffer[1] = "0";
@@ -554,6 +585,7 @@ public class PlayerTwo extends AppCompatActivity {
         card2.setOnLongClickListener(v -> {
 
             if (card2Poped[0]&& CardsPlacedCount2.get()<2) {
+                soundPool.play(CardTaken, 0.7f, 0.7f, 0, 0, 1);
                 CardsPlacedCount2.getAndIncrement();
                 buffer[0] = CardsArr2[1];
                 buffer[1] = "1";
@@ -574,6 +606,7 @@ public class PlayerTwo extends AppCompatActivity {
         card3.setOnLongClickListener(v -> {
 
             if (card3Poped[0]&& CardsPlacedCount2.get()<2) {
+                soundPool.play(CardTaken, 0.7f, 0.7f, 0, 0, 1);
                 CardsPlacedCount2.getAndIncrement();
                 buffer[0] = CardsArr2[2];
                 buffer[1] = "2";
@@ -593,6 +626,7 @@ public class PlayerTwo extends AppCompatActivity {
         card4.setOnLongClickListener(v -> {
 
             if (card4Poped[0]&& CardsPlacedCount2.get()<2) {
+                soundPool.play(CardTaken, 0.7f, 0.7f, 0, 0, 1);
                 CardsPlacedCount2.getAndIncrement();
                 buffer[0] = CardsArr2[3];
                 buffer[1] = "3";
@@ -612,6 +646,7 @@ public class PlayerTwo extends AppCompatActivity {
         card5.setOnLongClickListener(v -> {
 
             if (card5Poped[0]&& CardsPlacedCount2.get()<2) {
+                soundPool.play(CardTaken, 0.7f, 0.7f, 0, 0, 1);
                 CardsPlacedCount2.getAndIncrement();
                 buffer[0] = CardsArr2[4];
                 buffer[1] = "4";
@@ -631,6 +666,7 @@ public class PlayerTwo extends AppCompatActivity {
 
         CardViewer.setOnClickListener(view -> {
             if (CardViewerPoped[0]) {
+                soundPool.play(CardViewerSound, 1, 1, 1,0,1);
                 Log.i("Board cards", "All board cards:" + Arrays.toString(BoardCards2));
                 ValueAnimator goingAnim = ValueAnimator.ofFloat(1f, 0f);
                 goingAnim.setDuration(250);
@@ -651,6 +687,7 @@ public class PlayerTwo extends AppCompatActivity {
         });
 
         card1.setOnClickListener(view -> {
+            soundPool.play(CardPopped, 0.5f, 0.5f, 0, 0, 1);
             if (!card1Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
@@ -689,6 +726,7 @@ public class PlayerTwo extends AppCompatActivity {
             }
         });
         card2.setOnClickListener(view -> {
+            soundPool.play(CardPopped, 0.5f, 0.5f, 0, 0, 1);
             if (!card2Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
@@ -728,6 +766,7 @@ public class PlayerTwo extends AppCompatActivity {
             }
         });
         card3.setOnClickListener(view -> {
+            soundPool.play(CardPopped, 0.5f, 0.5f, 0, 0, 1);
             if (!card3Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
@@ -766,6 +805,7 @@ public class PlayerTwo extends AppCompatActivity {
             }
         });
         card4.setOnClickListener(view -> {
+            soundPool.play(CardPopped, 0.5f, 0.5f, 0, 0, 1);
             if (!card4Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
@@ -804,6 +844,7 @@ public class PlayerTwo extends AppCompatActivity {
             }
         });
         card5.setOnClickListener(view -> {
+            soundPool.play(CardPopped, 0.5f, 0.5f, 0, 0, 1);
             if (!card5Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
@@ -844,6 +885,8 @@ public class PlayerTwo extends AppCompatActivity {
 
 
         if(GameEnded){
+            soundPool.setOnLoadCompleteListener((soundPool, sampleId, status) -> soundPool.play(GameOver, 1, 1, 1,0,1));
+
             EndTurn2.setEnabled(false);
             card1.setEnabled(false);
             card2.setEnabled(false);
@@ -935,6 +978,7 @@ public class PlayerTwo extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DROP:
+                    soundPool.play(CardPlaced, 1, 1, 1,0,0.9f);
 
                     // Gets the item containing the dragged data.
                     ClipData.Item item = e.getClipData().getItemAt(0);
@@ -973,7 +1017,7 @@ public class PlayerTwo extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        BoardCards.renew(BoardCards2,EnemyCards2,BText2);
+                        BoardCards.placed(BoardCard1Txt,BoardCards2[0]);
                     }
 
                     // Returns true; the value is ignored.
@@ -1042,6 +1086,7 @@ public class PlayerTwo extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DROP:
+                    soundPool.play(CardPlaced, 1, 1, 1,0,0.9f);
 
                     // Gets the item containing the dragged data.
                     ClipData.Item item = e.getClipData().getItemAt(0);
@@ -1080,7 +1125,7 @@ public class PlayerTwo extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        BoardCards.renew(BoardCards2,EnemyCards2,BText2);
+                        BoardCards.placed(BoardCard2Txt,BoardCards2[1]);
                     }
 
                     // Returns true; the value is ignored.
@@ -1149,6 +1194,7 @@ public class PlayerTwo extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DROP:
+                    soundPool.play(CardPlaced, 1, 1, 1,0,0.9f);
 
                     // Gets the item containing the dragged data.
                     ClipData.Item item = e.getClipData().getItemAt(0);
@@ -1188,7 +1234,7 @@ public class PlayerTwo extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        BoardCards.renew(BoardCards2,EnemyCards2,BText2);
+                        BoardCards.placed(BoardCard3Txt,BoardCards2[2]);
                     }
 
                     // Returns true; the value is ignored.
@@ -1257,6 +1303,7 @@ public class PlayerTwo extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DROP:
+                    soundPool.play(CardPlaced, 1, 1, 1,0,0.9f);
 
                     // Gets the item containing the dragged data.
                     ClipData.Item item = e.getClipData().getItemAt(0);
@@ -1294,7 +1341,7 @@ public class PlayerTwo extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        BoardCards.renew(BoardCards2,EnemyCards2,BText2);
+                        BoardCards.placed(BoardCard4Txt,BoardCards2[3]);
                     }
 
                     // Returns true; the value is ignored.
@@ -1363,6 +1410,7 @@ public class PlayerTwo extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DROP:
+                    soundPool.play(CardPlaced, 1, 1, 1,0,0.9f);
 
                     // Gets the item containing the dragged data.
                     ClipData.Item item = e.getClipData().getItemAt(0);
@@ -1401,7 +1449,7 @@ public class PlayerTwo extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        BoardCards.renew(BoardCards2,EnemyCards2,BText2);
+                        BoardCards.placed(BoardCard5Txt,BoardCards2[4]);
                     }
 
                     // Returns true; the value is ignored.
@@ -1470,6 +1518,7 @@ public class PlayerTwo extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DROP:
+                    soundPool.play(CardPlaced, 1, 1, 1,0,0.9f);
 
                     // Gets the item containing the dragged data.
                     ClipData.Item item = e.getClipData().getItemAt(0);
@@ -1507,7 +1556,7 @@ public class PlayerTwo extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        BoardCards.renew(BoardCards2,EnemyCards2,BText2);
+                        BoardCards.placed(BoardCard6Txt,BoardCards2[5]);
                     }
                     // Returns true; the value is ignored.
                     return true;
@@ -1526,7 +1575,7 @@ public class PlayerTwo extends AppCompatActivity {
         Log.i("idk", "onCreate before setting  " + Arrays.toString(CardsArr2));
         CardsSet.set(card1, card2, card3, card4, card5, CardsArr2);
         Log.i("idk", "onCreate cards been set  " + Arrays.toString(CardsArr2));
-
+        Cards.UpdateHp(BoardCards2,EnemyCards2,BText2,2);
     }
     protected static void GameOver2(){
         GameEnded = true;

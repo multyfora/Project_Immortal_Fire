@@ -44,6 +44,10 @@ public class PlayerOne extends AppCompatActivity {
     private int CardPopped;
     private int CardTaken;
     private int IntroSound;
+    private int CardPlaced;
+    private int CardViewerSound;
+    private int EndTurn;
+    private int GameOver;
 
 
 
@@ -133,6 +137,7 @@ public class PlayerOne extends AppCompatActivity {
 
 
 
+
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
@@ -145,6 +150,12 @@ public class PlayerOne extends AppCompatActivity {
         CardPopped = soundPool.load(this, R.raw.cardpopsound, 1);
         CardTaken = soundPool.load(this, R.raw.cardtaken, 1);
         IntroSound = soundPool.load(this, R.raw.intro, 1);
+        CardPlaced = soundPool.load(this, R.raw.cardplaced, 1);
+        CardViewerSound = soundPool.load(this, R.raw.cardviewer, 1);
+        EndTurn = soundPool.load(this, R.raw.endturn, 1);
+        GameOver = soundPool.load(this, R.raw.gameover, 1);
+
+
 
 
 
@@ -162,7 +173,7 @@ public class PlayerOne extends AppCompatActivity {
                 welcome[i].setVisibility(View.VISIBLE);
             }
             g1.setOnClickListener(v -> {
-                soundPool.play(IntroSound, 1, 1, 1,0,1.1f);
+                soundPool.play(IntroSound, 1, 1, 1,0,0.9f);
                 ValueAnimator animation = ValueAnimator.ofInt(0,9);
                 animation.setDuration(2000);
                 animation.setInterpolator(new LinearInterpolator());
@@ -198,7 +209,10 @@ public class PlayerOne extends AppCompatActivity {
             CardsSet.enemyset(EnemyCard1, EnemyCard2, EnemyCard3, EnemyCard4, EnemyCard5, EnemyCard6, EnemyCards);
         }
         Log.i("BoardCards", "Player1 boardcards: " + Arrays.toString(BoardCards));
-        com.example.project_immortal_fire.BoardCards.renew(BoardCards, EnemyCards, BText1);
+
+
+
+
         card1.setTag(IMAGEVIEW_TAG_CARD1);
         card2.setTag(IMAGEVIEW_TAG_CARD2);
         card3.setTag(IMAGEVIEW_TAG_CARD3);
@@ -207,7 +221,7 @@ public class PlayerOne extends AppCompatActivity {
 
 
         EndTurn1.setOnClickListener(view -> {
-
+            soundPool.play(EndTurn, 1, 1, 1,0,1);
             Log.i(TAG, "atomic count: " + CardsPlacedCount.get());
             Log.i(TAG, "boardcards: " + Arrays.toString(BoardCards));
             Intent i = new Intent(PlayerOne.this, PlayerTwo.class);
@@ -344,6 +358,7 @@ public class PlayerOne extends AppCompatActivity {
 
         CardViewer.setOnClickListener(view -> {
             if (CardViewerPoped[0]) {
+                soundPool.play(CardViewerSound, 1, 1, 1,0,1);
                 Log.i("Board cards", "All board cards:" + Arrays.toString(BoardCards));
                 ValueAnimator goingAnim = ValueAnimator.ofFloat(1f, 0f);
                 goingAnim.setDuration(250);
@@ -382,7 +397,7 @@ public class PlayerOne extends AppCompatActivity {
         });
 */
         card1.setOnClickListener(view -> {
-            soundPool.play(CardPopped, 0.7f, 0.7f, 0, 0, 1);
+            soundPool.play(CardPopped, 0.5f, 0.5f, 0, 0, 1);
             if (!card1Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
@@ -424,7 +439,7 @@ public class PlayerOne extends AppCompatActivity {
             }
         });
         card2.setOnClickListener(view -> {
-            soundPool.play(CardPopped, 0.7f, 0.7f, 0, 0, 1);
+            soundPool.play(CardPopped, 0.5f, 0.5f, 0, 0, 1);
             if (!card2Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
@@ -463,7 +478,7 @@ public class PlayerOne extends AppCompatActivity {
             }
         });
         card3.setOnClickListener(view -> {
-            soundPool.play(CardPopped, 0.7f, 0.7f, 0, 0, 1);
+            soundPool.play(CardPopped, 0.5f, 0.5f, 0, 0, 1);
             if (!card3Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
@@ -502,7 +517,7 @@ public class PlayerOne extends AppCompatActivity {
             }
         });
         card4.setOnClickListener(view -> {
-            soundPool.play(CardPopped, 0.7f, 0.7f, 0, 0, 1);
+            soundPool.play(CardPopped, 0.5f, 0.5f, 0, 0, 1);
             if (!card4Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
@@ -542,7 +557,7 @@ public class PlayerOne extends AppCompatActivity {
             }
         });
         card5.setOnClickListener(view -> {
-            soundPool.play(CardPopped, 0.7f, 0.7f, 0, 0, 1);
+            soundPool.play(CardPopped, 0.5f, 0.5f, 0, 0, 1);
             if (!card5Poped[0]) {
 
                 ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);
@@ -583,6 +598,8 @@ public class PlayerOne extends AppCompatActivity {
         Crystal.HpCheck();
 
         if (GameEnded) {
+            soundPool.setOnLoadCompleteListener((soundPool, sampleId, status) -> soundPool.play(GameOver, 1, 1, 1,0,1));
+
             EndTurn1.setEnabled(false);
             card1.setEnabled(false);
             card2.setEnabled(false);
@@ -675,7 +692,7 @@ public class PlayerOne extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DROP:
-
+                    soundPool.play(CardPlaced, 1, 1, 1,0,0.9f);
                     // Gets the item containing the dragged data.
                     ClipData.Item item = e.getClipData().getItemAt(0);
 
@@ -684,6 +701,8 @@ public class PlayerOne extends AppCompatActivity {
 
                     Cards.boardSet((String) dragData, BoardCard1);
                     BoardCards[0] = buffer[0];
+
+
 
 
                     // Displays a message containing the dragged data.
@@ -716,7 +735,7 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        com.example.project_immortal_fire.BoardCards.renew(BoardCards, EnemyCards, BText1);
+                        com.example.project_immortal_fire.BoardCards.placed(BoardCard1Txt,BoardCards[0]);
                     }
                     // Returns true; the value is ignored.
                     return true;
@@ -785,6 +804,7 @@ public class PlayerOne extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DROP:
+                    soundPool.play(CardPlaced, 1, 1, 1,0,0.9f);
 
                     // Gets the item containing the dragged data.
                     ClipData.Item item = e.getClipData().getItemAt(0);
@@ -823,7 +843,7 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        com.example.project_immortal_fire.BoardCards.renew(BoardCards, EnemyCards, BText1);
+                        com.example.project_immortal_fire.BoardCards.placed(BoardCard2Txt,BoardCards[1]);
                     }
                     // Returns true; the value is ignored.
                     return true;
@@ -892,6 +912,7 @@ public class PlayerOne extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DROP:
+                    soundPool.play(CardPlaced, 1, 1, 1,0,0.9f);
 
                     // Gets the item containing the dragged data.
                     ClipData.Item item = e.getClipData().getItemAt(0);
@@ -931,7 +952,7 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        com.example.project_immortal_fire.BoardCards.renew(BoardCards, EnemyCards, BText1);
+                        com.example.project_immortal_fire.BoardCards.placed(BoardCard3Txt,BoardCards[2]);
                     }
                     // Returns true; the value is ignored.
                     return true;
@@ -1000,6 +1021,7 @@ public class PlayerOne extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DROP:
+                    soundPool.play(CardPlaced, 1, 1, 1,0,0.9f);
 
                     // Gets the item containing the dragged data.
                     ClipData.Item item = e.getClipData().getItemAt(0);
@@ -1039,7 +1061,7 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        com.example.project_immortal_fire.BoardCards.renew(BoardCards, EnemyCards, BText1);
+                        com.example.project_immortal_fire.BoardCards.placed(BoardCard4Txt,BoardCards[3]);
                     }
                     // Returns true; the value is ignored.
                     return true;
@@ -1108,6 +1130,7 @@ public class PlayerOne extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DROP:
+                    soundPool.play(CardPlaced, 1, 1, 1,0,0.9f);
 
                     // Gets the item containing the dragged data.
                     ClipData.Item item = e.getClipData().getItemAt(0);
@@ -1148,7 +1171,7 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        com.example.project_immortal_fire.BoardCards.renew(BoardCards, EnemyCards, BText1);
+                        com.example.project_immortal_fire.BoardCards.placed(BoardCard5Txt,BoardCards[4]);
                     }
                     // Returns true; the value is ignored.
                     return true;
@@ -1217,6 +1240,7 @@ public class PlayerOne extends AppCompatActivity {
                     return true;
 
                 case DragEvent.ACTION_DROP:
+                    soundPool.play(CardPlaced, 1, 1, 1,0,0.9f);
 
                     // Gets the item containing the dragged data.
                     ClipData.Item item = e.getClipData().getItemAt(0);
@@ -1257,7 +1281,7 @@ public class PlayerOne extends AppCompatActivity {
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
                         Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                        com.example.project_immortal_fire.BoardCards.renew(BoardCards, EnemyCards, BText1);
+                        com.example.project_immortal_fire.BoardCards.placed(BoardCard6Txt,BoardCards[5]);
                     }
                     // Returns true; the value is ignored.
                     return true;
@@ -1275,7 +1299,7 @@ public class PlayerOne extends AppCompatActivity {
         shuffler.shuffle(false);
         Log.i(TAG, "Cardsarr: " + Arrays.toString(CardsArr));
         CardsSet.set(card1, card2, card3, card4, card5, CardsArr);
-
+        Cards.UpdateHp(BoardCards,EnemyCards,BText1,1);
     }
 
 

@@ -81,6 +81,17 @@ public abstract class Cards {
     }
 
 
+    public static void UpdateHp(String[] BoardCards, String[] EnemyCards, TextView[] BText, int Player){
+        if (Player==1){
+            com.example.project_immortal_fire.BoardCards.renew(EnemyHp, BoardHp,BoardCards,EnemyCards,BText);
+        }
+        else if(Player==2){
+            com.example.project_immortal_fire.BoardCards.renew(BoardHp, EnemyHp,BoardCards,EnemyCards,BText);
+        }
+
+
+    }
+
     public static void Moved(String[] boardCards, String[] enemyCards, ImageView[] BCards, TextView[] BText) {
 
         Log.i(TAG, "string a: " + Arrays.toString(boardCards) + "\nstring b: " + Arrays.toString(enemyCards));

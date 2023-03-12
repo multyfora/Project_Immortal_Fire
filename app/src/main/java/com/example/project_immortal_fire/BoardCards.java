@@ -42,37 +42,24 @@ public class BoardCards {
 
     }
 
-    public static void renew(String[] BoardCards, String[] EnemyCards, TextView[] BText) {
-        Log.i(TAG, "renew CALLED ");
-        for (int i = 0; i < BoardCards.length; i++) {
-            if (BoardCards[i] != null && !Objects.equals(BoardCards[i], "none")) {
-                BText[i].setText(string[Integer.parseInt(BoardCards[i].charAt(BoardCards[i].length() - 2) + String.valueOf(BoardCards[i].charAt(BoardCards[i].length() - 1)))]);
-                String buffer = (String) BText[i].getText();
-                Log.i(TAG, "BText: " + BText[i].getText());
-            }
+    public static void placed(TextView Text, String BoardCard){
+        if(BoardCard!=null) {
+            Text.setText(string[Integer.parseInt(BoardCard.charAt(BoardCard.length() - 2) + String.valueOf(BoardCard.charAt(BoardCard.length() - 1)))]);
         }
-        BoardText = BText.clone();
-        First = false;
-
-        for (int j = 0; j < EnemyCards.length; j++) {
-            if (EnemyCards[j] != null && !Objects.equals(EnemyCards[j], "none")) {
-                BText[j+6].setText(string[Integer.parseInt(EnemyCards[j].charAt(EnemyCards[j].length() - 2) + String.valueOf(EnemyCards[j].charAt(EnemyCards[j].length() - 1)))]);
-                String buffer = (String) BText[j+6].getText();
-                Log.i(TAG, "BText: " + BText[j+6].getText());
-            }
-        }
-        BoardText = BText.clone();
-        First = false;
     }
 
+
     public static void renew(int[] BoardHp, int[] EnemyHp, String[] BoardCards, String[] EnemyCards, TextView[] BText) {
+        Log.i(TAG, "BoardHp: " + Arrays.toString(BoardHp) + "\nEnemyHp: " + Arrays.toString(EnemyHp));
         Log.i(TAG, "renew CALLED ");
         for (int i = 0; i < BoardCards.length; i++) {
             if (BoardCards[i] != null && !Objects.equals(BoardCards[i], "none")) {
                 BText[i].setText(string[Integer.parseInt(BoardCards[i].charAt(BoardCards[i].length() - 2) + String.valueOf(BoardCards[i].charAt(BoardCards[i].length() - 1)))]);
                 String buffer = (String) BText[i].getText();
-                BText[i].setText(buffer.replace(Cards.getHP(BoardCards[i]) + "", BoardHp[i] + ""));
-
+                Log.i(TAG, "BoardHp: " + BoardHp[i] + " i: " + i + " buffer: " + buffer  + " BoardCard: " + BoardCards[i]);
+                if(BoardHp[i]!=0) {
+                    BText[i].setText(buffer.replace(Cards.getHP(BoardCards[i]) + "", BoardHp[i] + ""));
+                }
                 Log.i(TAG, "BText: " + BText[i].getText());
             } else {
                 BText[i].setText("");
@@ -82,8 +69,9 @@ public class BoardCards {
                 if (EnemyCards[j] != null && !Objects.equals(EnemyCards[j], "none")) {
                     BText[j+6].setText(string[Integer.parseInt(EnemyCards[j].charAt(EnemyCards[j].length() - 2) + String.valueOf(EnemyCards[j].charAt(EnemyCards[j].length() - 1)))]);
                     String buffer = (String) BText[j+6].getText();
-                    BText[j+6].setText(buffer.replace(Cards.getHP(EnemyCards[j]) + "", EnemyHp[j] + ""));
-
+                    if(EnemyHp[j]!=0) {
+                        BText[j + 6].setText(buffer.replace(Cards.getHP(EnemyCards[j]) + "", EnemyHp[j] + ""));
+                    }
                     Log.i(TAG, "BText: " + BText[j].getText());
                 } else {
                     BText[j+6].setText("");
