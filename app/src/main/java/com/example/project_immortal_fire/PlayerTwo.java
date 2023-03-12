@@ -50,6 +50,7 @@ public class PlayerTwo extends AppCompatActivity {
     private int CardPlaced;
     private int CardViewerSound;
     private int GameOver;
+    private int Thump;
 
 
     private static final String IMAGEVIEW_TAG_CARD1 = "Card1";
@@ -137,6 +138,7 @@ public class PlayerTwo extends AppCompatActivity {
         CardPlaced = soundPool.load(this, R.raw.cardplaced, 1);
         CardViewerSound = soundPool.load(this, R.raw.cardviewer, 1);
         GameOver = soundPool.load(this, R.raw.gameover, 1);
+        Thump = soundPool.load(this,R.raw.thump ,1);
 
 
 
@@ -167,7 +169,6 @@ public class PlayerTwo extends AppCompatActivity {
         card3.setTag(IMAGEVIEW_TAG_CARD3);
         card4.setTag(IMAGEVIEW_TAG_CARD4);
         card5.setTag(IMAGEVIEW_TAG_CARD5);
-        //BoardCards.invalidate(BText2);
 
         EndTurn2.setOnClickListener(view -> {
 
@@ -231,6 +232,7 @@ public class PlayerTwo extends AppCompatActivity {
                 HitAnim.addListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
+                        soundPool.play(Thump,1,1,0,0,1);
                         ValueAnimator HitAnim2 = ValueAnimator.ofFloat(1.5f, 1f);
                         HitAnim2.setDuration(200);
                         HitAnim2.setInterpolator(new AccelerateInterpolator());
