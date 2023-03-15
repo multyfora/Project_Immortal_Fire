@@ -17,6 +17,7 @@ import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
@@ -81,6 +82,7 @@ public class PlayerOne extends AppCompatActivity {
         final boolean[] card3Poped = {false};
         final boolean[] card4Poped = {false};
         final boolean[] card5Poped = {false};
+        boolean Tablet = false;
 
         ConstraintLayout TurnScreen = findViewById(R.id.TurnScreen);
         CardView CardViewer = findViewById(R.id.CardViewer);
@@ -134,8 +136,15 @@ public class PlayerOne extends AppCompatActivity {
         ImageView EndTurn1 = findViewById(R.id.EndTurn);
         Crystal.renew1(CrystalHp);
 
+// get the device's screen size in inches
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        float xinch = metrics.widthPixels/metrics.xdpi;
+        float yinch = metrics.heightPixels/metrics.ydpi;
+        float diagonalInches = (float) Math.sqrt(xinch*xinch + yinch*yinch);
 
-
+// check if the screen diagonal size is greater than or equal to 7 inches (assuming that a tablet is a device with a screen size of 7 inches or greater)
+        Tablet = diagonalInches >= 7;
 
 
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
@@ -241,13 +250,14 @@ public class PlayerOne extends AppCompatActivity {
         });
 
 
+        boolean finalTablet = Tablet;
         card1.setOnLongClickListener(v -> {
             if (card1Poped[0] && CardsPlacedCount.get() < 2) {
                 soundPool.play(CardTaken, 0.7f, 0.7f, 0, 0, 1);
                 buffer[0] = CardsArr[0];
                 buffer[1] = "0";
                 CardsPlacedCount.getAndIncrement();
-                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr);
+                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr, finalTablet);
                 CardsArr[0] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
@@ -270,7 +280,7 @@ public class PlayerOne extends AppCompatActivity {
                 buffer[0] = CardsArr[1];
                 buffer[1] = "1";
                 CardsPlacedCount.getAndIncrement();
-                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr);
+                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr,finalTablet);
                 CardsArr[1] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
@@ -293,7 +303,7 @@ public class PlayerOne extends AppCompatActivity {
                 buffer[0] = CardsArr[2];
                 buffer[1] = "2";
                 CardsPlacedCount.getAndIncrement();
-                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr);
+                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr,finalTablet);
                 CardsArr[2] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
@@ -316,7 +326,7 @@ public class PlayerOne extends AppCompatActivity {
                 buffer[0] = CardsArr[3];
                 buffer[1] = "3";
                 CardsPlacedCount.getAndIncrement();
-                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr);
+                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr,finalTablet);
                 CardsArr[3] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
@@ -339,7 +349,7 @@ public class PlayerOne extends AppCompatActivity {
                 buffer[0] = CardsArr[4];
                 buffer[1] = "4";
                 CardsPlacedCount.getAndIncrement();
-                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr);
+                CardsSet.toScale(card1, card2, card3, card4, card5, CardsArr,finalTablet);
                 CardsArr[4] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);

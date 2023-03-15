@@ -73,6 +73,7 @@ public class PlayerTwo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_2);
         final boolean[] isEndTurn = {true};
+        boolean Tablet = false;
 
 
         AtomicInteger CardsPlacedCount2 = new AtomicInteger();
@@ -578,7 +579,8 @@ public class PlayerTwo extends AppCompatActivity {
                 View.DragShadowBuilder myShadow = new myDragShadowBuilder.MyDragShadowBuilder(card1);
                 v.startDragAndDrop(dragData, myShadow, null, 0);
 
-                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
+
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2,Tablet);
                 CardsArr2[0] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
                 return true;
@@ -591,7 +593,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardsPlacedCount2.getAndIncrement();
                 buffer[0] = CardsArr2[1];
                 buffer[1] = "1";
-                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2,Tablet);
                 CardsArr2[1] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
@@ -612,7 +614,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardsPlacedCount2.getAndIncrement();
                 buffer[0] = CardsArr2[2];
                 buffer[1] = "2";
-                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2,Tablet);
                 CardsArr2[2] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
@@ -632,7 +634,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardsPlacedCount2.getAndIncrement();
                 buffer[0] = CardsArr2[3];
                 buffer[1] = "3";
-                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2,Tablet);
                 CardsArr2[3] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
@@ -652,7 +654,7 @@ public class PlayerTwo extends AppCompatActivity {
                 CardsPlacedCount2.getAndIncrement();
                 buffer[0] = CardsArr2[4];
                 buffer[1] = "4";
-                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2);
+                CardsSet.toScale(card1,card2,card3,card4,card5,CardsArr2,Tablet);
                 CardsArr2[4] = "none";
                 CardsSet.renew(card1, card2, card3, card4, card5, CardsArr2);
                 ClipData.Item item = new ClipData.Item((CharSequence) buffer[0]);
