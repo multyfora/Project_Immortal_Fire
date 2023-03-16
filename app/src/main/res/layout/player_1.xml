@@ -24,6 +24,33 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.4" />
 
+        <ImageView
+            android:id="@+id/crystal"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/crystal"
+            android:visibility="visible"
+            app:tint="#70ff90"
+            app:layout_constraintBottom_toBottomOf="@+id/guideline3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/crystalHealth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/anton"
+            android:text="100"
+            android:textColor="#70ff90"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.633"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
         <TextView
             android:id="@+id/Card1"
             android:layout_width="0dp"
@@ -107,6 +134,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/Card4"
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -489,39 +517,39 @@
         app:layout_constraintGuide_percent="0.3" />
 
 
-
-    <ImageView
-        android:id="@+id/crystal"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/crystal" />
-
-    <TextView
-        android:id="@+id/crystalHealth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/anton"
-        android:text="99"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/crystal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.6" />
+
+    <ImageView
+        android:id="@+id/EnemyCrystal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/crystal"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#ff8030" />
+
+    <TextView
+        android:id="@+id/EnemyCrystalHealth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/anton"
+        android:text="100"
+        android:textColor="#ff8030"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/EnemyCrystal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/TurnScreen"
@@ -533,6 +561,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="gone">
+
+
+
+
+
+
+
+
+
+
+
+        <!-- THE HIGHEST PLAN -->
+        <!-- THE HIGHEST PLAN -->
+        <!-- THE HIGHEST PLAN -->
+        <!-- THE HIGHEST PLAN -->
+        <!-- THE HIGHEST PLAN -->
+        <!-- THE HIGHEST PLAN -->
+
+
+
+
+
+
+
 
 
         <ImageView
@@ -614,6 +666,9 @@
         app:layout_constraintBottom_toBottomOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/WinnerName"
         app:srcCompat="@drawable/replaybutton" />
+
+
+
 
 
 
@@ -735,26 +790,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:src = "@drawable/g1" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

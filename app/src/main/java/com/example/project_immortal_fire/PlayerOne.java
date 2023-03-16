@@ -87,6 +87,7 @@ public class PlayerOne extends AppCompatActivity {
         ConstraintLayout TurnScreen = findViewById(R.id.TurnScreen);
         CardView CardViewer = findViewById(R.id.CardViewer);
         TextView CrystalHp = findViewById(R.id.crystalHealth);
+        TextView EnemyCrystalHp = findViewById(R.id.EnemyCrystalHealth);
         TextView card1 = findViewById(R.id.Card1);
         TextView card2 = findViewById(R.id.Card2);
         TextView card3 = findViewById(R.id.Card3);
@@ -202,6 +203,9 @@ public class PlayerOne extends AppCompatActivity {
             });
                     }
 
+        if(!IsFirst){
+            Crystal.setHp1(getIntent().getExtras().getInt("CrystalHp"),EnemyCrystalHp);
+        }
 
         if (IsFirst) {
             TurnScreen.setVisibility(View.GONE);
@@ -209,6 +213,8 @@ public class PlayerOne extends AppCompatActivity {
             TurnScreen.setVisibility(View.VISIBLE);
         }
         IsFirst = false;
+
+
 
         if (getIntent().getStringArrayExtra("BoardCards2") != null) {
             BoardCards = Arrays.copyOf(getIntent().getExtras().getStringArray("EnemyCards2"), 6);
@@ -237,6 +243,7 @@ public class PlayerOne extends AppCompatActivity {
             Bundle extras = new Bundle();
             extras.putStringArray("BoardCards", BoardCards);
             extras.putStringArray("EnemyCards", EnemyCards);
+            extras.putInt("CrystalHp", Crystal.getHp2());
             extras.putBoolean("Replay", IsReplayed);
             i.putExtras(extras);
             startActivity(i);
