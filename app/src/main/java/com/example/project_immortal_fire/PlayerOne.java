@@ -190,7 +190,13 @@ public class PlayerOne extends AppCompatActivity {
                 animation.start();
                 animation.addUpdateListener(updatedAnimation -> {
                     int animatedValue = (int) updatedAnimation.getAnimatedValue();
-                    welcome[animatedValue].setVisibility(View.GONE);
+                            if(animatedValue!=0){
+                                welcome[animatedValue-1].setVisibility(View.GONE);
+                            }
+                            if(animatedValue>1){
+                                welcome[animatedValue-2].setVisibility(View.GONE);
+                            }
+                            welcome[animatedValue].setVisibility(View.GONE);
 
                 });
 
