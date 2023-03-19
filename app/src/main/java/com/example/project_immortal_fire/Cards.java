@@ -3,16 +3,12 @@ package com.example.project_immortal_fire;
 
 import static com.example.project_immortal_fire.CardsSet.draw;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
 import android.util.Log;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public abstract class Cards {
     public final static String[] AllCards = new String[]{"salamander_fire_card01", "phoenix_fire_card02", "dragon_fire_card03", "kirin_fire_card04", "lion_fire_card05", "koi_fish_water_card06", "leviathan_water_card07", "shark_water_card08", "09", "10", "raiden_electro_card11", "mjolnir_electro_card12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25",};
@@ -21,6 +17,14 @@ public abstract class Cards {
 
     static int[] BoardHp = new int[6];
     static int[] EnemyHp = new int[6];
+
+    static String Pyro = "Pyro";
+    static String Hydro = "Hydro";
+    static String Electro = "Electro";
+    static String Anemo = "Anemo";
+    static String Darkness = "Darkness";
+
+    static boolean IsBurning = false;
 
     static String TAG = "Cards";
 
@@ -73,6 +77,23 @@ public abstract class Cards {
     }
 
 
+    public static void ApplyElement(String Element){
+        if(Objects.equals(Element, Pyro)){
+            //!FINISH THISSSSSSSSSS
+        }
+    }
+
+    public static String getElement(String Card){
+        int key = Integer.parseInt(Card.charAt(Card.length() - 2) + String.valueOf(Card.charAt(Card.length() - 1)));
+        if(key>0 && key<=5){
+            return Pyro;
+        }
+        if(key>5 && key<=10){
+            return Hydro;
+        }
+        return "Not an expected value";
+    }
+
     public static void boardSet(String dragData, ImageView BoardCard) {
         Log.i(TAG, "key: " + dragData);
         int key = Integer.parseInt(dragData.charAt(dragData.length() - 2) + String.valueOf(dragData.charAt(dragData.length() - 1)));
@@ -97,7 +118,6 @@ public abstract class Cards {
         Log.i(TAG, "string a: " + Arrays.toString(boardCards) + "\nstring b: " + Arrays.toString(enemyCards));
 
         int[] AtkBuffer = new int[6];
-        int[] HpBuffer = new int[6];
 
         //* first step
 
@@ -122,7 +142,6 @@ public abstract class Cards {
 
         //cleaning buffers
         Arrays.fill(AtkBuffer, 0);
-        Arrays.fill(HpBuffer, 0);
 
         //damaging frien cards
         //taking away atk of enemy from hp of frien
@@ -140,6 +159,16 @@ public abstract class Cards {
             BoardHp[i] -= AtkBuffer[i];
         }
         Log.i(TAG, "ALLY AFTER: " + Arrays.toString(BoardHp));
+
+
+        //*second (and a half)-th step
+        //applying elemental effects
+        for (int i = 0; i < 6; i++) {
+            ApplyElement(getElement(boardCards[i]));
+        }
+
+
+
 
 
         //* third step

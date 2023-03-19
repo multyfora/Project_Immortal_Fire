@@ -83,22 +83,5 @@ public class BoardCards {
             First = false;
         }
     }
-
-    public static void invalidate(TextView[] BText) {
-        //if (!First) {
-            for (int i = 6; i < BText.length; i++) {
-                if (BoardText[i] != null) {
-                    BText[i].setText(BoardText[i-6].getText());
-                }
-            }
-            for (int i = 0; i < 6; i++) {
-                if (BoardText[i] != null) {
-                    assert BoardText[i + 6] != null;
-                    BText[i].setText(BoardText[i+6].getText());
-                    Log.i(TAG, "BoardText: " + BoardText[i+6].getText());
-                }
-            }
-        //}
-    }
 }
 
