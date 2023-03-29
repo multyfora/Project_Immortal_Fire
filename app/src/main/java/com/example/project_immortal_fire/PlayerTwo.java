@@ -38,6 +38,8 @@ public class PlayerTwo extends AppCompatActivity {
     int AvailableBoardSlots2 = 6;
 
     static boolean GameEnded = false;
+    static boolean[] burningB = new boolean[]{false,false,false,false,false,false};
+    static boolean[] burningE = new boolean[]{false,false,false,false,false,false};
     public static String[] BoardCards2 = new String[]{null, null, null, null, null, null};
     public static String[] EnemyCards2 = new String[]{null, null, null, null, null, null};
 
@@ -354,16 +356,25 @@ public class PlayerTwo extends AppCompatActivity {
                             public void onAnimationEnd(Animator animation) {
                                 if (isEndTurn[0]) {
                                     Cards.Moved(BoardCards2, EnemyCards2, BCards, BText2);
-                                    Log.i("boardCards", "array: " + Arrays.toString(BoardCards2) + "visibility: " + BoardCard1.getVisibility() + BoardCard2.getVisibility() + BoardCard3.getVisibility() + BoardCard4.getVisibility() + BoardCard5.getVisibility() + BoardCard6.getVisibility());
-                                    Intent i1 = new Intent(PlayerTwo.this, PlayerOne.class);
-                                    Bundle extras = new Bundle();
-                                    extras.putStringArray("BoardCards2", BoardCards2);
-                                    extras.putStringArray("EnemyCards2", EnemyCards2);
-                                    extras.putInt("CrystalHp", Crystal.getHp1());
-                                    Log.i("Player2", "CrystalHp: " + Crystal.getHp1());
-                                    i1.putExtras(extras);
-                                    startActivity(i1);
-                                    isEndTurn[0] = false;
+                                    ValueAnimator timer = ValueAnimator.ofInt(1,2);
+                                    timer.setDuration(600);
+                                    timer.setInterpolator(new LinearInterpolator());
+                                    timer.start();
+                                    timer.addListener(new AnimatorListenerAdapter() {
+                                        @Override
+                                        public void onAnimationEnd(Animator animation) {
+                                            Log.i("boardCards", "array: " + Arrays.toString(BoardCards2) + "visibility: " + BoardCard1.getVisibility() + BoardCard2.getVisibility() + BoardCard3.getVisibility() + BoardCard4.getVisibility() + BoardCard5.getVisibility() + BoardCard6.getVisibility());
+                                            Intent i1 = new Intent(PlayerTwo.this, PlayerOne.class);
+                                            Bundle extras = new Bundle();
+                                            extras.putStringArray("BoardCards2", BoardCards2);
+                                            extras.putStringArray("EnemyCards2", EnemyCards2);
+                                            extras.putInt("CrystalHp", Crystal.getHp1());
+                                            Log.i("Player2", "CrystalHp: " + Crystal.getHp1());
+                                            i1.putExtras(extras);
+                                            startActivity(i1);
+                                            isEndTurn[0] = false;
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -702,7 +713,7 @@ public class PlayerTwo extends AppCompatActivity {
 
 
         if (GameEnded) {
-            soundPool.setOnLoadCompleteListener((soundPool, sampleId, status) -> soundPool.play(GameOver, 1, 1, 1, 0, 1));
+            soundPool.setOnLoadCompleteListener((soundPool, sampleId, status) -> soundPool.play(GameOver, 1, 1, 1, 1, 1));
 
             EndTurn2.setEnabled(false);
             card1.setEnabled(false);
@@ -807,7 +818,7 @@ public class PlayerTwo extends AppCompatActivity {
                     BoardCards2[0] = buffer[0];
 
                     // Displays a message containing the dragged data.
-                    Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
                     ((ImageView) v).clearColorFilter();
@@ -833,7 +844,7 @@ public class PlayerTwo extends AppCompatActivity {
 
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
-                        Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                         BoardCards.placed(BoardCard1Txt, BoardCards2[0]);
                     }
 
@@ -915,7 +926,7 @@ public class PlayerTwo extends AppCompatActivity {
                     BoardCards2[1] = buffer[0];
 
                     // Displays a message containing the dragged data.
-                    Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
                     ((ImageView) v).clearColorFilter();
@@ -941,7 +952,7 @@ public class PlayerTwo extends AppCompatActivity {
 
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
-                        Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                         BoardCards.placed(BoardCard2Txt, BoardCards2[1]);
                     }
 
@@ -1023,7 +1034,7 @@ public class PlayerTwo extends AppCompatActivity {
                     BoardCards2[2] = buffer[0];
 
                     // Displays a message containing the dragged data.
-                    Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
                     ((ImageView) v).clearColorFilter();
@@ -1050,7 +1061,7 @@ public class PlayerTwo extends AppCompatActivity {
 
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
-                        Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                         BoardCards.placed(BoardCard3Txt, BoardCards2[2]);
                     }
 
@@ -1132,7 +1143,7 @@ public class PlayerTwo extends AppCompatActivity {
                     BoardCards2[3] = buffer[0];
 
                     // Displays a message containing the dragged data.
-                    Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
                     ((ImageView) v).clearColorFilter();
@@ -1157,7 +1168,7 @@ public class PlayerTwo extends AppCompatActivity {
 
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
-                        Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                         BoardCards.placed(BoardCard4Txt, BoardCards2[3]);
                     }
 
@@ -1239,7 +1250,7 @@ public class PlayerTwo extends AppCompatActivity {
                     BoardCards2[4] = buffer[0];
 
                     // Displays a message containing the dragged data.
-                    Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
                     ((ImageView) v).clearColorFilter();
@@ -1265,7 +1276,7 @@ public class PlayerTwo extends AppCompatActivity {
 
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
-                        Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                         BoardCards.placed(BoardCard5Txt, BoardCards2[4]);
                     }
 
@@ -1347,7 +1358,7 @@ public class PlayerTwo extends AppCompatActivity {
                     BoardCards2[5] = buffer[0];
 
                     // Displays a message containing the dragged data.
-                    Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
                     ((ImageView) v).clearColorFilter();
@@ -1372,7 +1383,7 @@ public class PlayerTwo extends AppCompatActivity {
 
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
-                        Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                         BoardCards.placed(BoardCard6Txt, BoardCards2[5]);
                     }
                     // Returns true; the value is ignored.
@@ -1394,7 +1405,10 @@ public class PlayerTwo extends AppCompatActivity {
         Log.i("idk", "onCreate cards been set  " + Arrays.toString(CardsArr2));
         Cards.UpdateHp(BoardCards2, EnemyCards2, BText2, 2);
     }
+    @Override
+    public void onBackPressed() {
 
+    }
     protected static void GameOver2() {
         GameEnded = true;
         Log.i("player 2", "GameOver");
@@ -1403,5 +1417,19 @@ public class PlayerTwo extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+    }
+    public static void SetBurning(int AllyOrEnemy,int num){
+        if(AllyOrEnemy==1){
+            burningB[num]=true;
+        }
+        else if (AllyOrEnemy==2){
+            burningE[num]=true;
+        }
+        else try {
+                throw new Exception("The field has to be either 1 or 2 ");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        Log.i("player2", "burnings: " + Arrays.toString(burningB) + "\n" + Arrays.toString(burningE));
     }
 }

@@ -274,7 +274,7 @@ public class PlayerOne extends AppCompatActivity {
                 v.startDragAndDrop(dragData, myShadow, null, 0);
                 return true;
             } else {
-                Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -297,7 +297,7 @@ public class PlayerOne extends AppCompatActivity {
                 v.startDragAndDrop(dragData, myShadow, null, 0);
                 return true;
             } else {
-                Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -320,7 +320,7 @@ public class PlayerOne extends AppCompatActivity {
                 v.startDragAndDrop(dragData, myShadow, null, 0);
                 return true;
             } else {
-                Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -343,7 +343,7 @@ public class PlayerOne extends AppCompatActivity {
                 v.startDragAndDrop(dragData, myShadow, null, 0);
                 return true;
             } else {
-                Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -366,7 +366,7 @@ public class PlayerOne extends AppCompatActivity {
                 v.startDragAndDrop(dragData, myShadow, null, 0);
                 return true;
             } else {
-                Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "cant pick that up", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -719,7 +719,7 @@ public class PlayerOne extends AppCompatActivity {
 
 
                     // Displays a message containing the dragged data.
-                    Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
                     ((ImageView) v).clearColorFilter();
@@ -747,7 +747,7 @@ public class PlayerOne extends AppCompatActivity {
 
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
-                        Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                         com.example.project_immortal_fire.BoardCards.placed(BoardCard1Txt, BoardCards[0]);
                     }
                     // Returns true; the value is ignored.
@@ -829,7 +829,7 @@ public class PlayerOne extends AppCompatActivity {
                     BoardCards[1] = buffer[0];
 
                     // Displays a message containing the dragged data.
-                    Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
                     ((ImageView) v).clearColorFilter();
@@ -855,7 +855,7 @@ public class PlayerOne extends AppCompatActivity {
 
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
-                        Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                         com.example.project_immortal_fire.BoardCards.placed(BoardCard2Txt, BoardCards[1]);
                     }
                     // Returns true; the value is ignored.
@@ -938,7 +938,7 @@ public class PlayerOne extends AppCompatActivity {
                     BoardCards[2] = buffer[0];
 
                     // Displays a message containing the dragged data.
-                    Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
                     ((ImageView) v).clearColorFilter();
@@ -964,7 +964,7 @@ public class PlayerOne extends AppCompatActivity {
 
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
-                        Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                         com.example.project_immortal_fire.BoardCards.placed(BoardCard3Txt, BoardCards[2]);
                     }
                     // Returns true; the value is ignored.
@@ -1046,7 +1046,7 @@ public class PlayerOne extends AppCompatActivity {
                     BoardCards[3] = buffer[0];
 
                     // Displays a message containing the dragged data.
-                    Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
                     ((ImageView) v).clearColorFilter();
@@ -1073,7 +1073,7 @@ public class PlayerOne extends AppCompatActivity {
 
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
-                        Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                         com.example.project_immortal_fire.BoardCards.placed(BoardCard4Txt, BoardCards[3]);
                     }
                     // Returns true; the value is ignored.
@@ -1156,7 +1156,7 @@ public class PlayerOne extends AppCompatActivity {
                     BoardCards[4] = buffer[0];
 
                     // Displays a message containing the dragged data.
-                    Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
                     ((ImageView) v).clearColorFilter();
@@ -1183,7 +1183,7 @@ public class PlayerOne extends AppCompatActivity {
 
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
-                        Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                         com.example.project_immortal_fire.BoardCards.placed(BoardCard5Txt, BoardCards[4]);
                     }
                     // Returns true; the value is ignored.
@@ -1266,7 +1266,7 @@ public class PlayerOne extends AppCompatActivity {
                     BoardCards[5] = buffer[0];
 
                     // Displays a message containing the dragged data.
-                    Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
 
                     // Turns off any color tints.
                     ((ImageView) v).clearColorFilter();
@@ -1293,7 +1293,7 @@ public class PlayerOne extends AppCompatActivity {
 
                     // Does a getResult(), and displays what happened.
                     if (e.getResult()) {
-                        Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                         com.example.project_immortal_fire.BoardCards.placed(BoardCard6Txt, BoardCards[5]);
                     }
                     // Returns true; the value is ignored.
@@ -1313,6 +1313,7 @@ public class PlayerOne extends AppCompatActivity {
         Log.i(TAG, "Cardsarr: " + Arrays.toString(CardsArr));
         CardsSet.set(card1, card2, card3, card4, card5, CardsArr);
         Cards.UpdateHp(BoardCards, EnemyCards, BText1, 1);
+        Cards.SetCalled();
     }
 
 

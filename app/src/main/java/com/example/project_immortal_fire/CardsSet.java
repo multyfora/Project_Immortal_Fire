@@ -14,7 +14,7 @@ public class CardsSet {
 
     static String TAG = "CardsSet";
 
-    static float textScaleBig = 12.5f;
+    static float textScaleBig = 13.5f;
     static float textScale = 12;
     static int Type = TypedValue.COMPLEX_UNIT_SP;
 

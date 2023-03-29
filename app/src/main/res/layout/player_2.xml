@@ -234,6 +234,89 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/placeholder" />
 
+        <ImageView
+            android:id="@+id/BoardCard1DMG"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/BoardCard2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline4"
+            android:visibility="gone"
+            android:alpha="0.2"
+            app:tint="#ff0000"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/placeholder" />
+
+        <ImageView
+            android:id="@+id/BoardCard2DMG"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/BoardCard3"
+            app:layout_constraintStart_toEndOf="@id/BoardCard1"
+            app:layout_constraintTop_toTopOf="@+id/guideline4"
+            android:visibility="gone"
+            android:alpha="0.2"
+            app:tint="#ff0000"
+            app:srcCompat="@drawable/placeholder" />
+
+        <ImageView
+            android:id="@+id/BoardCard3DMG"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/BoardCard4"
+            app:layout_constraintStart_toEndOf="@id/BoardCard2"
+            app:layout_constraintTop_toTopOf="@+id/guideline4"
+            android:visibility="gone"
+            android:alpha="0.2"
+            app:tint="#ff0000"
+            app:srcCompat="@drawable/placeholder" />
+
+        <ImageView
+            android:id="@+id/BoardCard4DMG"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/BoardCard5"
+            app:layout_constraintStart_toEndOf="@id/BoardCard3"
+            app:layout_constraintTop_toTopOf="@+id/guideline4"
+            android:visibility="gone"
+            android:alpha="0.2"
+            app:tint="#ff0000"
+            app:srcCompat="@drawable/placeholder" />
+
+        <ImageView
+            android:id="@+id/BoardCard5DMG"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/BoardCard6"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/BoardCard4"
+            android:visibility="gone"
+            android:alpha="0.2"
+            app:tint="#ff0000"
+            app:layout_constraintTop_toTopOf="@+id/guideline4"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/placeholder" />
+
+        <ImageView
+            android:id="@+id/BoardCard6DMG"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/BoardCard5"
+            android:visibility="gone"
+            android:alpha="0.2"
+            app:tint="#ff0000"
+            app:layout_constraintTop_toTopOf="@id/guideline4"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/placeholder" />
+
         <TextView
             android:id="@+id/BoardCard1Txt"
             android:layout_width="0dp"
@@ -383,6 +466,96 @@
             app:layout_constraintStart_toEndOf="@id/EnemyCard5"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/placeholder" />
+
+        <ImageView
+            android:id="@+id/EnemyCard1DMG"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/guideline4"
+            app:layout_constraintEnd_toStartOf="@id/EnemyCard2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:alpha="0.2"
+            app:tint="#FF0000"
+            app:srcCompat="@drawable/placeholder" />
+
+        <ImageView
+            android:id="@+id/EnemyCard2DMG"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/guideline4"
+            app:layout_constraintEnd_toStartOf="@id/EnemyCard3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/EnemyCard1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:alpha="0.2"
+            app:tint="#FF0000"
+            app:srcCompat="@drawable/placeholder" />
+
+        <ImageView
+            android:id="@+id/EnemyCard3DMG"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/guideline4"
+            app:layout_constraintEnd_toStartOf="@id/EnemyCard4"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@id/EnemyCard2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:alpha="0.2"
+            app:tint="#FF0000"
+            app:srcCompat="@drawable/placeholder" />
+
+        <ImageView
+            android:id="@+id/EnemyCard4DMG"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/guideline4"
+            app:layout_constraintEnd_toStartOf="@id/EnemyCard5"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/EnemyCard3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:alpha="0.2"
+            app:tint="#FF0000"
+            app:srcCompat="@drawable/placeholder" />
+
+        <ImageView
+            android:id="@+id/EnemyCard5DMG"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/guideline4"
+            app:layout_constraintEnd_toStartOf="@id/EnemyCard6"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@id/EnemyCard4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:alpha="0.2"
+            app:tint="#FF0000"
+            app:srcCompat="@drawable/placeholder" />
+
+        <ImageView
+            android:id="@+id/EnemyCard6DMG"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/guideline4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@id/EnemyCard5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:alpha="0.2"
+            app:tint="#FF0000"
             app:srcCompat="@drawable/placeholder" />
 
         <TextView
